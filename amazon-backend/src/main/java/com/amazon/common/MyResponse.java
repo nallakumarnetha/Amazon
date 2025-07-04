@@ -3,6 +3,7 @@ package com.amazon.common;
 import java.util.List;
 
 import com.amazon.product.Product;
+import com.amazon.user.User;
 
 public class MyResponse {
 
@@ -12,9 +13,11 @@ public class MyResponse {
 	
 	int total;
 	
+	private String message;
+	
 	private List<Product> products;
 	
-	private String message;
+	private List<User> users;
 
 	public int getStart() {
 		return start;
@@ -40,6 +43,14 @@ public class MyResponse {
 		this.total = total;
 	}
 
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	public List<Product> getProducts() {
 		return products;
 	}
@@ -48,12 +59,12 @@ public class MyResponse {
 		this.products = products;
 	}
 
-	public String getMessage() {
-		return message;
+	public List<User> getUsers() {
+		return users;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 	
 }

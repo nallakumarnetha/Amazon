@@ -30,3 +30,9 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+//to avoid "("id")" in @PathVariable("id") String id --> @PathVariable String id
+//but method param name should match with path/query param name
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += ['-parameters']
+}

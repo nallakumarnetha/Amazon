@@ -22,7 +22,7 @@ public class ProductService {
 		return response;
 	}
 
-	public Product findProductById(@PathParam("id") String id) {
+	public Product findProductById(String id) {
 		Product response = repository.findById(id).orElse(null);
 		return response;
 	}
@@ -32,12 +32,17 @@ public class ProductService {
 		return response;
 	}
 	
-	public Product updateProduct(@PathParam("id") String id, Product product) {
-		Product response = repository.save(product);
+	public Product updateProduct(String id, Product request) {
+		Product entity = repository.findById(id).orElse(null);
+		if(request.getName() != null && !request.getName().isEmpty())
+			entity.setName(request.getName());
+		if(request.getPrice() != 0)
+			entity.setName(request.getName());
+		Product response = repository.save(entity);
 		return response;
 	}
 	
-	public MyResponse removeProduct(@PathParam("id") String id) {
+	public MyResponse removeProduct(String id) {
 		repository.deleteById(id);
 		MyResponse response = new MyResponse();
 		return response;

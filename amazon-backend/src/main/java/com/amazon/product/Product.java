@@ -1,22 +1,26 @@
 package com.amazon.product;
 
-import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import net.bytebuddy.dynamic.loading.ClassReloadingStrategy.Strategy;
 
 @Entity
+@JsonInclude(value = Include.NON_EMPTY)
 public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private String id;
 	
+	@Column
 	private String name;
 	
+	@Column
 	private double price;
 
 	public String getId() {
