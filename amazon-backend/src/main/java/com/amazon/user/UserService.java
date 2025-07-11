@@ -16,7 +16,7 @@ public class UserService {
 
 	@Autowired
 	private UserRepository repository;
-	
+
 	public MyResponse findAllUsers() {
 		List<User> users = repository.findAll();
 		MyResponse response = new MyResponse();
@@ -33,16 +33,16 @@ public class UserService {
 		User response = repository.save(request);
 		return response;
 	}
-	
+
 	public User updateUser(String id, User request) {
 		User response = repository.save(request);
 		return response;
 	}
-	
+
 	public MyResponse removeUser(String id) {
 		repository.deleteById(id);
 		MyResponse response = new MyResponse();
 		return response;
 	}
-	
+
 }

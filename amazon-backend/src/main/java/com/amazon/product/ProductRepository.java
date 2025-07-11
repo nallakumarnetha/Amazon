@@ -7,5 +7,5 @@ import com.amazon.common.MyResponse;
 import jakarta.websocket.server.PathParam;
 
 public interface ProductRepository extends JpaRepository<Product, String> {
-	
+
 }

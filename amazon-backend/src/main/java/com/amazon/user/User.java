@@ -19,24 +19,24 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private String id;
-	
+
 	@JsonProperty("first_name")
 	private String firstName;
-	
+
 	@JsonProperty("last_name")
 	private String lastName;
-	
+
 	private String name;
-	
+
 	@JsonProperty("phone_number")
 	private String phoneNumber;
-	
+
 	private Gender gender;
-	
+
 	@ManyToOne
 	@JoinColumn
 	private Address address;
-	
+
 	private Role role;
 
 	public String getId() {
@@ -102,5 +102,5 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
+
 }

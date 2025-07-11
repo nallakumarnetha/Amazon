@@ -1,6 +1,8 @@
 package com.amazon.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,23 +10,30 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.amazon.common.MyResponse;
 
 import static com.amazon.common.MyLogger.log;
 
+import java.awt.print.Pageable;
+
 @RestController
-@RequestMapping("/products")
+@CrossOrigin("http://localhost:4200/")
+@RequestMapping("/amazon/products")
 public class ProductResource {
 
 	@Autowired
 	private ProductService service;
-	
+
+	// CRUD start
+
 	@GetMapping
-	public MyResponse findAllProducts() {
+	public MyResponse findAllProducts(@RequestParam(required = false, defaultValue = "0") int page,
+			@RequestParam(required = false, defaultValue = "10") int size) {
 		log.info("request recieved: find all products");
-		MyResponse response = service.findAllProducts();
+		MyResponse response = service.findAllProducts(page, size);
 		log.info("response sent: find all products");
 		return response;
 	}
@@ -44,7 +53,7 @@ public class ProductResource {
 		log.info("response sent: add product");
 		return response;
 	}
-	
+
 	@PutMapping("/{id}")
 	public Product updateProduct(@PathVariable String id, @RequestBody Product product) {
 		log.info("request recieved: update product");
@@ -52,13 +61,15 @@ public class ProductResource {
 		log.info("response sent: update product");
 		return response;
 	}
-	
+
 	@DeleteMapping("{id}")
-	public MyResponse removeProduct(@PathVariable String id) {
+	public MyResponse deleteProduct(@PathVariable String id) {
 		log.info("request recieved: remove product");
-		MyResponse response = service.removeProduct(id);
+		MyResponse response = service.deleteProduct(id);
 		log.info("response sent: remove product");
 		return response;
 	}
+
+	// CRUD end
 
 }

@@ -4,19 +4,22 @@ import java.util.List;
 
 import com.amazon.product.Product;
 import com.amazon.user.User;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+@JsonInclude(value = Include.NON_EMPTY)
 public class MyResponse {
 
 	int start = 0;
-	
+
 	int rows = 10;
-	
+
 	int total;
-	
+
 	private String message;
-	
+
 	private List<Product> products;
-	
+
 	private List<User> users;
 
 	public int getStart() {
@@ -66,5 +69,5 @@ public class MyResponse {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-	
+
 }

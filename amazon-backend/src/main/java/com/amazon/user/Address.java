@@ -18,11 +18,11 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private String id;
-	
+
 	private String street;
-	
+
 	private String city;
-	
+
 	private String pincode;
 
 	public String getStreet() {
@@ -48,5 +48,5 @@ public class Address {
 	public void setPincode(String pincode) {
 		this.pincode = pincode;
 	}
-	
+
 }

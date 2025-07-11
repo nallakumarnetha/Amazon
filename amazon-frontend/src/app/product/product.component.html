@@ -1,0 +1,39 @@
+<!-- CRUD start -->
+<form [formGroup]="productForm" (ngSubmit)="addProduct()">
+    <input formControlName="name" type="text">
+    <input formControlName="price" type="number">
+    <button type="submit">Add</button>
+</form>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+    </tr>
+    <ng-container *ngFor="let product of products">
+        <ng-container *ngIf="product.id === selectedProductId; else showProduct">
+            <tr>
+                <td>
+                    <form [formGroup]="selectedProductForm" (ngSubmit)="updateProduct(product.id)">
+                        <input formControlName="name">
+                        <input formControlName="price">
+                        <button type="submit">Update</button>
+                        <button (click)="selectedProductId=''">Cancel</button>
+                    </form>
+                </td>
+            </tr>
+        </ng-container>
+
+        <ng-template #showProduct>
+            <tr>
+                <td>{{product.name}}</td>
+                <td>{{product.price}}</td>
+                <td><button (click)="editProduct(product)">edit</button>
+                <td>
+                <td><button>view</button></td>
+            </tr>
+        </ng-template>
+
+    </ng-container>
+</table>
+<!-- CRUD end -->

@@ -22,7 +22,7 @@ public class UserResource {
 
 	@Autowired
 	private UserService service;
-	
+
 	@GetMapping
 	public MyResponse findAllUsers() {
 		MyResponse response = service.findAllUsers();
@@ -40,13 +40,13 @@ public class UserResource {
 		User response = service.addUser(request);
 		return response;
 	}
-	
+
 	@PutMapping("/{id}")
 	public User updateUser(@PathVariable String id, @RequestBody User request) {
 		User response = service.updateUser(id, request);
 		return response;
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public MyResponse removeUser(@PathVariable String id) {
 		MyResponse response = service.removeUser(id);
