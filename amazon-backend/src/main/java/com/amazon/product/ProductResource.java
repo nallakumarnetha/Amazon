@@ -20,7 +20,6 @@ import static com.amazon.common.MyLogger.log;
 import java.awt.print.Pageable;
 
 @RestController
-@CrossOrigin("http://localhost:4200/")
 @RequestMapping("/amazon/products")
 public class ProductResource {
 
