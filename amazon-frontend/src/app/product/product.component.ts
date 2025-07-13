@@ -3,6 +3,7 @@ import { Product, ProductListResponse } from './others/product.model';
 import { ProductService } from './others/product.service';
 import { Observable } from 'rxjs';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-product',
@@ -16,7 +17,7 @@ export class ProductComponent {
   selectedProductId?: string;
   selectedProductForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private productService: ProductService) {
+ constructor(private fb: FormBuilder, private productService: ProductService) {
     this.productForm = this.fb.group({
       name: '',
       price: 0,
@@ -83,4 +84,5 @@ export class ProductComponent {
   }
 
   //CRUD end
+
 }

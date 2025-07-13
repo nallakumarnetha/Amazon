@@ -1,0 +1,102 @@
+<!-- first menu -->
+<div class="my-menu-bar" style="background-color: #131921;">
+  <!-- logo -->
+<img src="assets/images/Selfie.png" style="width: 100px; height: 50px;" class="my-hover">
+<!-- delive to -->
+<div style="display: flex; align-items: center; gap: 2px; padding: 5px;" class="my-hover">
+  <i class="pi pi-map-marker"></i>
+  <div style="display: flex; flex-direction: column; font-size: 15px; justify-content: center;">
+    <div>Deliver to Kumar</div>
+    <div style="font-weight: bold;">Begumpet 508105</div>
+  </div>
+</div>
+<!-- search box -->
+<div style="display: flex; flex: 1; padding: 5px;">
+  <button type="submit" style="display: flex; background-color:#e6e6e6; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border: none; width: 40px;
+  align-items: center; padding: 10px; padding: 5px;">All<i class="pi pi-sort-down-fill" style="margin-left: 5px; font-size: 8px;"></i></button>
+  <input type="search" placeholder="Seach Amazon" style="width: 100%; border: none;">
+  <button type="submit" style="background-color:#febd69; border: none; width: 40px; border-top-right-radius: 5px; border-bottom-right-radius: 5px"><i class="pi pi-search"></i></button>
+</div>
+<!-- remianing -->
+ <div style="display: flex; align-items: center; gap: 25px; gap: 0;">
+<div class="my-hover" style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 5px">
+  <span>Language</span>
+</div>
+<div class="my-hover" style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 5px">
+  <span>Returns</span>
+  <span style="font-weight: bold;">& Orders</span>
+  
+ </div>
+<div class="my-hover" style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 5px">
+  <i class="pi pi-shopping-cart" style="margin-right: 5px;"></i>
+  Cart(5)
+</div>
+<div class="my-hover" style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 5px">
+  <a routerLink="/account" style="display: flex;">
+  <i class="pi pi-user" style="margin-right: 5px;"></i>
+  Account
+  </a>
+</div>
+</div>
+</div>
+<!-- second menu -->
+<div class="my-menu-bar" style="background-color: #232f3e; width: 100%; height: 100%; padding: 0px;">
+  <div (click)="toggleSideBar()" style="padding: 10px;"><i class="pi pi-bars" ></i></div>
+  <div class="my-hover" style="padding: 10px;"><a routerLink="/home">Home</a></div>
+  <div class="my-hover" style="padding: 10px;"><a >Orders</a></div>
+  <div class="my-hover" style="padding: 10px;"><a >Prime</a></div>
+  <div class="my-hover" style="padding: 10px;"><a >CustomerServie</a></div>
+  <div class="my-hover" style="padding: 10px;"><a >AI</a></div>
+  |
+  <div class="my-hover" style="padding: 10px;"><a >Sell</a></div>
+  <div class="my-hover" style="padding: 10px;"><a >Admin</a></div>
+  <div class="my-hover" style="padding: 10px;"><a routerLink="/products">Products</a></div>
+  </div>
+
+<!-- side bar -->
+  <p-sidebar [(visible)]="showSideBar">
+    <div class="my-side-bar">
+      <div style="background-color: #232f3e; color: white; padding: 10px;">
+        <i class="pi pi-user" style="margin-right: 8px;"></i>
+      <b style="font-size: 20px;">Hello, Kumar Nalla</b>
+      </div>
+      <b>Digital Content & Devices</b>
+      <a href="">aaa</a>
+      <b>Shop by Department</b>
+      <a href="">bbb</a>
+      <b>Programs & Features</b>
+      <a href="">ccc</a>
+      <b>Help & Settings</b>
+      <a href="">ddd</a>
+          </div>
+  </p-sidebar>
+
+
+<!-- 
+<div class="my-amazon-header">
+  //Row 1
+  <div class="my-top-bar">
+    <img src="assets/logo.png" class="my-logo" alt="Amazon Logo">
+
+    <div class="my-deliver">Deliver to <strong>India</strong></div>
+
+    <div class="my-search-box">
+      <input type="text" placeholder="Search Amazon" />
+      <button class="my-search-btn">
+        <i class="pi pi-search"></i>
+      </button>
+    </div>
+
+    <div class="my-right-items">
+      <span>EN</span>
+      <span>Hello, sign in<br><strong>Account & Lists</strong></span>
+      <span>Returns<br><strong>& Orders</strong></span>
+      <span><i class="pi pi-shopping-cart"></i> Cart</span>
+    </div>
+  </div>
+
+  //Row 2
+  <div class="my-bottom-bar">
+    <p-menubar [model]="menuItems"></p-menubar>
+  </div>
+</div> -->

@@ -1,0 +1,80 @@
+
+.my-menu-bar {
+  display: flex;
+  gap: 0;
+  width: 100%;
+  color: white;
+  font-family: 'Arial';
+  padding: 10px;
+}
+
+.my-menu-bar a {
+  color: white !important;
+}
+
+.my-side-bar{
+  display: flex; flex-direction: column; gap: 15px;
+  color: black;
+}
+.my-side-bar a {
+  color: black;
+  text-decoration: none;
+}
+
+.my-hover {
+  border: 1px;
+  border-style: solid;
+  border-color: transparent;
+}
+.my-hover:hover{
+ border-color: white;
+}
+/* .my-amazon-header {
+  font-family: Arial, sans-serif;
+}
+
+.my-top-bar {
+  background-color: #131921;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  gap: 15px;
+}
+
+.my-logo {
+  width: 100px;
+}
+
+.my-deliver {
+  font-size: 12px;
+}
+
+.my-search-box {
+  flex: 1;
+  display: flex;
+}
+
+.my-search-box input {
+  flex: 1;
+  padding: 8px;
+}
+
+.my-search-btn {
+  background-color: #febd69;
+  border: none;
+  padding: 8px;
+}
+
+.my-right-items {
+  display: flex;
+  gap: 20px;
+  font-size: 12px;
+  align-items: center;
+}
+
+.my-bottom-bar {
+  background-color: #232f3e;
+  color: white;
+  padding-left: 10px;
+} */

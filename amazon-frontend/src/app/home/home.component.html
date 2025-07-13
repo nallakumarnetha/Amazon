@@ -1,0 +1,27 @@
+<div style="display: flex; gap: 10px;">
+<div style="background-color: pink; width: 300px;">
+    hello
+</div>
+<div style="flex: 1; display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))">
+    <ng-container *ngFor="let product of products">
+        <div class="my-card">
+            <div>
+                <img src="assets/images/Selfie.png" style="width: 300px; height: 320px;">
+            </div>
+            <div>
+                PANDAFLY White Gel Pens, 0.8mm Extra Fine Point Opaque Archival Ink Pen for Journaling, Art, or Drawing
+                - For Artist Gifts, Holiday Gifts & DIY
+            </div>
+            <div>
+                Ratings <i class="pi pi-star-fill"></i><i class="pi pi-star-fill"></i><i class="pi pi-star-fill"></i>
+            </div>
+            <div style="font-size: 20px;">
+                119.00 Rs
+            </div>
+            <div>
+                <button style="padding: 10px; color: black; background-color: #ffd814; border: none; border-radius: 20px; padding-left: 20px; padding-right: 20px;">  Add to cart</button>
+            </div>
+        </div>
+    </ng-container>
+</div>
+</div>
