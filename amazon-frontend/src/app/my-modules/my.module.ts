@@ -6,13 +6,14 @@ import { FooterComponent } from '../footer/footer.component';
 import { MyPrimeNgModule } from './my-prime-ng.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 let myComponents = [MenuComponent, HomeComponent, AccountComponent, ProductsComponent, FooterComponent];
 
 @NgModule({
   declarations: [ ...myComponents],
   imports: [
-    CommonModule, MyPrimeNgModule
+    CommonModule, MyPrimeNgModule, ReactiveFormsModule
   ], 
   exports:[...myComponents]
 })

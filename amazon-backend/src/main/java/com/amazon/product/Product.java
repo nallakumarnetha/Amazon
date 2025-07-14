@@ -10,6 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.amazon.common.MyAudit;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.mysql.cj.protocol.ColumnDefinition;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -18,6 +19,7 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 
 @Entity
 @JsonInclude(value = Include.NON_EMPTY)
@@ -33,7 +35,14 @@ public class Product {
 
 	@Column
 	private double price;
-
+	
+	@Column
+	@Lob
+	private byte[] image;
+	
+	@Column
+	private String imageBase64;
+		
 	@Embedded
 	private MyAudit audit;
 
@@ -63,6 +72,22 @@ public class Product {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+	
+	public String getImageBase64() {
+		return imageBase64;
+	}
+
+	public void setImageBase64(String imageBase64) {
+		this.imageBase64 = imageBase64;
 	}
 
 	public MyAudit getAudit() {
