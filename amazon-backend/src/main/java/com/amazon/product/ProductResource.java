@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amazon.common.MyResponse;
+import com.amazon.common.Response;
 
-import static com.amazon.common.MyLogger.log;
+import static com.amazon.common.Logger.log;
 
 import java.awt.print.Pageable;
 
@@ -29,10 +29,10 @@ public class ProductResource {
 	// CRUD start
 
 	@GetMapping
-	public MyResponse findAllProducts(@RequestParam(required = false, defaultValue = "0") int page,
+	public Response findAllProducts(@RequestParam(required = false, defaultValue = "0") int page,
 			@RequestParam(required = false, defaultValue = "10") int size) {
 		log.info("request recieved: find all products");
-		MyResponse response = service.findAllProducts(page, size);
+		Response response = service.findAllProducts(page, size);
 		log.info("response sent: find all products");
 		return response;
 	}
@@ -62,9 +62,9 @@ public class ProductResource {
 	}
 
 	@DeleteMapping("{id}")
-	public MyResponse deleteProduct(@PathVariable String id) {
+	public Response deleteProduct(@PathVariable String id) {
 		log.info("request recieved: remove product");
-		MyResponse response = service.deleteProduct(id);
+		Response response = service.deleteProduct(id);
 		log.info("response sent: remove product");
 		return response;
 	}

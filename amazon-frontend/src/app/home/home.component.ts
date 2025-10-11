@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
-import { Product, ProductListResponse } from "../product/others/product.model";
+import { Product, ProductListResponse } from "../product/product.model";
 import { Observable } from "rxjs";
-import { ProductService } from "../product/others/product.service";
+import { ProductService } from "../product/product.service";
 
 @Component({
   selector: 'app-home',
@@ -21,7 +21,7 @@ export class HomeComponent {
       console.log('load products');
       let productsObservable: Observable<ProductListResponse> =
         this.productService.loadProducts();
-      productsObservable.subscribe((data) => (this.products = data.products));
+      productsObservable.subscribe((data) => (this.products = data.products || []));
     }
   
 }

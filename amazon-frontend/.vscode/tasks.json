@@ -1,8 +1,8 @@
 {
-  // For more information, visit: https://go.microsoft.com/fwlink/?LinkId=733558
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "npm: start",
       "type": "npm",
       "script": "start",
       "isBackground": true,
@@ -11,16 +11,13 @@
         "pattern": "$tsc",
         "background": {
           "activeOnStart": true,
-          "beginsPattern": {
-            "regexp": "(.*?)"
-          },
-          "endsPattern": {
-            "regexp": "bundle generation complete"
-          }
+          "beginsPattern": ".*",
+          "endsPattern": "Compiled successfully"
         }
       }
     },
     {
+      "label": "npm: test",
       "type": "npm",
       "script": "test",
       "isBackground": true,
@@ -29,12 +26,8 @@
         "pattern": "$tsc",
         "background": {
           "activeOnStart": true,
-          "beginsPattern": {
-            "regexp": "(.*?)"
-          },
-          "endsPattern": {
-            "regexp": "bundle generation complete"
-          }
+          "beginsPattern": ".*",
+          "endsPattern": "Compiled successfully"
         }
       }
     }

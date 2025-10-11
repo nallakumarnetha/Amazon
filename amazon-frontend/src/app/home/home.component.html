@@ -6,7 +6,9 @@
     <ng-container *ngFor="let product of products">
         <div class="my-card">
             <div>
-                <img src="assets/images/Selfie.png" style="width: 300px; height: 320px;">
+                <img src="./assets/images/Selfie.png" style="width: 300px; height: 320px;">
+                <!-- <img *ngIf="product.base64_files?.length>0"
+                [src]="'data:image/png;base64,'+product.base64_files[0]" [alt]="product.name" width="100" class="shadow-4" /> -->
             </div>
             <div>
                 {{product.name}}

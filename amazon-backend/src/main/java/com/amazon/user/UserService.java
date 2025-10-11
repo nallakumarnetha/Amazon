@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.amazon.common.MyResponse;
+import com.amazon.common.Response;
 import com.amazon.product.Product;
 import com.amazon.product.ProductRepository;
 
@@ -17,9 +17,9 @@ public class UserService {
 	@Autowired
 	private UserRepository repository;
 
-	public MyResponse findAllUsers() {
+	public Response findAllUsers() {
 		List<User> users = repository.findAll();
-		MyResponse response = new MyResponse();
+		Response response = new Response();
 		response.setUsers(users);
 		return response;
 	}
@@ -39,9 +39,9 @@ public class UserService {
 		return response;
 	}
 
-	public MyResponse removeUser(String id) {
+	public Response removeUser(String id) {
 		repository.deleteById(id);
-		MyResponse response = new MyResponse();
+		Response response = new Response();
 		return response;
 	}
 

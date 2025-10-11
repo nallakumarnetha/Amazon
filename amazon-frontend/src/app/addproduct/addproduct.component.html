@@ -1,0 +1,27 @@
+<div style="display: flex; justify-items: center; justify-content: center; margin: 10px;">
+    <form [formGroup]="productForm" (ngSubmit)="addProduct()"
+        style="justify-content: center; width: 500px; height: 1000px;">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+
+            <label for="name">Name</label>
+            <input formControlName="name" type="text" style="height: 30px;">
+
+            <label for="price">Price</label>
+            <input formControlName="price" type="number" style="height: 30px;">
+
+            <label for="price">Select images</label>
+            <input type="file" multiple (change)="onFileSelected($event)">
+
+            <div style="display: flex; flex-direction: row; justify-content: right; margin-left: 10px; gap: 10px;">
+                <button
+                    style="color: white; background-color: black; border: none; border-radius: 4px; padding: 10px; cursor: pointer"
+                    routerLink="/products">Cancel</button>
+                <button type="submit"
+                    style="background-color: #127788; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                    Save and Finish
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>

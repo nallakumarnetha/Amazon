@@ -4,13 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ProductModule } from './product/others/product.module';
+import { ProductModule } from './product/product.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MyPrimeNgModule } from './my-modules/my-prime-ng.module';
 import { MyModule } from './my-modules/my.module';
 import { MyRouting } from './my-modules/my-routing';
-
 
 @NgModule({
   declarations: [

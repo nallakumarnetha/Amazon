@@ -7,8 +7,12 @@ import { MyPrimeNgModule } from './my-prime-ng.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddproductComponent } from '../addproduct/addproduct.component';
+import { FileComponent } from '../file/file.component';
 
-let myComponents = [MenuComponent, HomeComponent, AccountComponent, ProductsComponent, FooterComponent];
+let myComponents = [MenuComponent, HomeComponent, AccountComponent, ProductsComponent, FooterComponent, AddproductComponent
+  , FileComponent
+];
 
 @NgModule({
   declarations: [ ...myComponents],

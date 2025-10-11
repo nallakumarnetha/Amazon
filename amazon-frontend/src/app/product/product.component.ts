@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Product, ProductListResponse } from './others/product.model';
-import { ProductService } from './others/product.service';
+import { Product, ProductListResponse } from './product.model';
+import { ProductService } from './product.service';
 import { Observable } from 'rxjs';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { MenuItem } from 'primeng/api';

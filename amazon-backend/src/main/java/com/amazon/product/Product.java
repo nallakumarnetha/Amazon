@@ -4,12 +4,17 @@ import java.sql.Timestamp;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.amazon.common.MyAudit;
+import com.amazon.common.Audit;
+import com.amazon.id.ID;
+import com.amazon.id.IdService;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mysql.cj.protocol.ColumnDefinition;
 
 import jakarta.persistence.Column;
@@ -20,6 +25,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Transient;
 
 @Entity
 @JsonInclude(value = Include.NON_EMPTY)
@@ -29,25 +36,25 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private String id;
+	
+	@JsonProperty("product_id")
+	private String productId;
 
-	@Column
 	private String name;
 
-	@Column
 	private double price;
 	
-	@Column
-	@Lob
-	private byte[] image;
+	private List<String> files;
 	
-	@Column
-	private String imageBase64;
-		
+	@Transient
+	@JsonProperty("base64_files")
+	private List<String> base64Files;
+
 	@Embedded
-	private MyAudit audit;
+	private Audit audit;
 
 	public Product() {
-		this.audit = new MyAudit();
+		this.audit = new Audit();
 	}
 
 	public String getId() {
@@ -74,28 +81,36 @@ public class Product {
 		this.price = price;
 	}
 
-	public byte[] getImage() {
-		return image;
-	}
-
-	public void setImage(byte[] image) {
-		this.image = image;
-	}
-	
-	public String getImageBase64() {
-		return imageBase64;
-	}
-
-	public void setImageBase64(String imageBase64) {
-		this.imageBase64 = imageBase64;
-	}
-
-	public MyAudit getAudit() {
+	public Audit getAudit() {
 		return audit;
 	}
 
-	public void setAudit(MyAudit audit) {
+	public void setAudit(Audit audit) {
 		this.audit = audit;
 	}
 
+	public List<String> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<String> files) {
+		this.files = files;
+	}
+
+	public List<String> getBase64Files() {
+		return base64Files;
+	}
+
+	public void setBase64Files(List<String> base64Files) {
+		this.base64Files = base64Files;
+	}
+
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+	
 }

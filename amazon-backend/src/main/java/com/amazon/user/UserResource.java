@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amazon.common.MyResponse;
+import com.amazon.common.Response;
 import com.amazon.product.Product;
 import com.amazon.product.ProductService;
 
@@ -24,8 +24,8 @@ public class UserResource {
 	private UserService service;
 
 	@GetMapping
-	public MyResponse findAllUsers() {
-		MyResponse response = service.findAllUsers();
+	public Response findAllUsers() {
+		Response response = service.findAllUsers();
 		return response;
 	}
 
@@ -48,8 +48,8 @@ public class UserResource {
 	}
 
 	@DeleteMapping("/{id}")
-	public MyResponse removeUser(@PathVariable String id) {
-		MyResponse response = service.removeUser(id);
+	public Response removeUser(@PathVariable String id) {
+		Response response = service.removeUser(id);
 		return response;
 	}
 

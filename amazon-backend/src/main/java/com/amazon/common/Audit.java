@@ -10,6 +10,8 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
@@ -17,22 +19,26 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 
 @Embeddable
-public class MyAudit {
+public class Audit {
 
 	@Column(columnDefinition = "timestamp")
 	@CreatedDate
+	@JsonProperty("created_date")
 	private Instant createdDate;
 
 	@Column(columnDefinition = "timestamp")
 	@LastModifiedDate
+	@JsonProperty("modified_date")
 	private Instant modifiedDate;
 
 	@Column
 	@CreatedBy
+	@JsonProperty("created_by")
 	private String createdBy;
 
 	@Column
 	@LastModifiedBy
+	@JsonProperty("modified_by")
 	private String modifiedBy;
 
 	public Instant getCreatedDate() {

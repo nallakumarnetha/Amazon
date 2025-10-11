@@ -1,36 +1,36 @@
+<!-- add product -->
+ <div style="display: flex; flex-direction: row; justify-content: right; margin: 10px;">
+<button style="background-color: white; border-radius: 7px; border-color: #ccc; border-style: solid;
+padding: 5px 8px; cursor: pointer"
+routerLink="/addProduct">
+    Add a product
+</button>
+</div>
 
-
-
-
-<p-table [value]="products" [tableStyle]="{'min-width': '60rem'}">
-    <ng-template pTemplate="caption">
-        <div class="flex align-items-center justify-content-between">
-            Products
-            <p-button icon="pi pi-refresh" />
-        </div>
-    </ng-template>
+<!-- list all products -->
+<p-table [value]="products" [tableStyle]="{'min-width': '60rem'}"
+[paginator]="true" [rows]="10">
     <ng-template pTemplate="header">
         <tr>
             <th>Id</th>
             <th>Name</th>
             <th>Price</th>
-            
-            <!-- <th>Image</th> -->
-            
-            <!-- <th>Category</th> -->
-            <!-- <th>Reviews</th> -->
-            <!-- <th>Status</th> -->
+            <th>images</th>
+            <th>Actions</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-product>
         <tr>
-            <td>{{product.id}}</td>
+            <td>{{product.product_id}}</td>
             <td>{{product.name}}</td>
-            <!-- <td><img [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.name" [alt]="product.name" width="100" class="shadow-4" /></td> -->
             <td>{{product.price | currency:'USD'}}</td>
-            <!-- <td>{{product.category}}</td> -->
-            <!-- <td><p-rating [(ngModel)]="product.rating" [readonly]="true" [cancel]="false" /></td> -->
-            <!-- <td><p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)" /></td> -->
+            <td><img *ngIf="product.base64_files?.length>0"
+                [src]="'data:image/png;base64,'+product.files[0]" [alt]="product.name" width="100" class="shadow-4" />
+            <!-- <a [href]="'data:image/png;base64,' + product.base64_files[0]" 
+                    [download]="product.name + '.png'" > Click to Download File </a> -->
+            <td style="display: flex; gap: 20px;">
+                <i class="pi pi-pencil"></i><i class="pi pi-trash"></i>
+            </td>
         </tr>
     </ng-template>
     <ng-template pTemplate="summary">
@@ -39,35 +39,3 @@
         </div>
     </ng-template>
 </p-table>
-
-
-
-
-
-
-
-
-
-
-<table>
-    <tr>
-        <th>aa</th>
-        <th>bb</th>
-    </tr>
-
-    <tr>
-        <td>11<td>
-<td>22</td>
-    </tr>
-</table>
-
-
-<!-- add prodct -->
-<form [formGroup]="productForm" (ngSubmit)="addProduct()" style="justify-content: center; width: 500px; height: 1000px;">
-    <div style="display: flex; flex-direction: column; gap: 10px;">
-<input formControlName="name" type="text">
-<input formControlName="price" type="number">
-<button>Cancel</button>
-<button type="submit">Add</button>
-</div>
-</form>

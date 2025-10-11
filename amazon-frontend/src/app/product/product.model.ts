@@ -2,6 +2,7 @@ export class Product {
     id?: string;
     name?: string;
     price?: number;
+    files?: String[];
 }
 
 export class ProductListResponse {
