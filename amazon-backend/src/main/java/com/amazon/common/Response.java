@@ -14,7 +14,7 @@ public class Response {
 
 	int rows = 10;
 
-	int total;
+	long total;
 
 	private String message;
 
@@ -38,11 +38,11 @@ public class Response {
 		this.rows = rows;
 	}
 
-	public int getTotal() {
+	public long getTotal() {
 		return total;
 	}
 
-	public void setTotal(int total) {
+	public void setTotal(long total) {
 		this.total = total;
 	}
 

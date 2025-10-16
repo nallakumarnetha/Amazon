@@ -11,9 +11,9 @@ constructor(private http: HttpClient) { }
 
   private baseUrl = 'http://localhost:8080/amazon/files'
 
-   uploadFiles(files: File[]): Observable<String[]> {
+   uploadFiles(files: File[]): Observable<string[]> {
     let formData = new FormData();
     files.forEach(file=>formData.append('files', file));
-      return this.http.post<String[]>(this.baseUrl, formData);
+      return this.http.post<string[]>(this.baseUrl, formData);
     }
 }

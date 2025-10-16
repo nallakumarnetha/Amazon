@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Product, ProductListResponse } from "./product.model";
+import { Product, ProductListResponse } from "./Xproduct.model";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -14,8 +14,8 @@ export class ProductService {
 
   //CRUD start
 
-  loadProducts(page: number, size: number): Observable<ProductListResponse> {
-    return this.http.get<ProductListResponse>(this.baseUrl+'?page='+page+'&size='+size);
+  loadProducts(): Observable<ProductListResponse> {
+    return this.http.get<ProductListResponse>(this.baseUrl);
   }
 
   findProduct(id: string): Observable<Product> {
@@ -30,8 +30,8 @@ export class ProductService {
     return this.http.put(`${this.baseUrl}/${id}`, product);
   }
 
-  deleteProduct(id: string): Observable<ProductListResponse> {
-    return this.http.delete<ProductListResponse>(`${this.baseUrl}/${id}`);
+  deleteProduct(id: string) {
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
   //CRUD end

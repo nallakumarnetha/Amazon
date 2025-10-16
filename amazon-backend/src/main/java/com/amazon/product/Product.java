@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +91,9 @@ public class Product {
 	}
 
 	public List<String> getFiles() {
+		if(this.files == null) {
+			return new ArrayList<String>();
+		}
 		return files;
 	}
 

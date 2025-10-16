@@ -16,7 +16,7 @@ export class AddproductComponent {
   productForm: FormGroup;
   product?: Product = {};
   selectedFiles: File[] = [];
-  fileIds: String[] = [];
+  fileIds: string[] = [];
 
   constructor(private fb: FormBuilder, private productService: ProductService, private router: Router
     , private fileService: FileService) {

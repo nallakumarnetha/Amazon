@@ -1,14 +1,20 @@
 package com.amazon.file;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.amazon.common.Response;
+import com.amazon.product.Product;
 
 import static com.amazon.common.Logger.log;;
 
@@ -34,5 +40,19 @@ public class FileService {
 			log.error("failed to upload files", ex);
 		}
 		return fileIds;
+	}
+	
+	public List<String> getBase64Files(List<String> ids) {
+		if(ids == null || ids != null && ids.isEmpty()) {
+			return null;
+		}
+		List<String> base64Files = new ArrayList<>();
+		for(String id : ids) {
+			File file = repository.findById(id).orElse(null);
+			byte[] fileData = file.getData();
+			String base64FileData = Base64.getEncoder().encodeToString(fileData);
+			base64Files.add(base64FileData);
+		}
+		return base64Files;
 	}
 }

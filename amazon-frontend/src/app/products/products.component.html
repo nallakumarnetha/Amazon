@@ -7,35 +7,44 @@ routerLink="/addProduct">
 </button>
 </div>
 
+<div style="font-weight: bold;">
+    In total there are {{products ? total : 0 }} products.
+</div>
+<br>
 <!-- list all products -->
-<p-table [value]="products" [tableStyle]="{'min-width': '60rem'}"
-[paginator]="true" [rows]="10">
+<p-table [value]="products" [tableStyle]="{'min-width': '60rem'}" 
+[paginator]="true" [rows]="10"
+[rows]="10"
+[totalRecords]="total"
+[lazy]="true"
+(onLazyLoad)="loadProducts($event)"
+[loading]="loading"
+>        
     <ng-template pTemplate="header">
         <tr>
             <th>Id</th>
             <th>Name</th>
             <th>Price</th>
-            <th>images</th>
+            <th>Images</th>
             <th>Actions</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-product>
-        <tr>
+        <tr (click)="showProduct(product.id)">
             <td>{{product.product_id}}</td>
             <td>{{product.name}}</td>
-            <td>{{product.price | currency:'USD'}}</td>
-            <td><img *ngIf="product.base64_files?.length>0"
-                [src]="'data:image/png;base64,'+product.files[0]" [alt]="product.name" width="100" class="shadow-4" />
-            <!-- <a [href]="'data:image/png;base64,' + product.base64_files[0]" 
-                    [download]="product.name + '.png'" > Click to Download File </a> -->
+            <td>{{product.price | currency:'INR'}}</td>
+            <td>
+            <ng-container *ngIf="product?.base64_files as base64_files">
+                <ng-container *ngIf="base64_files.length > 0">
+                 <img [src]="'data:image/png;base64,' + base64_files?.[0]" [alt]="product?.name" width="70" height="40"/>
+                </ng-container>
+            </ng-container>
+            </td>
             <td style="display: flex; gap: 20px;">
-                <i class="pi pi-pencil"></i><i class="pi pi-trash"></i>
+                <i class="pi pi-pencil" (click)="showProduct(product.id)"></i>
+                <i class="pi pi-trash" (click) = "deleteProduct(product.id)"></i>
             </td>
         </tr>
-    </ng-template>
-    <ng-template pTemplate="summary">
-        <div class="flex align-items-center justify-content-between">
-            In total there are {{products ? products.length : 0 }} products.
-        </div>
     </ng-template>
 </p-table>

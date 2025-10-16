@@ -1,7 +1,6 @@
-
 .my-menu-bar {
   display: flex;
-  gap: 0;
+  gap: 5px;
   width: 100%;
   color: white;
   font-family: 'Arial';

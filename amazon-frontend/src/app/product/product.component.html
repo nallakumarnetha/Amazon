@@ -1,9 +1,45 @@
+<div style="display: flex; justify-items: center; justify-content: center; margin: 10px;">
+    <form [formGroup]="updatedProductForm" (ngSubmit)="updateProduct()"
+        style="justify-content: center; width: 500px; height: 1000px;">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+
+            <i class="pi pi-trash"
+                style="display: flex; justify-content: right; gap: 5px; color: red; cursor: pointer;" (click) = "deleteProduct(id)">Delete</i>
+
+            <label for="product_id">Id</label>
+            <input formControlName="product_id" type="text" style="height: 30px;" readonly>
+
+            <label for="name">Name</label>
+            <input formControlName="name" type="text" style="height: 30px;">
+
+            <label for="price">Price</label>
+            <input formControlName="price" type="number" style="height: 30px;">
+
+            <label for="images">Images</label>
+            <div style="display: flex; flex-direction: row; gap: 10px;">
+            <ng-container *ngIf="product?.base64_files as base64_files">
+                <ng-container *ngIf="base64_files.length > 0">
+                 <img *ngFor="let base64_file of base64_files" [src]="'data:image/png;base64,' + base64_file" [alt]="product?.name" width="100"/>
+                </ng-container>
+            </ng-container>
+            </div>
+
+            <div style="display: flex; flex-direction: row; justify-content: right; margin-left: 10px; gap: 10px;">
+                <button
+                    style="color: white; background-color: black; border: none; border-radius: 4px; padding: 10px; cursor: pointer"
+                    routerLink="/products">Cancel</button>
+                <button type="submit"
+                    style="background-color: #127788; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                    Update
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
 <!-- CRUD start -->
-<form [formGroup]="productForm" (ngSubmit)="addProduct()">
-    <input formControlName="name" type="text">
-    <input formControlName="price" type="number">
-    <button type="submit">Add</button>
-</form>
+<!-- 
 
 <table>
     <tr>
@@ -35,5 +71,5 @@
         </ng-template>
 
     </ng-container>
-</table>
+</table> -->
 <!-- CRUD end -->

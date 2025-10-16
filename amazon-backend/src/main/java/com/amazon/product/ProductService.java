@@ -19,6 +19,7 @@ import com.amazon.common.Audit;
 import com.amazon.common.Response;
 import com.amazon.file.File;
 import com.amazon.file.FileRepository;
+import com.amazon.file.FileService;
 import com.amazon.id.IdService;
 
 import jakarta.websocket.server.PathParam;
@@ -30,7 +31,7 @@ public class ProductService {
 	private ProductRepository repository;
 	
 	@Autowired
-	private FileRepository fileRepository;
+	private FileService fileService;
 	
 	@Autowired
 	private IdService idService;
@@ -47,24 +48,22 @@ public class ProductService {
 		List<Product> products = productPage.getContent();
 		for(Product product : products) {
 			List<String> fileIds = product.getFiles();
-			if(fileIds != null) {
-				List<String> base64Files = new ArrayList<>();
-				for(String id : fileIds) {
-					File file = fileRepository.findById(id).orElse(null);
-					byte[] fileData = file.getData();
-					String base64FileData = Base64.getEncoder().encodeToString(fileData);
-					base64Files.add(base64FileData);
-				}
-				product.setBase64Files(base64Files);
-			}
+			List<String> base64FilesData = fileService.getBase64Files(fileIds);
+			product.setBase64Files(base64FilesData);
 		}
 		Response response = new Response();
 		response.setProducts(products);
+		//count
+		long total = repository.count();
+		response.setTotal(total);
 		return response;
 	}
 
 	public Product findProductById(String id) {
 		Product response = repository.findById(id).orElse(null);
+		List<String> fileIds = response.getFiles();
+		List<String> base64FilesData = fileService.getBase64Files(fileIds);
+		response.setBase64Files(base64FilesData);
 		return response;
 	}
 
