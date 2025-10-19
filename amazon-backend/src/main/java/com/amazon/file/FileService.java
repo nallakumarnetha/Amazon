@@ -2,7 +2,9 @@ package com.amazon.file;
 
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -42,16 +44,16 @@ public class FileService {
 		return fileIds;
 	}
 	
-	public List<String> getBase64Files(List<String> ids) {
+	public Map<String, String> getBase64Files(List<String> ids) {
 		if(ids == null || ids != null && ids.isEmpty()) {
 			return null;
 		}
-		List<String> base64Files = new ArrayList<>();
+		Map<String, String> base64Files = new HashMap<>();
 		for(String id : ids) {
 			File file = repository.findById(id).orElse(null);
 			byte[] fileData = file.getData();
 			String base64FileData = Base64.getEncoder().encodeToString(fileData);
-			base64Files.add(base64FileData);
+			base64Files.put(id, base64FileData);
 		}
 		return base64Files;
 	}

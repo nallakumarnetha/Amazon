@@ -10,11 +10,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { MyPrimeNgModule } from './my-modules/my-prime-ng.module';
 import { MyModule } from './my-modules/my.module';
 import { MyRouting } from './my-modules/my-routing';
+import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { PaymentComponent } from './payment/payment.component';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
-    AppComponent    
-  ],
+    AppComponent,
+    CheckoutComponent,
+    PaymentComponent,
+    OrderComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule, 

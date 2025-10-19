@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { ChangeDetectorRef, Component } from "@angular/core";
+import { CartService } from "../cart/cart.service";
 
 @Component({
   selector: 'app-menu',
@@ -7,12 +8,29 @@ import { Component } from "@angular/core";
 })
 export class MenuComponent {
 
-showSideBar: boolean=false;
-ngOnInit() {
-}
+  showSideBar: boolean = false;
+  cartCount?: number = 0;
 
-toggleSideBar() {
-this.showSideBar=!this.showSideBar;
-}
+  constructor(private cartService: CartService, private changeDetecorRef: ChangeDetectorRef) {
+  }
+
+  ngOnInit() {
+    this.updateCartCount();
+  }
+
+  toggleSideBar() {
+    this.showSideBar = !this.showSideBar;
+  }
+
+  updateCartCount() {
+    // const cartStr = localStorage.getItem('cart') || '';
+    // const cartItems =  JSON.parse(cartStr);
+    // this.cartCount = cartItems.length;
+    this.cartService.cartObservable$.subscribe(
+      cart => { this.cartCount = cart.length;
+        this.changeDetecorRef.detectChanges();
+       }
+    );
+  }
 
 }

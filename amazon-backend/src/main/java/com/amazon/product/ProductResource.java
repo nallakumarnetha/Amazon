@@ -40,7 +40,7 @@ public class ProductResource {
 	@GetMapping("/{id}")
 	public Product findProductById(@PathVariable String id) {
 		log.info("request recieved: find product by id");
-		Product response = service.findProductById(id);
+		Product response = service.findProduct(id);
 		log.info("response sent: find product by id");
 		return response;
 	}

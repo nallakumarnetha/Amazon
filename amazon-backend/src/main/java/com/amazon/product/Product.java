@@ -6,6 +6,7 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -49,7 +50,7 @@ public class Product {
 	
 	@Transient
 	@JsonProperty("base64_files")
-	private List<String> base64Files;
+	private Map<String,String> base64Files;
 
 	@Embedded
 	private Audit audit;
@@ -101,11 +102,11 @@ public class Product {
 		this.files = files;
 	}
 
-	public List<String> getBase64Files() {
+	public Map<String, String> getBase64Files() {
 		return base64Files;
 	}
 
-	public void setBase64Files(List<String> base64Files) {
+	public void setBase64Files(Map<String, String> base64Files) {
 		this.base64Files = base64Files;
 	}
 

@@ -16,7 +16,7 @@ export class ProductComponent {
   selectedProductId?: string;
   selectedProductForm: FormGroup;
 
- constructor(private fb: FormBuilder, private productService: ProductService) {
+  constructor(private fb: FormBuilder, private productService: ProductService) {
     this.productForm = this.fb.group({
       name: '',
       price: 0,
@@ -28,14 +28,14 @@ export class ProductComponent {
   }
 
   ngOnInit() {
-    this.loadProducts();
+    this.findAllProducts();
   }
 
   //CRUD start
-  loadProducts(): void {
+  findAllProducts(): void {
     console.log('load products');
     let productsObservable: Observable<ProductListResponse> =
-      this.productService.loadProducts();
+      this.productService.findAllProducts(0, 10);
     productsObservable.subscribe((data) => (this.products = data.products));
   }
 
@@ -73,7 +73,7 @@ export class ProductComponent {
       this.product = data;
       this.selectedProductId = '';
       this.selectedProductForm.reset();
-      this.loadProducts();
+      this.findAllProducts();
     });
   }
 

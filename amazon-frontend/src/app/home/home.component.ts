@@ -2,6 +2,8 @@ import { Component } from "@angular/core";
 import { Product, ProductListResponse } from "../product/product.model";
 import { Observable } from "rxjs";
 import { ProductService } from "../product/product.service";
+import { MenuComponent } from "../menu/menu.component";
+import { CartService } from "../cart/cart.service";
 
 @Component({
   selector: 'app-home',
@@ -15,8 +17,9 @@ export class HomeComponent {
   loading = false;
   allLoaded = false;
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private cartService: CartService) {
   }
+
   ngOnInit() {
     this.loadProducts();
   }
@@ -26,7 +29,7 @@ export class HomeComponent {
     if (this.loading || this.allLoaded) return; // prevent duplicate calls
     this.loading = true;
     let productsObservable: Observable<ProductListResponse> =
-      this.productService.loadProducts(this.page, this.size);
+      this.productService.findAllProducts(this.page, this.size);
     productsObservable.subscribe((data) => {
       const products = data?.products ?? [];
       if (products.length === 0) {
@@ -43,6 +46,10 @@ export class HomeComponent {
     if (element.scrollHeight - element.scrollTop === element.clientHeight) {
       this.loadProducts();
     }
+  }
+
+  addToCart(id?: string) {
+    this.cartService.addToCart(id);
   }
 
 }

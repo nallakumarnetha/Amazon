@@ -1,0 +1,11 @@
+<button>Buy all</button>
+<br><br>
+
+
+<ng-container *ngFor="let product of products">
+    <input type="checkbox" checked>
+    {{product.product_id}}
+    {{product.name}}
+    {{product.price}}
+    <br><br>
+</ng-container>

@@ -1,40 +1,104 @@
 <div style="display: flex; gap: 10px;">
-<div style="background-color: pink; width: 300px;">
-    hello
-</div>
+    <div style="background-color: #f0f2f2; width: 300px; padding: 15px;">
+        <b>Color</b><br>
+        <input type="checkbox"> Red<br>
+        <input type="checkbox"> Blue<br>
+        <input type="checkbox"> Green<br>
+        <br>
+        <b>Style</b><br>
+        <input type="checkbox"> New<br>
+        <input type="checkbox"> Old<br>
+        <br>
+        <b>Brands</b><br>
+        <input type="checkbox"> American tourister<br>
+        <input type="checkbox"> Nike<br>
+        <br>
+        <b>Design</b><br>
+        <input type="checkbox"> Classic<br>
+        <input type="checkbox"> Vintage<br>
+        <br>
+        <b>Length</b><br>
+        <input type="checkbox"> 5m<br>
+        <input type="checkbox"> 10m <br>
+        <input type="checkbox"> 20m <br>
+        <br>
+        <b>Weight</b><br>
+        <input type="checkbox"> 2kg<br>
+        <input type="checkbox"> 5kg <br>
+        <input type="checkbox"> 10kg<br>
+        <br>
+        <b>Material</b><br>
+        <input type="checkbox"> Plastic<br>
+        <input type="checkbox"> Iron<br>
+        <input type="checkbox"> Aluminium<br>
+        <br>
+        <b>Warranty type</b><br>
+        <input type="checkbox"> Lifetime<br>
+        <input type="checkbox"> Limited<br>
+        <br>
+        <b>Uses</b><br>
+        <input type="checkbox"> General<br>
+        <input type="checkbox"> Commercial<br>
+        <br>
+        <b>Age range</b><br>
+        <input type="checkbox"> Under 5y<br>
+        <input type="checkbox"> 5y - 20y<br>
+        <input type="checkbox"> Above 20y<br>
+        <br>
+        <b>Gender</b><br>
+        <input type="checkbox"> Male<br>
+        <input type="checkbox"> Female<br>
+        <br>
+        <b>Condition</b><br>
+        <input type="checkbox"> New <br>
+        <input type="checkbox"> Used/Refurbished <br>
+    </div>
 
-<div (scroll)="onScroll($event)" style="flex: 1; overflow-y: auto; height: 100vh; scrollbar-width: none;">
-<div style="flex: 1; display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))">
-    <ng-container *ngFor="let product of products">
-        <div class="my-card">
-            <div>
-                <img [src]="'data:image/png;base64,' + product?.base64_files?.[0]" style="width: 300px; height: 320px;">
-            </div>
-            <div>
-                {{product.name}}
-                <!-- PANDAFLY White Gel Pens, 0.8mm Extra Fine Point Opaque Archival Ink Pen for Journaling, Art, or Drawing - For Artist Gifts, Holiday Gifts & DIY -->
-            </div>
-            <div>
-                Ratings <i class="pi pi-star-fill"></i><i class="pi pi-star-fill"></i><i class="pi pi-star-fill"></i>
-            </div>
-            <div style="font-size: 20px;">
-                {{product.price}} Rs
-            </div>
-            <div>
-                <button style="padding: 10px; color: black; background-color: #ffd814; border: none; border-radius: 20px; padding-left: 20px; padding-right: 20px;">  Add to cart</button>
-            </div>
+    <div (scroll)="onScroll($event)" style="flex: 1; overflow-y: auto; height: 100vh; scrollbar-width: none;">
+        <div style="flex: 1; display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))">
+            <ng-container *ngFor="let product of products">
+                <div class="my-card">
+                    <div>
+                        <ng-container *ngIf="product?.base64_files | keyvalue as filesArray">
+                            <ng-container *ngIf="filesArray.length > 0">
+                                <img [src]="'data:image/png;base64,' + filesArray[0].value"
+                                    style="width: 300px; height: 320px;">
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                    <div>
+                        {{product.name}}
+                        <!-- PANDAFLY White Gel Pens, 0.8mm Extra Fine Point Opaque Archival Ink Pen for Journaling, Art, or Drawing - For Artist Gifts, Holiday Gifts & DIY -->
+                    </div>
+                    <div>
+                        Ratings <i class="pi pi-star-fill"></i><i class="pi pi-star-fill"></i><i
+                            class="pi pi-star-fill"></i>
+                    </div>
+                    <div style="font-size: 20px;">
+                        {{product.price}} Rs
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin: 10px">
+                        <button
+                            style="padding: 10px; color: black; background-color: #ffd814; border: none; border-radius: 20px; padding-left: 20px; padding-right: 20px;"
+                            (click)="addToCart(product.id)">
+                            Add to Cart</button>
+                        <button
+                            style="padding: 10px; color: black; background-color: #ffa41c; border: none; border-radius: 20px; padding-left: 20px; padding-right: 20px;"
+                            (click)="addToCart(product.id)">
+                            Buy Now</button>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="loading">
+                <b>Loading....</b>
+            </ng-container>
+
+            <ng-container *ngIf="allLoaded">
+                <b>Reached end of products....</b>
+            </ng-container>
+
         </div>
-    </ng-container>
-
-    <ng-container *ngIf="loading">
-        <b>Loading....</b>
-    </ng-container>
-
-        <ng-container *ngIf="allLoaded">
-        <b>Reached end of products....</b>
-    </ng-container>
-    
-</div>
-</div>
+    </div>
 
 </div>

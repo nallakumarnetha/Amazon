@@ -4,7 +4,6 @@ import { Product } from '../product/product.model';
 import { ProductService } from '../product/product.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { FileComponent } from '../file/file.component';
 import { FileService } from '../file/file.service';
 
 @Component({
@@ -17,9 +16,10 @@ export class AddproductComponent {
   product?: Product = {};
   selectedFiles: File[] = [];
   fileIds: string[] = [];
+  selectedFilesBase64: { id: string, data: string }[] = [];
 
-  constructor(private fb: FormBuilder, private productService: ProductService, private router: Router
-    , private fileService: FileService) {
+  constructor(private fb: FormBuilder, private productService: ProductService, private router: Router,
+    private fileService: FileService) {
     this.productForm = this.fb.group({
       name: '', price: 0
     });
@@ -35,7 +35,7 @@ export class AddproductComponent {
     };
 
     this.product = this.productForm.value;
-    if (this.selectedFiles && this.selectedFiles.length>0) {
+    if (this.selectedFiles && this.selectedFiles.length > 0) {
       console.log('uploading files');
       this.fileService.uploadFiles(this.selectedFiles).subscribe({
         next: (res) => {
@@ -45,15 +45,50 @@ export class AddproductComponent {
         },
         error: (err) => err
       });
-   } else {
+    } else {
       addProductFun();
     }
   }
 
   onFileSelected(event: any): void {
-    console.log(event.target.files);
     this.selectedFiles = Array.from(event.target.files);
     console.log(this.selectedFiles);
+
+    // to show selected files
+    this.selectedFiles.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        // Convert to base64 string (remove the "data:image/...;base64," prefix)
+        const base64Data = e.target.result.split(',')[1];
+        this.selectedFilesBase64.push({ id: file.name, data: base64Data });
+      };
+      reader.readAsDataURL(file);
+    });
   }
+
+  // onRemoveFile(id: string) {
+  //   console.log("file remove");
+  //   const index = this.product?.files?.indexOf(id);
+  //   if (index! > -1) {
+  //     this.product?.files?.splice(index!, 1);
+  //   }
+  //   //OR this.fileIds = this.fileIds.filter(id => id !== id);
+
+  //   if (this.product?.base64_files instanceof Map) {
+  //     this.product.base64_files.delete(id);
+  //   }
+  // }
+  onRemoveFile(id: string) {
+  console.log("file remove");
+
+  // Remove from selectedFiles array (for upload)
+  const index = this.selectedFiles.findIndex(f => f.name === id);
+  if (index > -1) this.selectedFiles.splice(index, 1);
+
+  // Remove from base64 preview array
+  const previewIndex = this.selectedFilesBase64.findIndex(f => f.id === id);
+  if (previewIndex > -1) this.selectedFilesBase64.splice(previewIndex, 1);
+}
+
 
 }

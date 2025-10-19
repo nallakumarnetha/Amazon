@@ -35,9 +35,9 @@ routerLink="/addProduct">
             <td>{{product.name}}</td>
             <td>{{product.price | currency:'INR'}}</td>
             <td>
-            <ng-container *ngIf="product?.base64_files as base64_files">
-                <ng-container *ngIf="base64_files.length > 0">
-                 <img [src]="'data:image/png;base64,' + base64_files?.[0]" [alt]="product?.name" width="70" height="40"/>
+            <ng-container *ngIf="product?.base64_files | keyvalue as filesArray">
+                <ng-container *ngIf="filesArray.length > 0">
+                 <img [src]="'data:image/png;base64,' + filesArray[0].value" [alt]="product?.name" width="70" height="40"/>
                 </ng-container>
             </ng-container>
             </td>

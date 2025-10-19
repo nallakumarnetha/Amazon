@@ -15,14 +15,31 @@
             <label for="price">Price</label>
             <input formControlName="price" type="number" style="height: 30px;">
 
-            <label for="images">Images</label>
+            <!-- 
             <div style="display: flex; flex-direction: row; gap: 10px;">
             <ng-container *ngIf="product?.base64_files as base64_files">
                 <ng-container *ngIf="base64_files.length > 0">
                  <img *ngFor="let base64_file of base64_files" [src]="'data:image/png;base64,' + base64_file" [alt]="product?.name" width="100"/>
                 </ng-container>
             </ng-container>
-            </div>
+            </div> -->
+
+            <!-- start -->
+             <label for="images">Images</label>
+             <div style="display: flex; flex-direction: row; gap: 10px;">
+             <ng-container *ngIf="product?.base64_files as base64_files">
+                <ng-container *ngIf="base64_files | keyvalue as filesMap">
+                    <ng-container *ngFor = "let element of filesMap">
+                        <img [src]="'data:image/png;base64,' + element.value" [alt]="product?.name" width="100">
+                        <button type="button" (click) = "onRemoveFile(element.key)" style="height: 20px;">x</button>
+                </ng-container>
+             </ng-container>
+             </ng-container>
+             </div>
+            
+             <button type="button" (click)="triggerFileSelect(myFileInputId)" style="width: 50px;"> + </button>
+             <input #myFileInputId type="file" multiple (change)="onFileSelected($event)" style="display: none;">
+            <!--  end -->
 
             <div style="display: flex; flex-direction: row; justify-content: right; margin-left: 10px; gap: 10px;">
                 <button

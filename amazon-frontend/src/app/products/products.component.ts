@@ -38,7 +38,7 @@ export class ProductsComponent {
     const page = (event?.first ?? 0) / (event?.rows ?? 10);
     const size = event?.rows ?? 10;
     let productsObservable: Observable<ProductListResponse> =
-      this.productService.loadProducts(page, size);
+      this.productService.findAllProducts(page, size);
     productsObservable.subscribe((data) => {
       (this.products = data.products || []);
       this.total = data.total;

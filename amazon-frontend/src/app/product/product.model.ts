@@ -4,7 +4,8 @@ export class Product {
     name?: string;
     price?: number;
     files?: string[];
-    base64_files?: string[]
+    base64_files?: Map<string, string>;
+    cart_count?: number;
 }
 
 export class ProductListResponse {

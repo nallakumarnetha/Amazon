@@ -14,7 +14,7 @@ export class ProductService {
 
   //CRUD start
 
-  loadProducts(page: number, size: number): Observable<ProductListResponse> {
+  findAllProducts(page: number, size: number): Observable<ProductListResponse> {
     return this.http.get<ProductListResponse>(this.baseUrl+'?page='+page+'&size='+size);
   }
 

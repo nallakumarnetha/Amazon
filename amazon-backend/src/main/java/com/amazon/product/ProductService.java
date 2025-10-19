@@ -6,6 +6,7 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -48,7 +49,7 @@ public class ProductService {
 		List<Product> products = productPage.getContent();
 		for(Product product : products) {
 			List<String> fileIds = product.getFiles();
-			List<String> base64FilesData = fileService.getBase64Files(fileIds);
+			Map<String, String> base64FilesData = fileService.getBase64Files(fileIds);
 			product.setBase64Files(base64FilesData);
 		}
 		Response response = new Response();
@@ -59,10 +60,10 @@ public class ProductService {
 		return response;
 	}
 
-	public Product findProductById(String id) {
+	public Product findProduct(String id) {
 		Product response = repository.findById(id).orElse(null);
 		List<String> fileIds = response.getFiles();
-		List<String> base64FilesData = fileService.getBase64Files(fileIds);
+		Map<String, String> base64FilesData = fileService.getBase64Files(fileIds);
 		response.setBase64Files(base64FilesData);
 		return response;
 	}
@@ -75,10 +76,13 @@ public class ProductService {
 
 	public Product updateProduct(String id, Product request) {
 		Product entity = repository.findById(id).orElse(null);
-		if (request.getName() != null && !request.getName().isEmpty())
+		if (request.getName() != null && !request.getName().isEmpty()) {
 			entity.setName(request.getName());
-		if (request.getPrice() != 0)
+		}
+		if (request.getPrice() != 0) {
 			entity.setPrice(request.getPrice());
+		}
+		entity.setFiles(request.getFiles());
 		Product response = repository.save(entity);
 		return response;
 	}

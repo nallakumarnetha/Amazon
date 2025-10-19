@@ -9,8 +9,23 @@
             <label for="price">Price</label>
             <input formControlName="price" type="number" style="height: 30px;">
 
-            <label for="price">Select images</label>
-            <input type="file" multiple (change)="onFileSelected($event)">
+            
+            <!-- <label for="price">Select images</label>
+            <input type="file" multiple (change)="onFileSelected($event)"> -->
+            <!-- start -->
+<label for="images">Images</label>
+<div style="display: flex; flex-direction: row; gap: 10px; flex-wrap: wrap;">
+  <ng-container *ngFor="let file of selectedFilesBase64">
+    <div style="position: relative;">
+      <img [src]="'data:image/png;base64,' + file.data" width="100">
+      <button type="button" (click)="onRemoveFile(file.id)" style="position: absolute; top: 0; right: 0;">x</button>
+    </div>
+  </ng-container>
+</div>
+
+<button type="button" (click)="myFileInputId.click()" style="width: 50px;"> + </button>
+<input #myFileInputId type="file" multiple (change)="onFileSelected($event)" style="display: none;">
+            <!--  end -->
 
             <div style="display: flex; flex-direction: row; justify-content: right; margin-left: 10px; gap: 10px;">
                 <button
