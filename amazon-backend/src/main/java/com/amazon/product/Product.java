@@ -6,12 +6,14 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale.Category;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.amazon.common.Audit;
+import com.amazon.common.Status;
 import com.amazon.id.ID;
 import com.amazon.id.IdService;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -23,6 +25,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -48,10 +52,26 @@ public class Product {
 	
 	private List<String> files;
 	
+	// for sending to client in base64 format
+	// Base64: Converts binary data into text format (letters, numbers, symbols)
+	// Easy to send over JSON or APIs directly
+	// preferred for in-line images
 	@Transient
 	@JsonProperty("base64_files")
 	private Map<String,String> base64Files;
 
+	private long count;
+	
+	@Transient
+	@JsonProperty("cart_count")
+	private long cartCount;	// CartProduct
+	
+	@Transient
+	private Status status;	// CartProduct
+	
+	@Enumerated(EnumType.STRING)
+	private com.amazon.product.Category category;
+	
 	@Embedded
 	private Audit audit;
 
@@ -116,6 +136,38 @@ public class Product {
 
 	public void setProductId(String productId) {
 		this.productId = productId;
+	}
+
+	public long getCount() {
+		return count;
+	}
+
+	public void setCount(long count) {
+		this.count = count;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public long getCartCount() {
+		return cartCount;
+	}
+
+	public void setCartCount(long cartCount) {
+		this.cartCount = cartCount;
+	}
+
+	public com.amazon.product.Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(com.amazon.product.Category category) {
+		this.category = category;
 	}
 	
 }

@@ -1,11 +1,22 @@
-<button>Buy all</button>
+<button type="button" routerLink="/order">Buy all</button>
 <br><br>
 
 
 <ng-container *ngFor="let product of products">
-    <input type="checkbox" checked>
+    <input type="checkbox" [checked]="product.status === Status.Active"
+        (change)="changeStatus(product.id!, $any($event.target).checked)">
     {{product.product_id}}
     {{product.name}}
     {{product.price}}
+
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="button" (click)="decreaseCount(product.id!)"> - </button>
+    {{product.cart_count}}
+    <button type="button" (click)="increaseCount(product.id!)"> + </button>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <i class="pi pi-trash" (click)="deleteFromCart(product.id!)"></i>
+
     <br><br>
+    <hr>
 </ng-container>

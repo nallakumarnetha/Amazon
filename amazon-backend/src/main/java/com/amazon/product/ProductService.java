@@ -16,6 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.amazon.common.Audit;
+import com.amazon.common.FilterRequest;
 //import com.amazon.common.ID;
 import com.amazon.common.Response;
 import com.amazon.file.File;
@@ -82,6 +83,10 @@ public class ProductService {
 		if (request.getPrice() != 0) {
 			entity.setPrice(request.getPrice());
 		}
+		if (request.getCategory() != null) {
+			entity.setCategory(request.getCategory());
+		}
+		entity.setCount(request.getCount());
 		entity.setFiles(request.getFiles());
 		Product response = repository.save(entity);
 		return response;
@@ -90,9 +95,45 @@ public class ProductService {
 	public Response deleteProduct(String id) {
 		repository.deleteById(id);
 		Response response = new Response();
+		response.setMessage("product deleted");
 		return response;
 	}
 
 	// CRUD end
+
+	public Response searchProducts(String query) {
+	    List<Product> products = repository.searchByIdOrName(query);
+	    for (Product product : products) {
+	        List<String> fileIds = product.getFiles();
+	        Map<String, String> base64FilesData = fileService.getBase64Files(fileIds);
+	        product.setBase64Files(base64FilesData);
+	    }
+	    Response response = new Response();
+	    response.setProducts(products);
+	    response.setTotal(products.size());
+	    return response;
+	}
+	
+	public Response filterProducts(FilterRequest request) {
+	    List<Product> products = null;
+	    if(request.getMinPrice() != 0 || request.getMaxPrice() != 0) {
+	    	products = repository.findByPriceBetween(request.getMinPrice(), request.getMaxPrice());
+	    }
+	    if(request.getMinCount() != 0 || request.getMaxCount() != 0) {
+	    	products = repository.findByCountBetween(request.getMinCount(), request.getMaxCount());
+	    }
+	    if(request.getCategory() != null) {
+	    	products = repository.findByCategory(request.getCategory());
+	    }
+	    for(Product product : products) {
+			List<String> fileIds = product.getFiles();
+			Map<String, String> base64FilesData = fileService.getBase64Files(fileIds);
+			product.setBase64Files(base64FilesData);
+		}
+		Response response = new Response();
+		response.setProducts(products);
+	    response.setTotal(products.size());
+	    return response;
+	}
 
 }

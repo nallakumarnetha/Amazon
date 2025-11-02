@@ -5,16 +5,20 @@
   color: white;
   font-family: 'Arial';
   padding: 10px;
+  height: 60px;
 }
 
 .my-menu-bar a {
   color: white !important;
 }
 
-.my-side-bar{
-  display: flex; flex-direction: column; gap: 15px;
+.my-side-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   color: black;
 }
+
 .my-side-bar a {
   color: black;
   text-decoration: none;
@@ -25,55 +29,19 @@
   border-style: solid;
   border-color: transparent;
 }
-.my-hover:hover{
- border-color: white;
-}
-/* .my-amazon-header {
-  font-family: Arial, sans-serif;
+
+.my-hover:hover {
+  border-color: white;
 }
 
-.my-top-bar {
-  background-color: #131921;
-  color: white;
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  gap: 15px;
+
+.search-focus{
+  border: 3px solid;
+  border-radius: 8px;
+  border-color: orange;
 }
 
-.my-logo {
-  width: 100px;
+input:focus {
+  outline: none;
+  box-shadow: none;
 }
-
-.my-deliver {
-  font-size: 12px;
-}
-
-.my-search-box {
-  flex: 1;
-  display: flex;
-}
-
-.my-search-box input {
-  flex: 1;
-  padding: 8px;
-}
-
-.my-search-btn {
-  background-color: #febd69;
-  border: none;
-  padding: 8px;
-}
-
-.my-right-items {
-  display: flex;
-  gap: 20px;
-  font-size: 12px;
-  align-items: center;
-}
-
-.my-bottom-bar {
-  background-color: #232f3e;
-  color: white;
-  padding-left: 10px;
-} */

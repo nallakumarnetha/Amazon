@@ -1,34 +1,46 @@
 <!-- first menu -->
 <div class="my-menu-bar" style="background-color: #131921;">
   <!-- logo -->
-  <img src="assets/images/amazon.png" style="width: 100px; height: 50px;" class="my-hover">
+  <img src="assets/images/amazon.png" style="width: 100px; height: 45px;" class="my-hover" routerLink="/home">
+
   <!-- delive to -->
-  <div style="display: flex; align-items: center; gap: 2px; padding: 5px;" class="my-hover">
-    <i class="pi pi-map-marker"></i>
-    <div style="display: flex; flex-direction: column; font-size: 15px; justify-content: center;">
-      <div>Deliver to Kumar</div>
-      <div style="font-weight: bold;">Begumpet 508105</div>
+  <div style="display: flex; align-items: flex-end; gap: 2px; padding: 5px;" class="my-hover">
+
+    <div>
+      <i class="pi pi-map-marker"></i>
     </div>
+
+    <div style="display: flex; flex-direction: column; font-size: 15px; justify-content: center;">
+      <div style="color: lightgrey;">Deliver to {{currentUser?.first_name.slice(0, 8)}}</div>
+      <div style="font-weight: bold;">{{currentUser?.address?.city.slice(0, 8)}}
+        {{currentUser?.address?.pincode.slice(0, 6)}}</div>
+    </div>
+
   </div>
+
   <!-- search box -->
-  <div style="display: flex; flex: 1; padding: 5px;">
-    <button type="submit" style="display: flex; background-color:#e6e6e6; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border: none; width: 40px;
-  align-items: center; padding: 10px; padding: 5px;">All<i class="pi pi-sort-down-fill"
-        style="margin-left: 5px; font-size: 8px;"></i></button>
-    <input type="search" placeholder="Seach Amazon" style="width: 100%; border: none;">
-    <button type="submit"
-      style="background-color:#febd69; border: none; width: 40px; border-top-right-radius: 5px; border-bottom-right-radius: 5px"><i
+  <div style="display: flex; flex: 1;" [ngClass]="{'search-focus':isSearchFocused}">
+    <select style="display: flex; background-color:#e6e6e6; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border: none; width: 55px;
+  align-items: center; padding: 10px; padding: 5px;" (change)="filterByCategory($event)">
+      <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+    </select>
+
+    <input type="search" placeholder="Search Amazon" style="width: 100%; border: none;" (input)=onSearch($event)
+    (focus)="isSearchFocused = true" (blur)="isSearchFocused = false">
+    <button type="submit" 
+      style="background-color:rgb(254, 189, 105); border: none; width: 40px; border-top-right-radius: 5px; border-bottom-right-radius: 5px"><i
         class="pi pi-search"></i></button>
   </div>
+
   <!-- remianing -->
   <div style="display: flex; align-items: center; gap: 25px; gap: 0;">
     <div class="my-hover"
       style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 5px">
-      <span>Language</span>
+      <span routerLink="/preferences">Language</span>
     </div>
     <div class="my-hover"
       style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 5px">
-      <span>Returns</span>
+      <span routerLink="/orders">Returns</span>
       <span style="font-weight: bold;">& Orders</span>
 
     </div>
@@ -40,7 +52,7 @@
     </div>
     <div class="my-hover"
       style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 5px">
-      <a routerLink="/account" style="display: flex;">
+      <a routerLink="/user" style="display: flex;">
         <i class="pi pi-user" style="margin-right: 5px;"></i>
         Account
       </a>
@@ -48,17 +60,20 @@
   </div>
 </div>
 <!-- second menu -->
-<div class="my-menu-bar" style="background-color: #232f3e; width: 100%; height: 100%; padding: 0px;">
+<div class="my-menu-bar" style="background-color: #232f3e; width: 100%; height:100%; padding: 0px;">
   <div (click)="toggleSideBar()" style="padding: 10px;"><i class="pi pi-bars"> All</i></div>
   <div class="my-hover" style="padding: 10px;"><a routerLink="/home">Home</a></div>
-  <div class="my-hover" style="padding: 10px;"><a>Orders</a></div>
+  <div class="my-hover" style="padding: 10px;"><a routerLink="/orders">Orders</a></div>
   <div class="my-hover" style="padding: 10px;"><a>Prime</a></div>
   <div class="my-hover" style="padding: 10px;"><a>CustomerServie</a></div>
-  <div class="my-hover" style="padding: 10px;"><a>AI</a></div>
+  <div class="my-hover" style="padding: 10px;"><a>Rufus AI</a></div>
+  <div class="my-hover" style="padding: 10px;"><a>Preferences</a></div>
   |
   <div class="my-hover" style="padding: 10px;"><a>Sell</a></div>
   <div class="my-hover" style="padding: 10px;"><a>Admin</a></div>
   <div class="my-hover" style="padding: 10px;"><a routerLink="/products">Products</a></div>
+  <div class="my-hover" style="padding: 10px;"><a routerLink="/demo-mode">Demo mode</a></div>
+
 </div>
 
 <!-- side bar -->

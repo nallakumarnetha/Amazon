@@ -2,6 +2,7 @@ package com.amazon.common;
 
 import java.util.List;
 
+import com.amazon.order.Order;
 import com.amazon.product.Product;
 import com.amazon.user.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -21,6 +22,8 @@ public class Response {
 	private List<Product> products;
 
 	private List<User> users;
+	
+	private List<Order> orders;
 
 	public int getStart() {
 		return start;
@@ -70,4 +73,12 @@ public class Response {
 		this.users = users;
 	}
 
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+	
 }

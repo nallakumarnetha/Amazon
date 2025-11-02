@@ -1,1 +1,18 @@
-<p>order works!</p>
+Items: <br>
+<ng-container *ngFor="let product of products">
+    {{product.product_id}}
+    {{product.name}}
+    {{product.price}} <br>
+</ng-container>
+
+<br>
+Deliver to<br>
+
+<br>
+Payment<br>
+<input type="radio" name="payment"> Online
+<input type="radio" name="payment"> COD<br>
+
+<br>
+<button type="button" (click)="placeOrder()">Place order</button>
+<br>

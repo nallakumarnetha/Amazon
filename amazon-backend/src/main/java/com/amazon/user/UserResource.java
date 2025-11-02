@@ -53,4 +53,9 @@ public class UserResource {
 		return response;
 	}
 
+	@GetMapping("current-user")
+	public User getCurrentUser() {
+		User response = service.getCurrentUser();
+		return response;
+	}
 }

@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.amazon.common.Response;
 
 @RestController
-@RequestMapping("/amazon/files")
+@RequestMapping("files")
 public class FileResource {
 
 	@Autowired

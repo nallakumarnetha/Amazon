@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Product, ProductListResponse } from './product.model';
+import { Category, Product, ProductListResponse } from './product.model';
 import { ProductService } from './product.service';
 import { Observable } from 'rxjs';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
@@ -18,6 +18,7 @@ export class ProductComponent {
   updatedProductForm: FormGroup;
   id: string = '';
   selectedFiles: File[] = [];
+  categories = Object.values(Category);
 
   constructor(private fb: FormBuilder, private productService: ProductService,
     private router: Router, private fileService: FileService
@@ -27,6 +28,8 @@ export class ProductComponent {
       product_id: product.product_id,
       name: product.name,
       price: product.price,
+      count: product.count,
+      category: [this.product?.category || ''] // preselect existing category
     });
   }
 
@@ -122,3 +125,4 @@ export class ProductComponent {
   }
 
 }
+

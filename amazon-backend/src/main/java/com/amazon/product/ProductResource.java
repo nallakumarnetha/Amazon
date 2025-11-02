@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.amazon.common.FilterRequest;
 import com.amazon.common.Response;
 
 import static com.amazon.common.Logger.log;
@@ -20,7 +21,7 @@ import static com.amazon.common.Logger.log;
 import java.awt.print.Pageable;
 
 @RestController
-@RequestMapping("/amazon/products")
+@RequestMapping("products")
 public class ProductResource {
 
 	@Autowired
@@ -71,4 +72,16 @@ public class ProductResource {
 
 	// CRUD end
 
+	@GetMapping("/search")
+	public Response searchProducts(@RequestParam String name) {
+	    log.info("Search request received: {}", name);
+	    return service.searchProducts(name);
+	}
+	
+	@PostMapping("/filter")
+	public Response filterProducts(@RequestBody FilterRequest request) {
+	    log.info("filter request received");
+	    return service.filterProducts(request);
+	}
+	
 }

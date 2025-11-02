@@ -10,28 +10,24 @@ import { HttpClientModule } from '@angular/common/http';
 import { MyPrimeNgModule } from './my-modules/my-prime-ng.module';
 import { MyModule } from './my-modules/my.module';
 import { MyRouting } from './my-modules/my-routing';
-import { CartComponent } from './cart/cart.component';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { PaymentComponent } from './payment/payment.component';
-import { OrderComponent } from './order/order.component';
+import { MessageService } from 'primeng/api';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    CheckoutComponent,
-    PaymentComponent,
-    OrderComponent
-    ],
+    AppComponent
+  ],
   imports: [
     BrowserModule,
-    AppRoutingModule, 
+    AppRoutingModule,
     //from below, we added
-    ReactiveFormsModule, HttpClientModule,
+    ReactiveFormsModule, HttpClientModule, BrowserAnimationsModule,
     ProductModule, MyModule, MyPrimeNgModule, MyRouting
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
 
 }

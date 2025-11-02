@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Product, ProductListResponse } from "./product.model";
 import { Observable } from "rxjs";
+import { FilterRequest } from "../common/common.model";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class ProductService {
   //CRUD start
 
   findAllProducts(page: number, size: number): Observable<ProductListResponse> {
-    return this.http.get<ProductListResponse>(this.baseUrl+'?page='+page+'&size='+size);
+    return this.http.get<ProductListResponse>(this.baseUrl + '?page=' + page + '&size=' + size);
   }
 
   findProduct(id: string): Observable<Product> {
@@ -35,5 +36,13 @@ export class ProductService {
   }
 
   //CRUD end
+
+  searchProducts(query: string): Observable<ProductListResponse> {
+    return this.http.get<ProductListResponse>(`${this.baseUrl}/search?name=${query}`);
+  }
+
+  filterProducts(request: FilterRequest): Observable<ProductListResponse> {
+    return this.http.post<ProductListResponse>(`${this.baseUrl}/filter`, request);
+  }
 
 }

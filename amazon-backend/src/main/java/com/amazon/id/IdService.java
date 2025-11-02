@@ -11,7 +11,7 @@ public class IdService {
 	@Autowired
 	private IdRepository repository;
 
-	public String getProductID() {
+	public synchronized String getProductID() {
 		String response = null;
 		List<ID> ids = repository.findAll();
 		ID id = null;
@@ -19,18 +19,17 @@ public class IdService {
 			id = new ID();
 			id.setProductCount(1);
 			id.setUserCount(1);
-			ID res = repository.save(id);
-			response = "PRO_" + res.getProductCount();
+			id.setOrderCount(1);
 		} else {
 			id = ids.get(0);
 			id.setProductCount(id.getProductCount() + 1);
-			repository.save(id);
-			response = "PRO_" + id.getProductCount();
 		}
+		repository.save(id);
+		response = "PRO_" + id.getProductCount();
 		return response;
 	}
 	
-	public String getUserID() {
+	public synchronized String getUserID() {
 		String response = null;
 		List<ID> ids = repository.findAll();
 		ID id = null;
@@ -38,14 +37,31 @@ public class IdService {
 			id = new ID();
 			id.setProductCount(1);
 			id.setUserCount(1);
-			ID res = repository.save(id);
-			response = "USR_" + res.getUserCount();
+			id.setOrderCount(1);
 		} else {
 			id = ids.get(0);
 			id.setUserCount(id.getUserCount() + 1);
-			repository.save(id);
-			response = "USR_" + id.getUserCount();
 		}
+		repository.save(id);
+		response = "USR_" + id.getUserCount();
+		return response;
+	}
+	
+	public synchronized String getOrderID() {
+		String response = null;
+		List<ID> ids = repository.findAll();
+		ID id = null;
+		if (ids.isEmpty() && ids.size() == 0) {
+			id = new ID();
+			id.setProductCount(1);
+			id.setUserCount(1);
+			id.setOrderCount(1);
+		} else {
+			id = ids.get(0);
+			id.setOrderCount(id.getOrderCount() + 1);
+		}
+		repository.save(id);
+		response = "ORD_" + id.getOrderCount();
 		return response;
 	}
 }

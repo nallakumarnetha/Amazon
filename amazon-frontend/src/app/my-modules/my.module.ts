@@ -1,6 +1,5 @@
 import { MenuComponent } from '../menu/menu.component';
 import { HomeComponent } from '../home/home.component';
-import { AccountComponent } from '../account/account.component';
 import { ProductsComponent } from '../products/products.component';
 import { FooterComponent } from '../footer/footer.component';
 import { MyPrimeNgModule } from './my-prime-ng.module';
@@ -10,16 +9,29 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddproductComponent } from '../addproduct/addproduct.component';
 import { FileComponent } from '../file/file.component';
 import { CartComponent } from '../cart/cart.component';
+import { CheckoutComponent } from '../checkout/checkout.component';
+import { PaymentComponent } from '../payment/payment.component';
+import { OrderComponent } from '../order/order.component';
+import { OrdersComponent } from '../orders/orders.component';
+import { ProductDetailComponent } from '../product-detail/product-detail.component';
+import { UserComponent } from '../user/user.component';
+import { PreferencesComponent } from '../preferences/preferences.component';
+import { DemoModeComponent } from '../demo-mode/demo-mode.component';
+import { ToastModule } from 'primeng/toast';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MessageService } from 'primeng/api';
 
-let myComponents = [MenuComponent, HomeComponent, AccountComponent, ProductsComponent, FooterComponent, AddproductComponent
-  , FileComponent, CartComponent
+let myComponents = [MenuComponent, HomeComponent, ProductsComponent, FooterComponent, AddproductComponent
+  , FileComponent, CartComponent, CheckoutComponent, PaymentComponent, OrderComponent, OrdersComponent, ProductDetailComponent
+  , UserComponent, PreferencesComponent, DemoModeComponent
 ];
 
 @NgModule({
-  declarations: [ ...myComponents],
+  declarations: [...myComponents],
   imports: [
-    CommonModule, MyPrimeNgModule, ReactiveFormsModule
-  ], 
-  exports:[...myComponents]
+    CommonModule, MyPrimeNgModule, ReactiveFormsModule, BrowserAnimationsModule, ToastModule
+  ],
+  providers: [MessageService],
+  exports: [...myComponents]
 })
 export class MyModule { }

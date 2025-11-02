@@ -3,8 +3,8 @@
         style="justify-content: center; width: 500px; height: 1000px;">
         <div style="display: flex; flex-direction: column; gap: 10px;">
 
-            <i class="pi pi-trash"
-                style="display: flex; justify-content: right; gap: 5px; color: red; cursor: pointer;" (click) = "deleteProduct(id)">Delete</i>
+            <i class="pi pi-trash" style="display: flex; justify-content: right; gap: 5px; color: red; cursor: pointer;"
+                (click)="deleteProduct(id)">Delete</i>
 
             <label for="product_id">Id</label>
             <input formControlName="product_id" type="text" style="height: 30px;" readonly>
@@ -15,38 +15,36 @@
             <label for="price">Price</label>
             <input formControlName="price" type="number" style="height: 30px;">
 
-            <!-- 
-            <div style="display: flex; flex-direction: row; gap: 10px;">
-            <ng-container *ngIf="product?.base64_files as base64_files">
-                <ng-container *ngIf="base64_files.length > 0">
-                 <img *ngFor="let base64_file of base64_files" [src]="'data:image/png;base64,' + base64_file" [alt]="product?.name" width="100"/>
-                </ng-container>
-            </ng-container>
-            </div> -->
+            <label for="count">Count</label>
+            <input formControlName="count" type="number" style="height: 30px;">
 
-            <!-- start -->
-             <label for="images">Images</label>
-             <div style="display: flex; flex-direction: row; gap: 10px;">
-             <ng-container *ngIf="product?.base64_files as base64_files">
-                <ng-container *ngIf="base64_files | keyvalue as filesMap">
-                    <ng-container *ngFor = "let element of filesMap">
-                        <img [src]="'data:image/png;base64,' + element.value" [alt]="product?.name" width="100">
-                        <button type="button" (click) = "onRemoveFile(element.key)" style="height: 20px;">x</button>
+            <label for="category">Category</label>
+            <option value="" disabled>Select category</option>
+            <select formControlName="category" id="category" style="height: 30px;">
+                <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+            </select>
+
+            <label for="images">Images</label>
+            <div style="display: flex; flex-direction: row; gap: 10px;">
+                <ng-container *ngIf="product?.base64_files as base64_files">
+                    <ng-container *ngIf="base64_files | keyvalue as filesMap">
+                        <ng-container *ngFor="let element of filesMap">
+                            <img [src]="'data:image/png;base64,' + element.value" [alt]="product?.name" width="100">
+                            <button type="button" (click)="onRemoveFile(element.key)" style="height: 20px;">x</button>
+                        </ng-container>
+                    </ng-container>
                 </ng-container>
-             </ng-container>
-             </ng-container>
-             </div>
-            
-             <button type="button" (click)="triggerFileSelect(myFileInputId)" style="width: 50px;"> + </button>
-             <input #myFileInputId type="file" multiple (change)="onFileSelected($event)" style="display: none;">
-            <!--  end -->
+            </div>
+
+            <button type="button" (click)="triggerFileSelect(myFileInputId)" style="width: 50px;"> + </button>
+            <input #myFileInputId type="file" multiple (change)="onFileSelected($event)" style="display: none;">
 
             <div style="display: flex; flex-direction: row; justify-content: right; margin-left: 10px; gap: 10px;">
                 <button
                     style="color: white; background-color: black; border: none; border-radius: 4px; padding: 10px; cursor: pointer"
                     routerLink="/products">Cancel</button>
                 <button type="submit"
-                    style="background-color: #127788; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                    style="background-color: hwb(189 7% 47%); color: white; border: none; border-radius: 4px; cursor: pointer;">
                     Update
                 </button>
             </div>
@@ -54,39 +52,3 @@
         </div>
     </form>
 </div>
-
-<!-- CRUD start -->
-<!-- 
-
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Price</th>
-    </tr>
-    <ng-container *ngFor="let product of products">
-        <ng-container *ngIf="product.id === selectedProductId; else showProduct">
-            <tr>
-                <td>
-                    <form [formGroup]="selectedProductForm" (ngSubmit)="updateProduct(product.id)">
-                        <input formControlName="name">
-                        <input formControlName="price">
-                        <button type="submit">Update</button>
-                        <button (click)="selectedProductId=''">Cancel</button>
-                    </form>
-                </td>
-            </tr>
-        </ng-container>
-
-        <ng-template #showProduct>
-            <tr>
-                <td>{{product.name}}</td>
-                <td>{{product.price}}</td>
-                <td><button (click)="editProduct(product)">edit</button>
-                <td>
-                <td><button>view</button></td>
-            </tr>
-        </ng-template>
-
-    </ng-container>
-</table> -->
-<!-- CRUD end -->

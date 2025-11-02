@@ -21,6 +21,8 @@ public class ID {
 	private int productCount;
 	
 	private int userCount;
+	
+	private int orderCount;
 
 	public int getId() {
 		return id;
@@ -44,6 +46,14 @@ public class ID {
 
 	public void setUserCount(int userCount) {
 		this.userCount = userCount;
+	}
+
+	public int getOrderCount() {
+		return orderCount;
+	}
+
+	public void setOrderCount(int orderCount) {
+		this.orderCount = orderCount;
 	}
 	
 }

@@ -24,14 +24,6 @@ public class File {
 	@Lob
 	private byte[] data;
 	
-	// for sending to client in base64 format
-	// Base64: Converts binary data into text format (letters, numbers, symbols)
-	// Easy to send over JSON or APIs directly
-	// preferred for inline images
-	@Transient
-	@JsonProperty("base64_data")
-	private String base64Data;
-
 	public String getId() {
 		return id;
 	}
@@ -64,12 +56,4 @@ public class File {
 		this.data = data;
 	}
 
-	public String getBase64Data() {
-		return base64Data;
-	}
-
-	public void setBase64Data(String base64Data) {
-		this.base64Data = base64Data;
-	}
-	
 }

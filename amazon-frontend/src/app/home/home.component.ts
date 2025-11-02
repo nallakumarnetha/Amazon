@@ -1,9 +1,14 @@
 import { Component } from "@angular/core";
-import { Product, ProductListResponse } from "../product/product.model";
+import { Category, Product, ProductListResponse } from "../product/product.model";
 import { Observable } from "rxjs";
 import { ProductService } from "../product/product.service";
 import { MenuComponent } from "../menu/menu.component";
 import { CartService } from "../cart/cart.service";
+import { Router } from "@angular/router";
+import { Order } from "../order/order.model";
+import { OrderService } from "../order/order.service";
+import { CommonService } from "../common/common.service";
+import { FilterRequest } from "../common/common.model";
 
 @Component({
   selector: 'app-home',
@@ -12,16 +17,55 @@ import { CartService } from "../cart/cart.service";
 })
 export class HomeComponent {
   products: Product[] = [];
+  product?: Product;
   page = 0;
   size = 10;
   loading = false;
   allLoaded = false;
+  showAnimation = false;
+  // order: Order = {};
+  categories = Object.values(Category).slice(0, 4);;
 
-  constructor(private productService: ProductService, private cartService: CartService) {
+  constructor(private productService: ProductService, private cartService: CartService,
+    private route: Router, private orderService: OrderService,
+    private commonService: CommonService
+  ) {
   }
 
   ngOnInit() {
     this.loadProducts();
+
+    // Listen for search updates
+    this.commonService.search$.subscribe(query => {
+      if (query.length > 0) {
+        this.productService.searchProducts(query).subscribe(res => {
+          this.products = res.products || [];
+        });
+      } else {
+        this.products = [];
+        this.page = 0;
+        this.allLoaded = false;
+        this.loadProducts(); // reload all products when search cleared
+      }
+    });
+
+    // Listen for category filter updates
+    this.commonService.category$.subscribe(category => {
+      if (!category || category === 'All') {
+        // Reset to all products
+        this.products = [];
+        this.page = 0;
+        this.allLoaded = false;
+        this.loadProducts();
+      } else {
+        let filterRequest: FilterRequest = {};
+        filterRequest.category = category;
+        this.productService.filterProducts(filterRequest).subscribe(res => {
+          this.products = res.products || [];
+        });
+      }
+    });
+
   }
 
   loadProducts(): void {
@@ -50,6 +94,27 @@ export class HomeComponent {
 
   addToCart(id?: string) {
     this.cartService.addToCart(id);
+    this.addToCartAnimation();
+  }
+
+  addToCartAnimation() {
+    const audio = new Audio('assets/audios/placeorder.mp3');
+    audio.load();
+    audio.play().catch(err => console.log('Audio play failed:', err));
+
+    this.showAnimation = true;
+    setTimeout(() => {
+      this.showAnimation = false;
+    }, 5000);
+  }
+
+  byNow(id: string) {
+    this.route.navigate(['/order'], { queryParams: { buyNowId: id } });
+  }
+
+  onCategoryChange(event: any) {
+    const value = event.target.value;
+    this.commonService.updateCategory(value);
   }
 
 }
