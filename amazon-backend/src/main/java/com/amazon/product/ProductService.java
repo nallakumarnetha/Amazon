@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.amazon.cart.CartRepository;
 import com.amazon.common.Audit;
 import com.amazon.common.FilterRequest;
 //import com.amazon.common.ID;
@@ -24,6 +25,7 @@ import com.amazon.file.FileRepository;
 import com.amazon.file.FileService;
 import com.amazon.id.IdService;
 
+import jakarta.transaction.Transactional;
 import jakarta.websocket.server.PathParam;
 
 @Service
@@ -37,6 +39,9 @@ public class ProductService {
 	
 	@Autowired
 	private IdService idService;
+	
+	@Autowired
+	private CartRepository cartRepository;
 
 	// CRUD start
 
@@ -92,7 +97,9 @@ public class ProductService {
 		return response;
 	}
 
+	@Transactional
 	public Response deleteProduct(String id) {
+		cartRepository.deleteByProductId(id);
 		repository.deleteById(id);
 		Response response = new Response();
 		response.setMessage("product deleted");

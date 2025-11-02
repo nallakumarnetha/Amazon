@@ -1,0 +1,47 @@
+/* prime ng */
+/* ::ng-deep .p-datatable-tbody>tr {
+    height: 10px;
+} */
+
+/* normal */
+
+.table {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+
+.table-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.table-filter {
+    display: flex;
+    gap: 6px
+}
+
+.table-actions {
+    display: flex;
+    gap: 20px;
+}
+
+.white-button {
+    background-color: white;
+    border-radius: 7px;
+    border-color: #ccc;
+    border-style: solid;
+    padding: 5px 8px;
+    cursor: pointer
+}
+
+.filter-control {
+    height: 30px;
+}
+
+:hover {
+    background-color: rgb(240, 238, 238);
+}

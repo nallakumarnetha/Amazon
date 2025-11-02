@@ -1,55 +1,60 @@
-<div style="font-weight: bold;">
-    In total there are {{orders ? total : 0 }} orders.
-</div>
-<br>
+<div class="table">
+    <!-- table title -->
+    <div class="table-title">
+        <div style="font-weight: bold;"> In total there are {{orders ? total : 0 }} orders. </div>
+    </div>
 
-<!-- filters -->
- <select style="height: 30px;" (change)="filterByStatus($event)">
-    <option *ngFor="let status of orderStatus" [value]="status">{{ status }}</option>
-     <option value="" disabled selected>Select status</option>
-</select>
+    <!-- filter & search -->
+    <div class="table-filter">
+        <!-- filters -->
+        <select (change)="filterByStatus($event)" class="filter-control">
+            <option *ngFor="let status of orderStatus" [value]="status">{{ status }}</option>
+            <option value="" disabled selected>Select status</option>
+        </select>
 
-<select style="height: 30px;" (change)="filterByPrice($event)">
-    <option value="" disabled selected>Select price range</option>
-    <option *ngFor="let price of prices" [value]="price">{{ price }}</option>
-</select>
+        <select (change)="filterByPrice($event)" class="filter-control">
+            <option value="" disabled selected>Select price range</option>
+            <option *ngFor="let price of prices" [value]="price">{{ price }}</option>
+        </select>
 
-<select style="height: 30px;" (change)="filterByCategory($event)">
-    <option value="" disabled>Select category</option>
-    <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
-</select>
+        <select (change)="filterByCategory($event)" class="filter-control">
+            <option value="" disabled>Select category</option>
+            <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+        </select>
 
-<!-- search box -->
-<input type="search" placeholder="Search Product_id, Payment_id" (input)=onSearch($event)>
+        <!-- search box -->
+        <input type="search" placeholder="Search Product_id, Payment_id" (input)=onSearch($event)
+            class="filter-control">
+    </div>
 
-<!-- list of orders -->
-<p-table [value]="orders" [tableStyle]="{'min-width': '60rem'}" [paginator]="true" [rows]="10" [rows]="10"
-    [totalRecords]="total" [lazy]="true" (onLazyLoad)="loadOrders($event)" [loading]="loading" #tableTemplateRefVar>
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Id</th>
-            <th>Product ID</th>
-            <th>Count</th>
-            <th>Amount</th>
-            <th>Payment ID</th>
-            <th>Category</th>
-            <th>Status</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-order>
-        <tr>
-            <td>{{order.order_id}}</td>
-            <td>{{order.product_id}}</td>
-            <td>{{order.count}}</td>
-            <td>{{order.amount}}</td>
-            <td>{{order.payment_id}}</td>
-            <td>{{order.category}}</td>
-            <!-- <td style="color: green;">{{order.status}}</td> -->
-             <td [ngClass]="order.status.toLowerCase()">{{ order.status }}</td>
-        </tr>
-    </ng-template>
-</p-table>
+    <!-- list of orders -->
+    <p-table [value]="orders" [tableStyle]="{'min-width': '60rem'}" [paginator]="true" [rows]="10" [rows]="10"
+        [totalRecords]="total" [lazy]="true" (onLazyLoad)="loadOrders($event)" [loading]="loading" #tableTemplateRefVar>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Id</th>
+                <th>Product ID</th>
+                <th>Count</th>
+                <th>Amount</th>
+                <th>Payment ID</th>
+                <th>Category</th>
+                <th>Status</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-order>
+            <tr>
+                <td>{{order.order_id}}</td>
+                <td>{{order.product_id}}</td>
+                <td>{{order.count}}</td>
+                <td>{{order.amount}}</td>
+                <td>{{order.payment_id}}</td>
+                <td>{{order.category}}</td>
+                <td [ngClass]="order.status.toLowerCase()">{{ order.status }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
 
-<div class="order-success" *ngIf="showAnimation">
-    🎉 Order Placed Successfully! 🎉
+    <div class="order-success" *ngIf="showAnimation">
+        🎉 Order Placed Successfully! 🎉
+    </div>
 </div>

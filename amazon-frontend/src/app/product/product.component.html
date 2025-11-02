@@ -1,52 +1,62 @@
-<div style="display: flex; justify-items: center; justify-content: center; margin: 10px;">
-    <form [formGroup]="updatedProductForm" (ngSubmit)="updateProduct()"
-        style="justify-content: center; width: 500px; height: 1000px;">
-        <div style="display: flex; flex-direction: column; gap: 10px;">
+<div class="form-container">
+    <form [formGroup]="updatedProductForm" (ngSubmit)="updateProduct()" class="form">
 
-            <i class="pi pi-trash" style="display: flex; justify-content: right; gap: 5px; color: red; cursor: pointer;"
-                (click)="deleteProduct(id)">Delete</i>
+        <div class="vertical-left">
+            <span class="form-title"> Edit product here </span>
+            <span class="form-subtitle">You can edit product here and see in listing page </span>
+        </div>
 
-            <label for="product_id">Id</label>
-            <input formControlName="product_id" type="text" style="height: 30px;" readonly>
+        <div class="form-body">
+            <div class="form-body-title">
+                <span>Update the product details</span>
+                <span class="delete-icon" (click)="deleteProduct(id)">
+                    <i class="pi pi-trash"></i>
+                    <span>Delete</span>
+                </span>
+            </div>
 
-            <label for="name">Name</label>
-            <input formControlName="name" type="text" style="height: 30px;">
 
-            <label for="price">Price</label>
-            <input formControlName="price" type="number" style="height: 30px;">
+            <label for="product_id" class="form-control-title">Id</label>
+            <input formControlName="product_id" type="text" class="form-control" readonly>
 
-            <label for="count">Count</label>
-            <input formControlName="count" type="number" style="height: 30px;">
+            <label for="name" class="form-control-title">Name</label>
+            <input formControlName="name" type="text" class="form-control">
 
-            <label for="category">Category</label>
-            <option value="" disabled>Select category</option>
-            <select formControlName="category" id="category" style="height: 30px;">
+            <label for="price" class="form-control-title">Price</label>
+            <input formControlName="price" type="number" class="form-control">
+
+            <label for="count" class="form-control-title">Count</label>
+            <input formControlName="count" type="number" class="form-control">
+
+            <label for="category" class="form-control-title">Category</label>
+            <select formControlName="category" id="category" class="form-control">
                 <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
             </select>
 
-            <label for="images">Images</label>
-            <div style="display: flex; flex-direction: row; gap: 10px;">
+            <!-- start -->
+            <label for="images" class="form-control-title">Images</label>
+            <div class="image-preview-container">
                 <ng-container *ngIf="product?.base64_files as base64_files">
                     <ng-container *ngIf="base64_files | keyvalue as filesMap">
                         <ng-container *ngFor="let element of filesMap">
-                            <img [src]="'data:image/png;base64,' + element.value" [alt]="product?.name" width="100">
-                            <button type="button" (click)="onRemoveFile(element.key)" style="height: 20px;">x</button>
+                            <div style="position: relative;">
+                                <img [src]="'data:image/png;base64,' + element.value" [alt]="product?.name" width="100">
+                                <i class="pi pi-times remove-button" (click)="onRemoveFile(element.key)"></i>
+                            </div>
                         </ng-container>
                     </ng-container>
                 </ng-container>
             </div>
 
-            <button type="button" (click)="triggerFileSelect(myFileInputId)" style="width: 50px;"> + </button>
-            <input #myFileInputId type="file" multiple (change)="onFileSelected($event)" style="display: none;">
 
-            <div style="display: flex; flex-direction: row; justify-content: right; margin-left: 10px; gap: 10px;">
-                <button
-                    style="color: white; background-color: black; border: none; border-radius: 4px; padding: 10px; cursor: pointer"
-                    routerLink="/products">Cancel</button>
-                <button type="submit"
-                    style="background-color: hwb(189 7% 47%); color: white; border: none; border-radius: 4px; cursor: pointer;">
-                    Update
-                </button>
+            <!-- <button type="button" (click)="triggerFileSelect(myFileInputId)" style="width: 50px;"> + </button> -->
+            <i class="pi pi-plus" (click)="triggerFileSelect(myFileInputId)"></i>
+            <input #myFileInputId type="file" multiple (change)="onFileSelected($event)" style="display: none;">
+            <!-- end -->
+
+            <div class="form-footer">
+                <button routerLink="/products" class="cancel-button">Cancel</button>
+                <button type="submit" class="save-button"> Update </button>
             </div>
 
         </div>

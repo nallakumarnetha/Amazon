@@ -1,54 +1,53 @@
+<div class="form-container">
+  <form [formGroup]="productForm" (ngSubmit)="addProduct()" class="form">
 
+    <div class="vertical-left">
+      <span class="form-title"> Add product here </span>
+      <span class="form-subtitle">You can add product here and see in listing page </span>
+    </div>
 
-<div style="background-color: lightgrey;">
+    <div class="form-body">
+      <span class="form-body-title">Fill the product details</span>
 
-<div style="display: flex; justify-items: center; justify-content: center; margin: 10px;">
-  Add product
-  <form [formGroup]="productForm" (ngSubmit)="addProduct()"
-    style="justify-content: center; width: 500px; height: 1000px;">
-    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <label for="name" class="form-control-title">Name</label>
+      <input formControlName="name" type="text" class="form-control">
 
-      <label for="name">Name</label>
-      <input formControlName="name" type="text" style="height: 30px;">
+      <label for="price" class="form-control-title">Price</label>
+      <input formControlName="price" type="number" class="form-control">
 
-      <label for="price">Price</label>
-      <input formControlName="price" type="number" style="height: 30px;">
+      <label for="count" class="form-control-title">Count</label>
+      <input formControlName="count" type="number" class="form-control">
 
-      <label for="count">Count</label>
-      <input formControlName="count" type="number" style="height: 30px;">
-
-      <select style="height: 30px;" formControlName="category">
+      <label for="category" class="form-control-title">Category</label>
+      <select formControlName="category" class="form-control">
         <option value="" disabled>Select category</option>
         <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
       </select>
 
       <!-- start -->
-      <label for="images">Images</label>
-      <div style="display: flex; flex-direction: row; gap: 10px; flex-wrap: wrap;">
+      <label for="images" class="form-control-title">Images</label>
+      <div class="image-preview-container">
         <ng-container *ngFor="let file of selectedFilesBase64">
           <div style="position: relative;">
             <img [src]="'data:image/png;base64,' + file.data" width="100">
-            <button type="button" (click)="onRemoveFile(file.id)"
-              style="position: absolute; top: 0; right: 0;">x</button>
+            <!-- <button type="button" (click)="onRemoveFile(file.id)" class="remove-button">x</button> -->
+            <i class="pi pi-times remove-button" (click)="onRemoveFile(file.id)"></i>
           </div>
         </ng-container>
       </div>
-
-      <button type="button" (click)="myFileInputId.click()" style="width: 50px;"> + </button>
+      <!-- <button type="button" (click)="myFileInputId.click()" style="width: 50px; border: none;"> + </button> -->
+      <i class="pi pi-plus" (click)="myFileInputId.click()"></i>
       <input #myFileInputId type="file" multiple (change)="onFileSelected($event)" style="display: none;">
       <!--  end -->
 
-      <div style="display: flex; flex-direction: row; justify-content: right; margin-left: 10px; gap: 10px;">
-        <button
-          style="color: white; background-color: black; border: none; border-radius: 4px; padding: 10px; cursor: pointer"
-          routerLink="/products">Cancel</button>
-        <button type="submit"
-          style="background-color: #127788; color: white; border: none; border-radius: 4px; cursor: pointer;">
-          Save and Finish
-        </button>
+      <div class="form-footer">
+        <button routerLink="/products" class="cancel-button">Cancel</button>
+        <button type="submit" class="save-button"> Save and Finish </button>
       </div>
 
     </div>
+
+
+
   </form>
-</div>
 </div>

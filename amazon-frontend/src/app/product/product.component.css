@@ -1,4 +1,1 @@
-input[readonly] {
-    border: none !important;
-    outline: none;
-}
+@import "../common/form.css";

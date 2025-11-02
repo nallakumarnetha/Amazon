@@ -1,18 +1,79 @@
 @import 'primeng/resources/themes/lara-light-blue/theme.css';
 @import 'primeng/resources/primeng.min.css';
 @import 'primeicons/primeicons.css';
+
+/* prime ng */
 .p-card * {
   padding: 0 !important;
   margin: 0 !important;
 }
 
-.p-card{
+.p-card {
   width: 300px;
   height: 400px;
 }
 
-html, body {
+/* html inbuilt*/
+html,
+body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+input:focus {
+  outline: none;
+  border-color: grey;
+  border-radius: 3px;
+}
+
+input[readonly] {
+    border: none !important;
+    outline: none;
+}
+
+/* div */
+.horizontal-left {
+  display: flex;
+  flex-direction: row;
+  justify-items: left;
+  justify-content: left;
+}
+
+.horizontal-center {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  justify-content: center;
+}
+
+.horizontal-right {
+  display: flex;
+  flex-direction: row;
+  justify-items: right;
+  justify-content: right;
+}
+
+.vertical-left {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  align-content: initial;
+}
+
+.vertical-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
+
+.vertical-right {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  align-content: end;
+}
+
+/* normal */
+

@@ -1,69 +1,67 @@
-<!-- add product -->
-<div style="display: flex; flex-direction: row; justify-content: right; margin: 10px;">
-    <button style="background-color: white; border-radius: 7px; border-color: #ccc; border-style: solid;
-padding: 5px 8px; cursor: pointer" routerLink="/addProduct">
-        Add a product
-    </button>
-</div>
+<div class="table">
+    <!-- table title -->
+    <div class="table-title">
+        <div style="font-weight: bold;"> In total there are {{products ? total : 0 }} products. </div>
+        <button routerLink="/addProduct" class="white-button"> Add a product </button>
+    </div>
 
-<div style="font-weight: bold;">
-    In total there are {{products ? total : 0 }} products.
-</div>
-<br>
+    <!-- filter & search -->
+    <div class="table-filter">
+        <!-- filters -->
+        <select class="filter-control" (change)="filterByPrice($event)">
+            <option value="" disabled selected>Select price range</option>
+            <option *ngFor="let price of prices" [value]="price">{{ price }}</option>
+        </select>
 
-<!-- filters -->
-<select style="height: 30px;" (change)="filterByPrice($event)">
-    <option value="" disabled selected>Select price range</option>
-    <option *ngFor="let price of prices" [value]="price">{{ price }}</option>
-</select>
+        <select class="filter-control" (change)="filterByCount($event)">
+            <option value="" disabled selected>Select count</option>
+            <option *ngFor="let count of counts" [value]="count">{{ count }}</option>
+        </select>
 
-<select style="height: 30px;" (change)="filterByCount($event)">
-    <option value="" disabled selected>Select count</option>
-    <option *ngFor="let count of counts" [value]="count">{{ count }}</option>
-</select>
+        <select class="filter-control" (change)="filterByCategory($event)">
+            <option value="" disabled>Select category</option>
+            <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+        </select>
 
-<select style="height: 30px;" (change)="filterByCategory($event)">
-    <option value="" disabled>Select category</option>
-    <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
-</select>
+        <!-- search box -->
+        <input type="search" placeholder="Search id, name" (input)=onSearch($event) class="filter-control">
+    </div>
 
-<!-- search box -->
-<input type="search" placeholder="Search id, name" (input)=onSearch($event)>
-
-<!-- list all products -->
-<p-table [value]="products" [tableStyle]="{'min-width': '60rem'}" [paginator]="true" [rows]="10" [rows]="10"
-    [totalRecords]="total" [lazy]="true" (onLazyLoad)="loadProducts($event)" [loading]="loading" #tableTemplateRefVar>
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Count</th>
-            <th>Category</th>
-            <th>Images</th>
-            <th>Actions</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-product>
-        <tr (click)="showProduct(product.id)">
-            <td>{{product.product_id}}</td>
-            <td>{{product.name}}</td>
-            <td>{{product.price | currency:'INR'}}</td>
-            <td>{{product.count}}</td>
-            <td>{{product.category}}</td>
-            <td>
-                <ng-container *ngIf="product?.base64_files | keyvalue as filesArray">
-                    <ng-container *ngIf="filesArray.length > 0">
-                        <img [src]="'data:image/png;base64,' + filesArray[0].value" [alt]="product?.name" width="70"
-                            height="40" />
+    <!-- list all products -->
+    <p-table [value]="products" [tableStyle]="{'min-width': '60rem'}" [paginator]="true" [rows]="10" [rows]="10"
+        [totalRecords]="total" [lazy]="true" (onLazyLoad)="loadProducts($event)" [loading]="loading"
+        #tableTemplateRefVar>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Count</th>
+                <th>Category</th>
+                <th>Images</th>
+                <th>Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr (click)="showProduct(product.id)">
+                <td>{{product.product_id}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.price | currency:'INR'}}</td>
+                <td>{{product.count}}</td>
+                <td>{{product.category}}</td>
+                <td>
+                    <ng-container *ngIf="product?.base64_files | keyvalue as filesArray">
+                        <ng-container *ngIf="filesArray.length > 0">
+                            <img [src]="'data:image/png;base64,' + filesArray[0].value" [alt]="product?.name" width="auto" height="15px" />
+                        </ng-container>
                     </ng-container>
-                </ng-container>
-            </td>
+                </td>
 
-            <td style="display: flex; gap: 20px;">
-                <i class="pi pi-pencil" (click)="showProduct(product.id)"></i>
-                <i class="pi pi-trash" (click)="deleteProduct(product.id)"></i>
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
+                <td class="table-actions">
+                    <i class="pi pi-pencil" (click)="showProduct(product.id)"></i>
+                    <i class="pi pi-trash" (click)="deleteProduct(product.id)"></i>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

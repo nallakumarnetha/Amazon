@@ -1,0 +1,114 @@
+.form-container {
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    margin: 10px;
+    background-color: #f2f7f8
+}
+
+.form {
+    justify-content: center;
+    width: 500px;
+    height: fit-content;
+    margin-bottom: 100px;
+    margin-top: 15px;
+}
+
+.form-title {
+    font-size: 30px;
+    text-align: left;
+    margin-top: 5px;
+    margin-bottom: 0;
+    padding: 0;
+    font-style: normal;
+}
+
+.form-subtitle {
+    font-size: 12px;
+    text-align: left;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+.form-body {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    border: 1px solid;
+    border-color: #b0b0b0;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 10px lightgrey;
+}
+
+.form-body-title {
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: grey;
+    display: flex;
+    justify-content: space-between
+}
+
+.form-control {
+    height: 30px;
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 10px;
+}
+
+.form-control-title {
+    /* height: 30px; */
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 4px;
+}
+
+.image-preview-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.remove-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-color: white ;
+}
+
+.form-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    margin-left: 10px;
+    gap: 10px;
+}
+
+.cancel-button {
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer
+}
+
+.save-button {
+    background-color: #127788;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 2px 6px;
+}
+
+.delete-icon {
+    display: flex;
+    justify-content: right;
+    gap: 5px;
+    color: red;
+    cursor: pointer;
+    /* font-family: inherit; */
+    font-family: 'Poppins', sans-serif;
+}
