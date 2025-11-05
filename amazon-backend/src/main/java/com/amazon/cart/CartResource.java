@@ -32,6 +32,14 @@ public class CartResource {
 		log.info("response sent: find cart products by user id");
 		return response;
 	}
+	
+	@GetMapping("{productId}")
+	public Cart findCartByProductId(@PathVariable String productId) {
+		log.info("request recieved: find cart by product id");
+		Cart response = service.findCartByProductId(productId);
+		log.info("response sent: find cart by product id");
+		return response;
+	}
 
 	@PostMapping("{productId}")
 	public Response addToCart(@PathVariable String productId) {

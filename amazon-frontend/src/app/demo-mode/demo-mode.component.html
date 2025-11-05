@@ -1,3 +1,8 @@
 <p-toast></p-toast>
-<button type="button" (click)="dumpData()">Dump data</button>
-<button type="button" (click)="clearData()">Clear data</button>
+<div class="demo">
+    <label>This will create a sample data of Users, Products, Cart, Orders</label>
+    <button type="button" (click)="dumpData()" class="save-button demo-button">Dump data</button>
+    <br>
+    <label>This will clears everything in database (Users, Products, Cart, Orders) | Only data</label>
+    <button type="button" (click)="clearData()" class="cancel-button demo-button">Clear data</button>
+</div>

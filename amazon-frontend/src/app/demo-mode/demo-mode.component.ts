@@ -20,6 +20,7 @@ export class DemoModeComponent {
   clearData() {
     this.commonService.clearData();
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Data cleared successfully!' });
+    
   }
 
 }

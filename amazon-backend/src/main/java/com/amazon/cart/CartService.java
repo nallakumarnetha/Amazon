@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.amazon.common.Response;
 import com.amazon.common.Status;
+import com.amazon.file.FileService;
 import com.amazon.product.Product;
 import com.amazon.product.ProductRepository;
 
@@ -25,6 +26,9 @@ public class CartService {
 
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private FileService fileService;
 
 	static String userId = "u1";	//to do
 
@@ -40,6 +44,9 @@ public class CartService {
 			Product product = productRepository.findById(p.getProductId()).orElse(null);
 			product.setCartCount(p.getCount());
 			product.setStatus(p.getStatus());
+			List<String> fileIds = product.getFiles();
+			Map<String, String> base64FilesData = fileService.getBase64Files(fileIds);
+			product.setBase64Files(base64FilesData);
 			products.add(product);
 		});
 		Response response = new Response();
@@ -104,6 +111,11 @@ public class CartService {
 			repository.save(cart);
 			response.setMessage("cart product selected/deselected");
 		}
+		return response;
+	}
+	
+	public Cart findCartByProductId(String productId) {
+		Cart response = repository.findByProductIdAndUserId(productId, userId);
 		return response;
 	}
 

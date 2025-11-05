@@ -16,6 +16,7 @@ export class CartComponent {
 
   products?: Product[];
   Status = Status;
+  selectAllActive = true;
 
   constructor(private cartService: CartService) {
     // localStorage.clear();
@@ -47,6 +48,20 @@ export class CartComponent {
   changeStatus(id: string, isChecked: boolean) {
     const status = isChecked ? Status.Active : Status.Inactive;
     this.cartService.changeStatus(id, status);
+  }
+
+  selectAll() {
+    this.products?.forEach(product => {
+      this.changeStatus(product.id!, true);
+    });
+    this.selectAllActive = false;
+  }
+
+  deselectAll() {
+    this.products?.forEach(product => {
+      this.changeStatus(product.id!, false);
+    });
+    this.selectAllActive = true;
   }
 
 }

@@ -18,7 +18,7 @@
     font-size: 30px;
     text-align: left;
     margin-top: 5px;
-    margin-bottom: 0;
+    margin-bottom: 5px;
     padding: 0;
     font-style: normal;
 }
@@ -27,7 +27,7 @@
     font-size: 12px;
     text-align: left;
     margin-bottom: 20px;
-    margin-top: 5px;
+    /* margin-top: 5px; */
 }
 
 .form-body {
@@ -74,7 +74,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    border-color: white ;
+    border-color: white;
 }
 
 .form-footer {
@@ -85,6 +85,16 @@
     gap: 10px;
 }
 
+.save-button {
+    background-color: #127788;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    /* padding: 2px 6px; */
+    padding: 10px;
+}
+
 .cancel-button {
     color: white;
     background-color: black;
@@ -92,15 +102,6 @@
     border-radius: 4px;
     padding: 10px;
     cursor: pointer
-}
-
-.save-button {
-    background-color: #127788;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    padding: 2px 6px;
 }
 
 .delete-icon {

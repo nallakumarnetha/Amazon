@@ -67,29 +67,17 @@ export class AddproductComponent {
     });
   }
 
-  // onRemoveFile(id: string) {
-  //   console.log("file remove");
-  //   const index = this.product?.files?.indexOf(id);
-  //   if (index! > -1) {
-  //     this.product?.files?.splice(index!, 1);
-  //   }
-  //   //OR this.fileIds = this.fileIds.filter(id => id !== id);
-
-  //   if (this.product?.base64_files instanceof Map) {
-  //     this.product.base64_files.delete(id);
-  //   }
-  // }
   onRemoveFile(id: string) {
-  console.log("file remove");
+    console.log("file remove");
 
-  // Remove from selectedFiles array (for upload)
-  const index = this.selectedFiles.findIndex(f => f.name === id);
-  if (index > -1) this.selectedFiles.splice(index, 1);
+    // Remove from selectedFiles array (for upload)
+    const index = this.selectedFiles.findIndex(f => f.name === id);
+    if (index > -1) this.selectedFiles.splice(index, 1);
 
-  // Remove from base64 preview array
-  const previewIndex = this.selectedFilesBase64.findIndex(f => f.id === id);
-  if (previewIndex > -1) this.selectedFilesBase64.splice(previewIndex, 1);
-}
+    // Remove from base64 preview array
+    const previewIndex = this.selectedFilesBase64.findIndex(f => f.id === id);
+    if (previewIndex > -1) this.selectedFilesBase64.splice(previewIndex, 1);
+  }
 
 
 }

@@ -1,0 +1,10 @@
+@import '../common/form.css';
+
+.cart-container {
+    background-color: #eaeded;
+    padding: 30px;
+}
+
+hr{
+    border-color: #F0F0F0;
+}

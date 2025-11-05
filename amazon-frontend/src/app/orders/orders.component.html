@@ -28,7 +28,7 @@
     </div>
 
     <!-- list of orders -->
-    <p-table [value]="orders" [tableStyle]="{'min-width': '60rem'}" [paginator]="true" [rows]="10" [rows]="10"
+    <p-table [value]="orders" [tableStyle]="{'min-width': '60rem'}" [paginator]="true" [rows]="10"
         [totalRecords]="total" [lazy]="true" (onLazyLoad)="loadOrders($event)" [loading]="loading" #tableTemplateRefVar>
         <ng-template pTemplate="header">
             <tr>

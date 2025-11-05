@@ -1,5 +1,11 @@
 package com.amazon.product;
 
+import static com.amazon.common.Logger.log;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -14,9 +20,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.amazon.cart.CartRepository;
 import com.amazon.common.Audit;
+import com.amazon.common.CustomMultipartFile;
 import com.amazon.common.FilterRequest;
 //import com.amazon.common.ID;
 import com.amazon.common.Response;
@@ -76,6 +84,15 @@ public class ProductService {
 
 	public Product addProduct(Product request) {
 		request.setProductId(idService.getProductID());
+		if(request.getName() != null || request.getName().length() < 95) {
+			StringBuilder sb = new StringBuilder();
+			sb.append(request.getName());
+			sb.append(" | Best Quality Product Available at Great Price | Get the Best Deals on Top Brands Today | Only Limited Time");
+			request.setName(sb.toString());
+		}
+		if(request.getFiles() == null || request.getFiles().isEmpty()) {
+			addSampleImages(request);
+		}
 		Product response = repository.save(request);
 		return response;
 	}
@@ -141,6 +158,18 @@ public class ProductService {
 		response.setProducts(products);
 	    response.setTotal(products.size());
 	    return response;
+	}
+	
+	public void addSampleImages(Product request) {
+		try {
+			Path path = Paths.get("src/main/resources/images/sampleProduct.png");
+			byte[] imageBytes = Files.readAllBytes(path);
+			MultipartFile multipartFile = new CustomMultipartFile("files", "file1.txt", "image/png", imageBytes);
+			List<String> fileIds = fileService.uploadFile(List.of(multipartFile));
+			request.setFiles(fileIds);
+		} catch(Exception ex) {
+			log.info("failed to add sample image");
+		}
 	}
 
 }

@@ -28,7 +28,7 @@
     </div>
 
     <!-- list all products -->
-    <p-table [value]="products" [tableStyle]="{'min-width': '60rem'}" [paginator]="true" [rows]="10" [rows]="10"
+    <p-table [value]="products" [tableStyle]="{'min-width': '60rem'}" [paginator]="true" [rows]="10"
         [totalRecords]="total" [lazy]="true" (onLazyLoad)="loadProducts($event)" [loading]="loading"
         #tableTemplateRefVar>
         <ng-template pTemplate="header">
@@ -52,7 +52,8 @@
                 <td>
                     <ng-container *ngIf="product?.base64_files | keyvalue as filesArray">
                         <ng-container *ngIf="filesArray.length > 0">
-                            <img [src]="'data:image/png;base64,' + filesArray[0].value" [alt]="product?.name" width="auto" height="15px" />
+                            <img [src]="'data:image/png;base64,' + filesArray[0].value" [alt]="product?.name"
+                                width="auto" height="15px" />
                         </ng-container>
                     </ng-container>
                 </td>

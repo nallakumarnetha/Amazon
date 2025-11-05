@@ -6,6 +6,8 @@ import { OrderService } from './order.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Order } from './order.model';
 import { ProductService } from '../product/product.service';
+import { User } from '../user/user.model';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'app-order',
@@ -16,9 +18,11 @@ export class OrderComponent {
 
   products: Product[] = [];
   order: Order = {};
+  currentUser?: User;
 
   constructor(private cartService: CartService, private orderService: OrderService,
     private route: Router, private activatedRoute: ActivatedRoute, private productService: ProductService
+    , private userService: UserService
   ) {
   }
 
@@ -32,6 +36,7 @@ export class OrderComponent {
         res => this.products = res
       );
     }
+    this.updateDeliverTo();
   }
 
   placeOrder() {
@@ -53,5 +58,17 @@ export class OrderComponent {
     });
     this.route.navigateByUrl('/orders', { state: { orderPlaced: true } });
   }
+
+  updateDeliverTo() {
+    this.userService.getCurrentUser().subscribe(res => {
+      this.currentUser = res;
+    });
+  }
+
+  getTotal(): number {
+    return this.products
+      ?.reduce((sum, p) => sum + (p.cart_count! * p.price!), 0) || 0;
+  }
+
 
 }

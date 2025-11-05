@@ -50,6 +50,7 @@ export class CartService {
         }
     }
 
+    
     addToCart(id?: string) {
         console.log("add to cart");
         if (!this.isLoggedIn) {

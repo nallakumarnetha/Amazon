@@ -7,14 +7,18 @@
   flex-direction: column;
   /* background-color: red; */
   width: 300px;
-  height: 480px;
+  /* height: 480px; */
+  height: 520px;
   border: 1px;
   border-style: solid;
   border-color: #e6e6e6;
-  gap: 2px;
+  gap: 5px;
+  padding: 10px;
 }
 
-
+.my-hover:hover {
+    color: #c45500;
+}
 
 /*start - add to cart animation*/
 .order-success {
