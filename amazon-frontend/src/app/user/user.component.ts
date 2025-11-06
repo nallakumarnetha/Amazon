@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { UserService } from './user.service';
-import { User } from './user.model';
-import { Observable } from 'rxjs';
+import { Address, Gender, Language, Role, User } from './user.model';
+import { first, Observable } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FileService } from '../file/file.service';
@@ -9,15 +9,20 @@ import { FileService } from '../file/file.service';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrl: './user.component.css'
+  styleUrl: './user.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserComponent {
 
   id?: string;
   user: User = {};
+  address: Address = {};
   updatedUserForm: FormGroup;
   isUpdate = false;
   selectedFiles: File[] = [];
+  genders?: Gender[];
+  roles?: Role[];
+  languages?: Language[];
 
   constructor(
     private userService: UserService,
@@ -29,14 +34,28 @@ export class UserComponent {
     this.updatedUserForm = this.fb.group({
       user_id: user.user_id,
       name: user.name,
+      first_name: user.first_name,
+      last_name: user.last_name,
       phone_number: user.phone_number,
       gender: user.gender,
-      role: user.role
+      role: user.role,
+      base64_files: user.base64_files,
+      language: user.language,
+      files: user.files,
+      address: this.fb.group({
+        id: this.address.id,
+        street: this.address.street,
+        city: this.address.city,
+        pincode: this.address.pincode
+      })
     });
   }
 
   ngOnInit() {
     this.loadUser();
+    this.genders = Object.values(Gender);
+    this.roles = Object.values(Role);
+    this.languages = Object.values(Language);
   }
 
   loadUser() {
@@ -46,6 +65,13 @@ export class UserComponent {
         res.base64_files = new Map(Object.entries(res.base64_files));
       }
       this.user = res;
+
+      this.userService.findAddress(res.address || '').subscribe(res => {
+        this.address.street = res.street;
+        this.address.city = res.city;
+        this.address.pincode = res.pincode;
+      });
+
       this.updatedUserForm?.patchValue(this.user);
     });
   }

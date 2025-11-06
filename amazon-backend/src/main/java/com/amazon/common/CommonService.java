@@ -24,7 +24,7 @@ import com.amazon.order.OrderStatus;
 import com.amazon.product.Category;
 import com.amazon.product.Product;
 import com.amazon.product.ProductService;
-import com.amazon.user.Address;
+import com.amazon.address.Address;
 import com.amazon.user.Gender;
 import com.amazon.user.Language;
 import com.amazon.user.Role;
@@ -73,14 +73,14 @@ public class CommonService {
 		user.setLastName("Nalla");
 		user.setName("Kumar Nalla");
 		user.setPhoneNumber("+91 8498931574");
-		user.setGender(Gender.MALE);
+		user.setGender(Gender.Male);
 			Address address = new Address();
 			address.setStreet("Highschool colony");
 			address.setCity("Begumpeta");
 			address.setPincode("508105");
 		user.setAddress(address);
-		user.setRole(Role.ADMIN);
-		user.setLanguage(Language.TELUGU);
+		user.setRole(Role.Admin);
+		user.setLanguage(Language.Telugu);
 		user.setFiles(fileIds);
 		user = userService.addUser(user);
 	
@@ -95,14 +95,14 @@ public class CommonService {
 		user.setLastName("Thella");
 		user.setName("Kumar Thella");
 		user.setPhoneNumber("+91 6305252149");
-		user.setGender(Gender.MALE);
+		user.setGender(Gender.Male);
 			address = new Address();
 			address.setStreet("Durgam cheruvu");
 			address.setCity("Madhapur");
 			address.setPincode("500081");
 		user.setAddress(address);
-		user.setRole(Role.ENDUSER);
-		user.setLanguage(Language.TELUGU);
+		user.setRole(Role.Enduser);
+		user.setLanguage(Language.Telugu);
 		user.setFiles(fileIds);
 		user = userService.addUser(user);
 		

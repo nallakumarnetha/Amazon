@@ -3,6 +3,7 @@ package com.amazon.user;
 import java.util.List;
 import java.util.Map;
 
+import com.amazon.address.Address;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -10,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -39,14 +42,17 @@ public class User {
 	@JsonProperty("phone_number")
 	private String phoneNumber;
 
+	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn
 	private Address address;
 
+	@Enumerated(EnumType.STRING)
 	private Role role;
 	
+	@Enumerated(EnumType.STRING)
 	private Language language;
 	
 	private List<String> files;

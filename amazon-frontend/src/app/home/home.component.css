@@ -18,6 +18,7 @@
 
 .my-hover:hover {
     color: #c45500;
+    cursor: pointer;
 }
 
 /*start - add to cart animation*/

@@ -3,7 +3,8 @@
     justify-items: center;
     justify-content: center;
     margin: 10px;
-    background-color: #f2f7f8
+    /* background-color: #f2f7f8 */
+    background-color:#f8f8f8;
 }
 
 .form {

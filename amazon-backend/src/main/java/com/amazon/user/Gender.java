@@ -1,5 +1,5 @@
 package com.amazon.user;
 
 public enum Gender {
-	MALE, FEMALE, OTHERS
+	Male, Female, Others
 }

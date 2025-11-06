@@ -1,18 +1,24 @@
-package com.amazon.user;
+package com.amazon.address;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.amazon.common.Audit;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import jakarta.persistence.Access;
 import jakarta.persistence.AccessType;
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 @JsonInclude(value = Include.NON_EMPTY)
+@EntityListeners(AuditingEntityListener.class)
 public class Address {
 
 	@Id
@@ -25,6 +31,13 @@ public class Address {
 
 	private String pincode;
 
+	@Embedded
+	private Audit audit;
+	
+	public Address() {
+		this.audit = new Audit();
+	}
+	
 	public String getStreet() {
 		return street;
 	}
@@ -47,6 +60,14 @@ public class Address {
 
 	public void setPincode(String pincode) {
 		this.pincode = pincode;
+	}
+	
+	public Audit getAudit() {
+		return audit;
+	}
+	
+	public void setAudit(Audit audit) {
+		this.audit = audit;
 	}
 
 }

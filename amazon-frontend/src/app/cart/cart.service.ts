@@ -50,7 +50,6 @@ export class CartService {
         }
     }
 
-    
     addToCart(id?: string) {
         console.log("add to cart");
         if (!this.isLoggedIn) {
@@ -121,6 +120,10 @@ export class CartService {
     updateCartLocalStorage() {
         localStorage.setItem('cart', JSON.stringify(this.products));
         this.cartSubject.next([...this.products]);
+    }
+
+    findCart() {
+        
     }
 
 }

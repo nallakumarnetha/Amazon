@@ -59,6 +59,15 @@ public class UserService {
         if (request.getName() != null && !request.getName().isEmpty()) {
             entity.setName(request.getName());
         }
+        
+        if (request.getFirstName() != null && !request.getFirstName().isEmpty()) {
+            entity.setFirstName(request.getFirstName());
+        }
+        
+        if (request.getLastName() != null && !request.getLastName().isEmpty()) {
+            entity.setLastName(request.getLastName());
+        }
+        
         if (request.getPhoneNumber() != null && !request.getPhoneNumber().isEmpty()) {
             entity.setPhoneNumber(request.getPhoneNumber());
         }
@@ -68,10 +77,14 @@ public class UserService {
         if (request.getLanguage() != null) {
             entity.setLanguage(request.getLanguage());
         }
+        if (request.getRole() != null) {
+            entity.setRole(request.getRole());
+        }
         if (request.getFiles() != null && !request.getFiles().isEmpty()) {
             entity.setFiles(request.getFiles());
         }
 
+        
         return repository.save(entity);
     }
 

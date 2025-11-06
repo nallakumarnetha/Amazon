@@ -1,0 +1,7 @@
+.detail-card {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    gap: 4px;
+    width: 50px;
+}

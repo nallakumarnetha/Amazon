@@ -6,9 +6,9 @@ export class User {
     last_name?: string;
     name?: string;
     phone_number?: string;
-    gender?: string;
-    address?: Address;
-    role?: string;
+    gender?: Gender;
+    address?: string;
+    role?: Role;
     language?: Language;
     files?: string[];
     base64_files?: Map<string, string>;
@@ -22,13 +22,19 @@ export class Address {
 }
 
 export enum Gender {
-    MALE, FEMALE, OTHERS
+    Male = 'Male',
+    Female = 'Female',
+    Others = 'Others'
 }
 
 export enum Role {
-    ENDUSER, SELLER, ADMIN
+    Enduser = 'Enduser',
+    Seller = 'Seller',
+    Admin = 'Admin'
 }
 
 export enum Language {
-    TELUGU, HINDI, ENGLISH
+    Telugu = 'Telugu',
+    Hindi = 'Hindi',
+    English = 'English'
 }

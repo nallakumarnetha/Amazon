@@ -2,6 +2,7 @@ package com.amazon.common;
 
 import java.util.List;
 
+import com.amazon.address.Address;
 import com.amazon.order.Order;
 import com.amazon.product.Product;
 import com.amazon.user.User;
@@ -24,6 +25,8 @@ public class Response {
 	private List<User> users;
 	
 	private List<Order> orders;
+	
+	private List<Address> addresses;
 
 	public int getStart() {
 		return start;
@@ -79,6 +82,14 @@ public class Response {
 
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
+	}
+
+	public List<Address> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
 	
 }

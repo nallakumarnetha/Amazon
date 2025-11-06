@@ -26,7 +26,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import com.amazon.user.Address;
+import com.amazon.address.Address;
 
 @Entity
 @Table(name = "orders")	//order is reserved keyword in db
