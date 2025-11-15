@@ -39,6 +39,9 @@ public class OrderService {
 	}
 
 	public Order addOrder(Order order) {
+		if(order.getStatus() == null) {
+			order.setStatus(OrderStatus.Pending);
+		}
 		order.setOrderId(idService.getOrderID());
 		order.setUserId(userId);
 		return repository.save(order);

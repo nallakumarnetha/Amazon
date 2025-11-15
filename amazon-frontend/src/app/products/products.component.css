@@ -1,2 +1,5 @@
 @import '../common/table.css';
 
+.img {
+    object-fit: contain;
+}

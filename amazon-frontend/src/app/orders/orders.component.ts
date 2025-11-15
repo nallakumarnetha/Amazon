@@ -6,6 +6,7 @@ import { Table, TableLazyLoadEvent } from 'primeng/table';
 import { Observable } from 'rxjs';
 import { Category, PriceRange, ProductListResponse } from '../product/product.model';
 import { FilterRequest } from '../common/common.model';
+import JSConfetti from 'js-confetti';
 
 @Component({
   selector: 'app-orders',
@@ -56,9 +57,25 @@ export class OrdersComponent {
 
       this.showAnimation = true;
       setTimeout(() => {
+        this.showConfettiAnimation();
         this.showAnimation = false;
-      }, 5000);
+      }, 2500);
+
+      let jsConfetti = new JSConfetti();
+      jsConfetti.addConfetti({
+        confettiNumber: 400,
+        confettiRadius: 6,
+        confettiColors: [
+          '#FF0A54', '#FF477E', '#FF7096', '#FF85A1',
+          '#FBB1BD', '#F9BEC7', '#00C2FF', '#7DF9FF',
+          '#28FFBF', '#BCFFB9', '#FFD700', '#FFA500'
+        ]
+      });
     }
+  }
+
+  showConfettiAnimation() {
+
   }
 
   onSearch(event: any) {
@@ -111,7 +128,7 @@ export class OrdersComponent {
 
   filterByCategory(event: any) {
     const value = event.target.value;
-     if (value === 'ALL') {
+    if (value === 'All') {
       this.table.first = 0; // resets to first page
       this.orderService.findAllOrders(0, 10).subscribe(res => {
         this.orders = res.orders || [];

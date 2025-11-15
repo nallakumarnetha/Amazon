@@ -1,3 +1,28 @@
 @import "../common/form.css";
 /* @import url("../common/form.css"); */
 /* <link rel="stylesheet" href="../common/form.css"> */
+
+
+.form-header {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    align-content: initial;
+}
+
+.display-none {
+    display: none
+}
+
+.position-relative {
+    position: relative;
+}
+
+.error {
+    color: #CC0C39;
+    font-size: 14px;
+}
+
+.img {
+    object-fit: contain;
+}

@@ -1,7 +1,7 @@
 <div class="form-container">
     <form [formGroup]="updatedProductForm" (ngSubmit)="updateProduct()" class="form">
 
-        <div class="vertical-left">
+        <div class="form-header">
             <span class="form-title"> Edit product here </span>
             <span class="form-subtitle">You can edit product here and see in listing page </span>
         </div>
@@ -14,7 +14,6 @@
                     <span>Delete</span>
                 </span>
             </div>
-
 
             <label for="product_id" class="form-control-title">Id</label>
             <input formControlName="product_id" type="text" class="form-control" readonly>
@@ -33,14 +32,15 @@
                 <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
             </select>
 
-            <!-- start -->
+            <!-- images start -->
             <label for="images" class="form-control-title">Images</label>
             <div class="image-preview-container">
                 <ng-container *ngIf="product?.base64_files as base64_files">
                     <ng-container *ngIf="base64_files | keyvalue as filesMap">
                         <ng-container *ngFor="let element of filesMap">
                             <div style="position: relative;">
-                                <img [src]="'data:image/png;base64,' + element.value" [alt]="product?.name" width="100" height="70">
+                                <img [src]="'data:image/png;base64,' + element.value" [alt]="product?.name" width="100"
+                                    height="70" class="img">
                                 <i class="pi pi-times remove-button" (click)="onRemoveFile(element.key)"></i>
                             </div>
                         </ng-container>
@@ -48,11 +48,9 @@
                 </ng-container>
             </div>
 
-
-            <!-- <button type="button" (click)="triggerFileSelect(myFileInputId)" style="width: 50px;"> + </button> -->
             <i class="pi pi-plus" (click)="triggerFileSelect(myFileInputId)"></i>
             <input #myFileInputId type="file" multiple (change)="onFileSelected($event)" style="display: none;">
-            <!-- end -->
+            <!-- images end -->
 
             <div class="form-footer">
                 <button routerLink="/products" class="cancel-button">Cancel</button>

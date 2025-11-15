@@ -1,91 +1,76 @@
 <!-- first menu -->
-<div class="my-menu-bar" style="background-color: #131921;">
+<div class="menu-one-container">
   <!-- logo -->
-  <img src="assets/images/amazon.png" style="width: 100px; height: 45px;" class="my-hover" routerLink="/home">
+  <img src="assets/images/amazon.png" class="img hover cursor" routerLink="/home">
 
   <!-- delive to -->
-  <div style="display: flex; align-items: flex-end; gap: 2px; padding: 5px;" class="my-hover">
-
-    <div>
-      <i class="pi pi-map-marker"></i>
-    </div>
-
-    <div style="display: flex; flex-direction: column; font-size: 15px; justify-content: center;">
-      <div style="color: lightgrey;">Deliver to {{currentUser?.first_name.slice(0, 8)}}</div>
-      <div style="font-weight: bold;">{{currentUser?.address?.city.slice(0, 8)}}
+  <div class="deliver-container hover">
+    <div> <i class="pi pi-map-marker"></i> </div>
+    <div class="address-details">
+      <div class="user-name">Deliver to {{currentUser?.first_name.slice(0, 8)}}</div>
+      <div class="address">{{currentUser?.address?.city.slice(0, 8)}}
         {{currentUser?.address?.pincode.slice(0, 6)}}</div>
     </div>
-
   </div>
 
   <!-- search box -->
-  <div style="display: flex; flex: 1;" [ngClass]="{'search-focus':isSearchFocused}">
-    <select style="display: flex; background-color:#e6e6e6; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border: none; width: 55px;
-  align-items: center; padding: 10px; padding: 5px;" (change)="filterByCategory($event)">
+  <div class="search-container" [ngClass]="{'search-focus':isSearchFocused}">
+    <select class="search-category" (change)="filterByCategory($event)">
       <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
     </select>
 
-    <input type="search" placeholder="Search Amazon" style="width: 100%; border: none;" (input)=onSearch($event)
+    <input type="search" placeholder="Search Amazon" class="search-bar" (input)=onSearch($event)
       (focus)="isSearchFocused = true" (blur)="isSearchFocused = false">
-    <button type="submit"
-      style="background-color:rgb(254, 189, 105); border: none; width: 40px; border-top-right-radius: 5px; border-bottom-right-radius: 5px"><i
-        class="pi pi-search"></i></button>
+    <button type="submit" class="search-icon"><i class="pi pi-search"></i></button>
   </div>
 
   <!-- remianing -->
-  <div style="display: flex; align-items: center; gap: 25px; gap: 0;">
-    <div class="my-hover"
-      style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 5px">
+  <div class="remaining">
+    <div class="language hover cursor">
       <span routerLink="/preferences">Language</span>
     </div>
-    <div class="my-hover"
-      style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 5px">
+    <div class="returns-orders hover cursor">
       <span routerLink="/orders">Returns</span>
-      <span style="font-weight: bold;">& Orders</span>
+      <span class="orders">& Orders</span>
 
     </div>
-    <div class="my-hover" routerLink="/cart"
-      style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 5px">
-      <i class="pi pi-shopping-cart" style="margin-right: 5px;"></i>
-      <!-- Cart({{cartService.cartObservable$ | async | len}}) -->
+    <div class="cart hover cursor" routerLink="/cart">
+      <i class="pi pi-shopping-cart cart-count"></i>
       Cart({{cartCount}})
     </div>
-    <div class="my-hover"
-      style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 5px">
-      <a routerLink="/user" style="display: flex;">
-        <i class="pi pi-user" style="margin-right: 5px;"></i>
+    <div class="account-container hover">
+      <a routerLink="/user" class="account">
+        <i class="pi pi-user account-icon"></i>
         Account
       </a>
     </div>
   </div>
 </div>
 <!-- second menu -->
-<div class="my-menu-bar" style="background-color: #232f3e; width: 100%; height:100%; padding: 0px;">
-  <div (click)="toggleSideBar()" style="padding: 10px;"><i class="pi pi-bars"> All</i></div>
-  <div class="my-hover" style="padding: 10px;"><a routerLink="/home">Home</a></div>
-  <div class="my-hover" style="padding: 10px;"><a routerLink="/products">Products</a></div>
-  <div class="my-hover" style="padding: 10px;"><a routerLink="/cart">Cart</a></div>
-  <div class="my-hover" style="padding: 10px;"><a routerLink="/orders">Orders</a></div>
-  <div class="my-hover" style="padding: 10px;"><a routerLink="/demo-mode">Demo mode</a></div>
+<div class="menu-two-container">
+  <div (click)="toggleSideBar()"><i class="pi pi-bars"></i> All</div>
+  <div class="hover"><a routerLink="/home">Home</a></div>
+  <div class="hover"><a routerLink="/products">Products</a></div>
+  <div class="hover"><a routerLink="/cart">Cart</a></div>
+  <div class="hover"><a routerLink="/orders">Orders</a></div>
+  <div class="hover"><a routerLink="/demo-mode">Demo mode</a></div>
   |
-  <div class="my-hover" style="padding: 10px;"><a>Preferences</a></div>
-  <div class="my-hover" style="padding: 10px;"><a>Prime</a></div>
-  <div class="my-hover" style="padding: 10px;"><a>CustomerServie</a></div>
-  <div class="my-hover" style="padding: 10px;"><a>Rufus AI</a></div>
+  <div class="hover"><a>Preferences</a></div>
+  <div class="hover"><a>Prime</a></div>
+  <div class="hover"><a>CustomerServie</a></div>
+  <div class="hover"><a>Rufus AI</a></div>
 
-  <div class="my-hover" style="padding: 10px;"><a>Sell</a></div>
-  <div class="my-hover" style="padding: 10px;"><a>Admin</a></div>
-
-
+  <div class="hover"><a>Sell</a></div>
+  <div class="hover"><a>Admin</a></div>
 
 </div>
 
 <!-- side bar -->
 <p-sidebar [(visible)]="showSideBar">
-  <div class="my-side-bar">
-    <div style="background-color: #232f3e; color: white; padding: 10px;">
-      <i class="pi pi-user" style="margin-right: 8px;"></i>
-      <b style="font-size: 20px;">Hello, Kumar Nalla</b>
+  <div class="side-menu-container">
+    <div class="heading">
+      <i class="pi pi-user" class="user-icon"></i>
+      <b class="user-name-size">Hello, {{currentUser?.name | uppercase}}</b>
     </div>
     <b>Digital Content & Devices</b>
     <a href="">aaa</a>

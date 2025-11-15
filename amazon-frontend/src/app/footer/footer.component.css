@@ -1,20 +1,50 @@
-.my-backToTop{
-    background-color: #37475a; 
-    width: 100%; cursor: pointer;
+.backToTop {
+    background-color: #37475a;
+    width: 100%;
+    cursor: pointer;
     text-align: center;
     color: white;
     padding: 10px;
 }
 
-.my-backToTop:hover{
-background-color: #485769;
+.backToTop:hover {
+    background-color: #485769;
 }
 
-.my-hyperlink a{
-color: white;
-text-decoration: none;
-}
-
-.my-hyperlink:hover{
+.hyperlink a {
     color: white;
+    text-decoration: none;
+}
+
+.hyperlink a:hover {
+    text-decoration: underline;
+}
+
+.column-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.back-to-top {
+    font-size: 13px;
+}
+
+.footer-one {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    color: white;
+    background-color: #232f3e;
+    padding: 20px;
+    font-size: 13px
+}
+
+.footer-two {
+    display: block;
+    background-color: #131921;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    font-size: 13px;
 }

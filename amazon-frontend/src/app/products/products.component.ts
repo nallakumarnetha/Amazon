@@ -135,7 +135,7 @@ export class ProductsComponent {
 
   filterByCategory(event: any) {
     const value = event.target.value;
-    if (value === 'ALL') {
+    if (value === 'All') {
       this.table.first = 0; // resets to first page
       this.productService.findAllProducts(0, 10).subscribe(res => {
         this.products = res.products || [];

@@ -1,25 +1,144 @@
-:host{
-  margin: 20px;
+:host {
+    margin: 20px;
 }
 
-.my-card{
-  display: flex;
-  flex-direction: column;
-  /* background-color: red; */
-  width: 300px;
-  /* height: 480px; */
-  height: 520px;
-  border: 1px;
-  border-style: solid;
-  border-color: #e6e6e6;
-  gap: 5px;
-  padding: 10px;
+.home-container {
+    display: flex;
+    gap: 10px;
 }
 
-.my-hover:hover {
+
+.side-bar {
+    background-color: #f8f8f8;
+    width: 300px;
+    padding: 15px;
+}
+
+.scroll {
+    flex: 1;
+    overflow-y: auto;
+    height: 100vh;
+    scrollbar-width: none;
+}
+
+.scroll-container {
+    flex: 1;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 520px;
+    border: 1px;
+    border-style: solid;
+    border-color: #e6e6e6;
+    gap: 5px;
+    padding: 10px;
+}
+
+.details-container {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+
+.img {
+    width: 255px;
+    height: 255px;
+    object-fit: contain;
+}
+
+.ratings {
+    color: #ff6200;
+}
+
+.rating {
+    color: black;
+}
+
+.hover:hover {
     color: #c45500;
     cursor: pointer;
 }
+
+.currency {
+    font-size: 15px;
+    margin-top: 3px;
+}
+
+.price {
+    font-size: 25px;
+}
+
+.discount {
+    font-size: 15px;
+    color: #565959;
+    align-self: flex-end;
+    margin-left: 2px;
+    margin-bottom: 3px;
+}
+
+.offer {
+    color: #565959;
+    font-size: 13px;
+}
+
+.free-delivery {
+    font-size: 13px
+}
+
+.buttons-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 3px;
+    width: 100%;
+    margin-top: auto;
+}
+
+.button {
+    padding: 10px;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.add-to-cart {
+    background-color: #ffd814;
+}
+
+.buy-now {
+    background-color: #ffa41c;
+}
+
+.out-of-stock {
+    padding: 9px;
+    color: red;
+    background-color: transparent;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.details {
+    display: flex;
+    gap: 2px;
+}
+
+
+
+
+
+
+
+
+
+
 
 /*start - add to cart animation*/
 .order-success {
@@ -76,4 +195,5 @@
 .order-btn:hover {
     background-color: hwb(189 7% 47%);
 }
+
 /*end - add to cart animation*/

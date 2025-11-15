@@ -1,66 +1,59 @@
-<div class="cart-container">
-    <div style="background-color: white; padding: 25px;">
-        <!-- title -->
-        <div style="height: 65px; display: flex; justify-content: space-between; ">
-            <div class="vertical-left">
-                <span class="form-title">Shopping Cart</span>
-                <button *ngIf="!selectAllActive" (click)="deselectAll()" class="link-button">Deselect all items</button>
-                <button *ngIf="selectAllActive" (click)="selectAll()" class="link-button">Select all items</button>
-            </div>
-            <div><button type="button" routerLink="/order" class="yellow-button">Proceed to Buy</button></div>
+<div class="container">
+
+    <!-- title -->
+    <div class="header">
+        <div class="header-title">
+            <span class="form-title">Shopping Cart</span>
+            <button *ngIf="!selectAllActive" (click)="deselectAll()" class="link-button">Deselect all items</button>
+            <button *ngIf="selectAllActive" (click)="selectAll()" class="link-button">Select all items</button>
         </div>
-        <span style="display: block; text-align: right; color: grey; padding-right: 62px; font-size: 15px;">Price</span>
-        <hr>
-        <!-- cart items -->
-        <ng-container *ngFor="let product of products">
-            <div style="height: 200px; display: flex; padding: 10px; box-sizing: border-box;">
-                <div style="flex: 5; align-content: center;">
-                    <input type="checkbox" [checked]="product.status === Status.Active"
-                        (change)="changeStatus(product.id!, $any($event.target).checked)">
-                </div>
-                <div style="flex:15">
-                    <ng-container *ngIf="product?.base64_files | keyvalue as filesArray">
-                        <ng-container *ngIf="filesArray.length > 0">
-                            <img [src]="'data:image/png;base64,' + filesArray[0].value" [alt]="product?.name"
-                                width="180px" height="180px" />
-                        </ng-container>
-                    </ng-container>
-                </div>
-
-                <div
-                    style="display: flex; flex: 50; padding-left: 20px; flex-direction: column; justify-content: space-between;">
-                    <div style="font-size: 19px;">{{product.name}}</div>
-                    <!-- <div>{{product.product_id}}</div> -->
-                    <div style="color: #0b7b3c; font-size: 12px;">In stock</div>
-                    <div style="font-size: 12px;">Eligible for FREE Shipping</div>
-                    <div style="color: #cc0c39; font-size: 12px;">Limited time deal</div>
-                    <div style="font-size: 12px;">Up to 5% back with Amazon Pay ICICI card</div>
-
-                    <div style="display: flex; gap: 10px; align-self: flex-start; margin-top: 8px;">
-                        <div
-                            style="display: flex; border: 3px solid; border-color: #ffd814; border-radius: 15px; gap: 8px; width: 100px; height: 24px; align-items: center; box-sizing: content-box; justify-content: center; gap: 22px; cursor: pointer;">
-                            <div><i class="pi pi-minus" (click)="decreaseCount(product.id!)"
-                                    style="font-size: 10px; font-weight: bold; text-shadow: 0 0 1px black;"></i></div>
-                            <div><span style="font-size: 15px; font-weight: bold;">{{product.cart_count}}</span></div>
-                            <div><i class="pi pi-plus" (click)="increaseCount(product.id!)"
-                                    style="font-size: 10px; font-weight: bold; text-shadow: 0 0 1px black;"></i></div>
-                        </div>
-
-                        <button class="link-button" (click)="deleteFromCart(product.id!)">Delete</button>
-                    </div>
-                </div>
-
-                <div style="flex: 10; display: flex; justify-content: center; align-items: flex-start;">
-                    {{product.product_id}}
-                </div>
-
-                <div style="flex: 10; display: flex; justify-content: center; align-items: flex-start;">
-                    {{product.price * product.cart_count | currency:'INR'}}
-                </div>
-
-            </div>
-            <hr>
-        </ng-container>
+        <div><button type="button" routerLink="/order" class="yellow-button">Proceed to Buy</button></div>
     </div>
+    <span class="price-font">Price</span>
+    <hr>
+    
+    <!-- cart items -->
+    <ng-container *ngFor="let product of products">
+        <div class="cart-item">
+            <div class="cart-checkbox">
+                <input type="checkbox" [checked]="product.status === Status.Active"
+                    (change)="changeStatus(product.id!, $any($event.target).checked)">
+            </div>
+            <div class="cart-img">
+                <ng-container *ngIf="product?.base64_files | keyvalue as filesArray">
+                    <ng-container *ngIf="filesArray.length > 0">
+                        <img [src]="'data:image/png;base64,' + filesArray[0].value" [alt]="product?.name" width="180px"
+                            height="180px" class="img"/>
+                    </ng-container>
+                </ng-container>
+            </div>
 
+            <div class="item-details">
+                <div class="item-name">{{product.name?.slice(0, 200)}}</div>
+                <div class="in-stock">In stock</div>
+                <div class="free-shipping">Eligible for FREE Shipping</div>
+                <div class="limited-deal"> Limited time deal</div>
+                <div class="discount">Up to 5% back with Amazon Pay ICICI card</div>
+
+                <div class="cart-count">
+                    <div class="counter">
+                        <div><i class="pi pi-minus change-count" (click)="decreaseCount(product.id!)"></i></div>
+                        <div><span class="count">{{product.cart_count}}</span></div>
+                        <div><i class="pi pi-plus change-count" (click)="increaseCount(product.id!)"></i></div>
+                    </div>
+                    <button class="link-button" (click)="deleteFromCart(product.id!)">Delete</button>
+                </div>
+            </div>
+
+            <div class="cart-detail">
+                {{product.product_id}}
+            </div>
+
+            <div class="cart-detail">
+                {{product.price * product.cart_count | currency:'INR'}}
+            </div>
+
+        </div>
+        <hr>
+    </ng-container>
 </div>

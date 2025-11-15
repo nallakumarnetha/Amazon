@@ -19,6 +19,7 @@ export class OrderComponent {
   products: Product[] = [];
   order: Order = {};
   currentUser?: User;
+  total = 0;
 
   constructor(private cartService: CartService, private orderService: OrderService,
     private route: Router, private activatedRoute: ActivatedRoute, private productService: ProductService
@@ -29,12 +30,22 @@ export class OrderComponent {
   ngOnInit() {
     const id = this.activatedRoute.snapshot.queryParamMap.get('buyNowId');
     if (id) {
-      this.productService.findProduct(id).subscribe(res => this.products = [res]);
+      this.productService.findProduct(id).subscribe(productRes => {
+        this.cartService.findCart(productRes.id!).subscribe(
+          cartRes => {
+            productRes.cart_count = cartRes.count;
+            this.products = [productRes];
+            this.updateTotal();
+          }
+        );
+      });
     } else {
       this.cartService.findProducts(Status.Active);
       this.cartService.cartObservable$.subscribe(
-        res => this.products = res
-      );
+        res => {
+          this.products = res;
+          this.updateTotal();
+        });
     }
     this.updateDeliverTo();
   }
@@ -65,8 +76,8 @@ export class OrderComponent {
     });
   }
 
-  getTotal(): number {
-    return this.products
+  updateTotal(): void {
+    this.total = this.products
       ?.reduce((sum, p) => sum + (p.cart_count! * p.price!), 0) || 0;
   }
 

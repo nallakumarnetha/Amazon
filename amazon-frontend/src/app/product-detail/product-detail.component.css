@@ -1,7 +1,87 @@
+@import "../cart/cart.component.css";
+
+.container {
+    display: flex;
+    flex-direction: row;
+    margin: 40px;
+}
+
+.img-container {
+    margin-right: 40px;
+    margin-left: 70px;
+}
+
+.img {
+    width: 365px;
+    height: 365px;
+    object-fit: contain;
+}
+
+.heading {
+    font-size: 30px;
+}
+
+.sub-heading {
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
 .detail-card {
     display: flex;
     flex-direction: column;
     align-content: space-between;
     gap: 4px;
     width: 50px;
+}
+
+.detail-heading {
+    display: flex;
+    flex-direction: row;
+    width: 500px;
+    gap: 30px;
+}
+
+.detail-content {
+    font-weight: bold;
+    width: 30%;
+}
+
+.detail-price {
+    font-size: 20px;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 10px;
+}
+
+.button {
+    padding: 10px;
+    color: black;
+    /* background-color: #ffd814; */
+    border: none;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 50%;
+    cursor: pointer;
+}
+
+.button-add-to-cart {
+    background-color: #ffd814;
+}
+
+.button-buy-now {
+    background-color: #ffa41c;
+}
+
+.button-out-of-stock {
+    padding: 9px;
+    color: red;
+    background-color: transparent;
+    font-weight: bold;
 }

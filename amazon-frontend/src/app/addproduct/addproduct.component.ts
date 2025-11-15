@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category, Product } from '../product/product.model';
 import { ProductService } from '../product/product.service';
 import { Observable } from 'rxjs';
@@ -17,12 +17,12 @@ export class AddproductComponent {
   selectedFiles: File[] = [];
   fileIds: string[] = [];
   selectedFilesBase64: { id: string, data: string }[] = [];
-  categories = Object.values(Category);
+  categories = Object.values(Category).filter(cat => cat !== Category.All);
 
   constructor(private fb: FormBuilder, private productService: ProductService, private router: Router,
     private fileService: FileService) {
     this.productForm = this.fb.group({
-      name: '', price: 0, count: 0, category: Category.All
+      name: '', price: 0, count: 0, category: ['', Validators.required]
     });
   }
   addProduct(): void {

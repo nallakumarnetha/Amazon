@@ -4,6 +4,7 @@ import { Product, ProductListResponse } from "../product/product.model";
 import { HttpClient } from "@angular/common/http";
 import { ProductService } from "../product/product.service";
 import { Status } from "./cart.component";
+import { Cart } from "./cart.model";
 
 @Injectable({
     providedIn: 'root'
@@ -122,8 +123,8 @@ export class CartService {
         this.cartSubject.next([...this.products]);
     }
 
-    findCart() {
-        
+    findCart(productId: string): Observable<Cart> {
+        return this.http.get<Cart>(`${this.baseUrl}/${productId}`);
     }
 
 }

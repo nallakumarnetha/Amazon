@@ -2,86 +2,86 @@
     <div class="form-container">
         <form [formGroup]="updatedUserForm" (ngSubmit)="updateUser()" class="form">
 
-            <div class="vertical-left">
-                <span class="form-title"> Your account </span>
+            <div class="form-header">
+                <span class="form-title"> Your account </span> 
                 <span class="form-subtitle">These are user details </span>
             </div>
 
-            <div class="form-body" style="padding: 30px;">
-                <div class="form-body-title;" style="gap: 5px; display: flex; justify-content: space-between;">
+            <div class="form-body padding">
+                <div class="form-body-title title">
                     <span></span>
-                    <span (click)="isUpdate = !isUpdate" style="cursor: pointer;">
+                    <span (click)="isUpdate = !isUpdate" class="cursor">
                         <i class="pi pi-pencil"></i>
                         <span> Edit</span>
                     </span>
                 </div>
 
-                <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center;">
+                <div class="img-container img-center">
                     <ng-container *ngIf="user?.base64_files as base64_files">
                         <ng-container *ngIf="base64_files | keyvalue as filesMap">
                             <ng-container *ngFor="let element of filesMap">
                                 <img [src]="'data:image/png;base64,' + element.value" [alt]="user?.name" width="200"
-                                    height="200" style="border-radius: 50%; object-fit: cover;">
+                                    height="200" class="img">
                             </ng-container>
                         </ng-container>
                     </ng-container>
                 </div>
 
-                <div style="font-size: 30px; text-align: center; margin: 10px;">{{user.name | uppercase}}</div>
+                <div class="name">{{user.name | uppercase}}</div>
 
-                <div style="display: flex; flex-direction: row; gap: 30px;">
-                    <div style="width: 50%; text-align: right; font-weight: bold;">ID</div>
-                    <div style="width: 50%;">{{user.user_id}}</div>
+                <div class="field-container">
+                    <div class="field-title">ID</div>
+                    <div class="field-body">{{user.user_id}}</div>
                 </div>
 
-                <div style="display: flex; flex-direction: row; gap: 30px;">
-                    <div style="width: 50%; text-align: right; font-weight: bold;">Name</div>
-                    <div style="width: 50%;">{{user.name}}</div>
+                <div class="field-container">
+                    <div class="field-title">Name</div>
+                    <div class="field-body">{{user.name}}</div>
                 </div>
 
-                <div style="display: flex; flex-direction: row; gap: 30px;">
-                    <div style="width: 50%; text-align: right; font-weight: bold;">Firts name</div>
-                    <div style="width: 50%;">{{user.first_name}}</div>
+                <div class="field-container">
+                    <div class="field-title">Firts name</div>
+                    <div class="field-body">{{user.first_name}}</div>
                 </div>
 
-                <div style="display: flex; flex-direction: row; gap: 30px;">
-                    <div style="width: 50%; text-align: right; font-weight: bold;">Last name</div>
-                    <div style="width: 50%;">{{user.last_name}}</div>
+                <div class="field-container">
+                    <div class="field-title">Last name</div>
+                    <div class="field-body">{{user.last_name}}</div>
                 </div>
 
-                <div style="display: flex; flex-direction: row; gap: 30px;">
-                    <div style="width: 50%; text-align: right; font-weight: bold;">Phone number</div>
-                    <div style="width: 50%;">{{user.phone_number}}</div>
+                <div class="field-container">
+                    <div class="field-title">Phone number</div>
+                    <div class="field-body">{{user.phone_number}}</div>
                 </div>
 
-                <div style="display: flex; flex-direction: row; gap: 30px;">
-                    <div style="width: 50%; text-align: right; font-weight: bold;">Gender</div>
-                    <div style="width: 50%;">{{user.gender}}</div>
+                <div class="field-container">
+                    <div class="field-title">Gender</div>
+                    <div class="field-body">{{user.gender}}</div>
                 </div>
 
-                <div style="display: flex; flex-direction: row; gap: 30px;">
-                    <div style="width: 50%; text-align: right; font-weight: bold;">Role</div>
-                    <div style="width: 50%;">{{user.role}}</div>
+                <div class="field-container">
+                    <div class="field-title">Role</div>
+                    <div class="field-body">{{user.role}}</div>
                 </div>
 
-                <div style="display: flex; flex-direction: row; gap: 30px;">
-                    <div style="width: 50%; text-align: right; font-weight: bold;">Language</div>
-                    <div style="width: 50%;">{{user.language}}</div>
+                <div class="field-container">
+                    <div class="field-title">Language</div>
+                    <div class="field-body">{{user.language}}</div>
                 </div>
 
-                <div style="display: flex; flex-direction: row; gap: 30px;">
-                    <div style="width: 50%; text-align: right; font-weight: bold;">Street</div>
-                    <div style="width: 50%;">{{user?.address?.street}}</div>
+                <div class="field-container">
+                    <div class="field-title">Street</div>
+                    <div class="field-body">{{user?.address?.street}}</div>
                 </div>
 
-                <div style="display: flex; flex-direction: row; gap: 30px;">
-                    <div style="width: 50%; text-align: right; font-weight: bold;">City</div>
-                    <div style="width: 50%;">{{user?.address?.city}}</div>
+                <div class="field-container">
+                    <div class="field-title">City</div>
+                    <div class="field-body">{{user?.address?.city}}</div>
                 </div>
 
-                <div style="display: flex; flex-direction: row; gap: 30px;">
-                    <div style="width: 50%; text-align: right; font-weight: bold;">Pincode</div>
-                    <div style="width: 50%;">{{user?.address?.pincode}}</div>
+                <div class="field-container">
+                    <div class="field-title">Pincode</div>
+                    <div class="field-body">{{user?.address?.pincode}}</div>
                 </div>
             </div>
         </form>
@@ -90,33 +90,33 @@
 <div [hidden]="!isUpdate">
     <div class="form-container">
         <form [formGroup]="updatedUserForm" (ngSubmit)="updateUser()" class="form">
-            <div class="vertical-left">
+            <div class="form-header">
                 <span class="form-title"> Your account </span>
                 <span class="form-subtitle">Update the user details </span>
             </div>
 
             <div class="form-body">
-                <div class="form-body-title;" style="gap: 5px; display: flex; justify-content: space-between;">
+                <div class="form-body-title title">
                     <span>Update user details here</span>
                 </div>
 
                 <!-- start -->
-                <div class="image-preview-container" style="align-self: center;">
+                <div class="image-preview-container img-center">
                     <ng-container *ngIf="user?.base64_files as base64_files">
                         <ng-container *ngIf="base64_files | keyvalue as filesMap">
                             <ng-container *ngFor="let element of filesMap">
-                                <div style="position: relative;">
+                                <div class="position-relative">
                                     <img [src]="'data:image/png;base64,' + element.value" [alt]="user?.name" width="200"
-                                        height="200" style="border-radius: 50%;">
+                                        height="200" class="img">
                                     <i class="pi pi-times remove-button" (click)="onRemoveFile(element.key)"></i>
                                 </div>
                             </ng-container>
                         </ng-container>
                     </ng-container>
                 </div>
-                <div style="align-self: center;">
+                <div class="align-center">
                     <i class="pi pi-upload" (click)="triggerFileSelect(myFileInputId)"></i>
-                    <input #myFileInputId type="file" multiple (change)="onFileSelected($event)" style="display: none;">
+                    <input #myFileInputId type="file" multiple (change)="onFileSelected($event)" class="display-none">
                 </div>
                 <!-- end -->
 
@@ -151,7 +151,7 @@
                     <option *ngFor="let language of languages" [value]="language">{{ language }}</option>
                 </select>
 
-                <span style="font-weight: bold;">Address</span>
+                <span class="address-title">Address</span>
 
                 <label for="street" class="form-control-title">Street</label>
                 <input formControlName="user.address.street" type="text" class="form-control">
@@ -171,82 +171,3 @@
         </form>
     </div>
 </div>
-
-
-
-
-
-<!-- 
-
-<ng-content *ngIf="!isUpdate; else updateUserTemplate">
-    <div style="text-align: center;">
-        <ng-container *ngIf="user?.base64_files as base64_files">
-            <ng-container *ngIf="base64_files | keyvalue as filesMap">
-                <ng-container *ngFor="let element of filesMap">
-                    <img [src]="'data:image/png;base64,' + element.value" [alt]="user?.name" width="100" height="100"
-                        style="border-radius: 50%; object-fit: cover;">
-                </ng-container>
-            </ng-container>
-        </ng-container>
-
-        <div style="margin-top: 10px;">
-            {{user.user_id}} <br>
-            {{user.name}} <br>
-            {{user.role}} <br>
-            <button (click)="isUpdate = !isUpdate">Edit</button>
-        </div>
-    </div>
-</ng-content>
-
-<ng-template #updateUserTemplate>
-    <div style="display: flex; justify-items: center; justify-content: center; margin: 10px;">
-        <form [formGroup]="updatedUserForm" (ngSubmit)="updateUser()"
-            style="justify-content: center; width: 500px; height: 1000px;">
-            <div style="display: flex; flex-direction: column; gap: 10px;">
-
-                <label for="user_id">ID</label>
-                <input formControlName="user_id" type="text" style="height: 30px;" readonly>
-
-                <label for="name">Name</label>
-                <input formControlName="name" type="text" style="height: 30px;">
-
-                <label for="phone_number">Phone number</label>
-                <input formControlName="phone_number" type="number" style="height: 30px;">
-
-                <label for="gender">Gender</label>
-                <input formControlName="gender" type="text" style="height: 30px;">
-
-                <label for="role">Role</label>
-                <input formControlName="role" type="text" style="height: 30px;">
-
-                <label for="image">Images</label>
-                <div style="display: flex; flex-direction: row; gap: 10px;">
-                    <ng-container *ngIf="user?.base64_files as base64_files">
-                        <ng-container *ngIf="base64_files | keyvalue as filesMap">
-                            <ng-container *ngFor="let element of filesMap">
-                                <img [src]="'data:image/png;base64,' + element.value" [alt]="user?.name" width="100"
-                                    height="100" style="border-radius: 50%; object-fit: cover;">
-                                <button type="button" (click)="onRemoveFile(element.key)"
-                                    style="height: 20px;">x</button>
-                            </ng-container>
-                        </ng-container>
-                    </ng-container>
-                </div>
-
-                <button type="button" (click)="triggerFileSelect(myFileInputId)" style="width: 50px;"> + </button>
-                <input #myFileInputId type="file" multiple (change)="onFileSelected($event)" style="display: none;">
-
-                <div style="display: flex; flex-direction: row; justify-content: right; margin-left: 10px; gap: 10px;">
-                    <button
-                        style="color: white; background-color: black; border: none; border-radius: 4px; padding: 10px; cursor: pointer"
-                        (click)="isUpdate = false">Cancel</button>
-                    <button type="submit"
-                        style="background-color: hwb(189 7% 47%); color: white; border: none; border-radius: 4px; cursor: pointer;">
-                        Update
-                    </button>
-                </div>
-
-            </div>
-        </form>
-    </div>
-</ng-template> -->

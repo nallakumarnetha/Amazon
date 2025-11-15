@@ -1,41 +1,58 @@
-<div style="display: flex; flex-direction: row; margin: 40px;">
-    <div style="margin-right: 40px; margin-left: 70px;">
+<div class="container">
+    <div class="img">
         <ng-container *ngIf="product?.base64_files | keyvalue as filesArray;">
             <ng-container *ngIf="filesArray.length > 0">
-                <img [src]="'data:image/png;base64,' + filesArray[0].value"
-                    style="width: 365px; height: 365px; object-fit: contain;">
+                <img [src]="'data:image/png;base64,' + filesArray[0].value" class="img">
             </ng-container>
         </ng-container>
     </div>
     <div>
-        <div style="font-size: 30px;">{{product.name}}</div>
-        <div style="font-size: 20px; font-weight: bold; padding-top: 10px;">About this item</div>
+        <div class="heading">{{product.name}}</div>
+        <div class="sub-heading">About this item</div>
         <div> • Designed to offer quality, durability, and value for everyday use.</div>
         <div> • Suitable for personal use or gifting on any occasion</div>
         <div class="detail-card">
-            <div style="display: flex; flex-direction: row; width: 500px; gap: 30px; padding-top: 10px;">
-                <div style="font-weight: bold; width: 30%;">Product ID:</div>
+            <div class="detail-heading" style="padding-top: 10px;">
+                <div class="detail-content">Product ID:</div>
                 <div>{{product.product_id}}</div>
             </div>
-            <div style="display: flex; flex-direction: row; width: 500px; gap: 30px;">
-                <div style="font-weight: bold; width: 30%;">Product Category:</div>
+            <div class="detail-heading">
+                <div class="detail-content">Product Category:</div>
                 <div>{{product.category}}</div>
             </div>
-            <div style="font-size: 20px;">{{product.price | currency:'INR'}}</div>
+            <div class="detail-price">{{product.price | currency:'INR'}}</div>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 8px; margin-top:auto; padding-top: 10px;">
-            <button
-                style="padding: 10px; color: black; background-color: #ffd814; border: none; border-radius: 20px; padding-left: 20px; padding-right: 20px; width: 50%; cursor: pointer;"
-                (click)="addToCart(product.id)">
-                Add to Cart</button>
+        <div class="options-container">
+            <ng-container *ngIf="product?.cart_count > 0; else addToCart">
+
+
+
+                <div class="cart-count">
+                    <div class="counter">
+                        <div><i class="pi pi-minus change-count" (click)="decreaseCount(product.id!)"></i></div>
+                        <div><span class="count">{{product.cart_count}}</span></div>
+                        <div><i class="pi pi-plus change-count" (click)="increaseCount(product.id!)"></i></div>
+                    </div>
+                    <button class="link-button" (click)="deleteFromCart(product.id!)">Delete</button>
+                </div>
+
+
+                
+            </ng-container>
+            <ng-template #addToCart>
+                <button class="button button-add-to-cart" (click)="addToCart(product.id)">
+                    Add to Cart</button>
+            </ng-template>
+
+
+
             <ng-container *ngIf="product?.count > 0; else outOfStock">
-                <button
-                    style="padding: 10px; color: black; background-color: #ffa41c; border: none; border-radius: 20px; padding-left: 20px; padding-right: 20px; width: 50%; cursor: pointer;"
-                    (click)="byNow(product.id)" routerLink="/order">
+                <button class="button button-buy-now" (click)="byNow(product.id)" routerLink="/order">
                     Buy Now</button>
             </ng-container>
             <ng-template #outOfStock>
-                <b style="color: red;"> Temporarily out of stock </b>
+                <button class="button button-out-of-stock">
+                    Temporarily out of stock.</button>
             </ng-template>
 
         </div>

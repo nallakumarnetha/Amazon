@@ -17,8 +17,82 @@
     align-content: space-between;
 }
 
+.card-title-container {
+    display: flex;
+    justify-content: space-between;
+}
+
 .card-title {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 5px;
+}
+
+.button-margin {
+    margin-top: 10px;
+}
+
+.review-container {
+    display: flex;
+    flex-direction: columns;
+    margin: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.review-img {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.product-detail {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.product-name {
+    flex: 6;
+    display: flex;
+    justify-content: center;
+}
+
+.place-order {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.place-order-button {
+    width: 100%;
+    font-size: 20px;
+}
+
+.gap {
+    gap: 4px;
+}
+
+.summary {
+    height: 100px;
+    width: 350px;
+}
+
+.summary-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.free-delivery {
+    color: #0b7b3c;
+}
+
+.total {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.img {
+    object-fit: contain;
 }

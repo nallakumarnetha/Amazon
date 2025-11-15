@@ -28,52 +28,8 @@ input:focus {
 }
 
 input[readonly] {
-    border: none !important;
-    outline: none;
+  border: none !important;
+  outline: none;
 }
 
-/* div */
-.horizontal-left {
-  display: flex;
-  flex-direction: row;
-  justify-items: left;
-  justify-content: left;
-}
-
-.horizontal-center {
-  display: flex;
-  flex-direction: row;
-  justify-items: center;
-  justify-content: center;
-}
-
-.horizontal-right {
-  display: flex;
-  flex-direction: row;
-  justify-items: right;
-  justify-content: right;
-}
-
-.vertical-left {
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  align-content: initial;
-}
-
-.vertical-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
-}
-
-.vertical-right {
-  display: flex;
-  flex-direction: column;
-  align-items: end;
-  align-content: end;
-}
-
-/* normal */
 

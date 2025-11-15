@@ -22,7 +22,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.amazon.cart.Cart;
 import com.amazon.cart.CartRepository;
+import com.amazon.cart.CartService;
 import com.amazon.common.Audit;
 import com.amazon.common.CustomMultipartFile;
 import com.amazon.common.FilterRequest;
@@ -41,15 +43,18 @@ public class ProductService {
 
 	@Autowired
 	private ProductRepository repository;
-	
+
 	@Autowired
 	private FileService fileService;
-	
+
 	@Autowired
 	private IdService idService;
-	
+
 	@Autowired
 	private CartRepository cartRepository;
+
+	@Autowired
+	private CartService cartService;
 
 	// CRUD start
 
@@ -76,9 +81,15 @@ public class ProductService {
 
 	public Product findProduct(String id) {
 		Product response = repository.findById(id).orElse(null);
+		// set base64 files
 		List<String> fileIds = response.getFiles();
 		Map<String, String> base64FilesData = fileService.getBase64Files(fileIds);
 		response.setBase64Files(base64FilesData);
+		//set cart count
+		Cart cart = cartService.findCartByProductId(id);
+		if(cart != null) {
+			response.setCartCount(cart.getCount());
+		}
 		return response;
 	}
 
@@ -126,40 +137,40 @@ public class ProductService {
 	// CRUD end
 
 	public Response searchProducts(String query) {
-	    List<Product> products = repository.searchByIdOrName(query);
-	    for (Product product : products) {
-	        List<String> fileIds = product.getFiles();
-	        Map<String, String> base64FilesData = fileService.getBase64Files(fileIds);
-	        product.setBase64Files(base64FilesData);
-	    }
-	    Response response = new Response();
-	    response.setProducts(products);
-	    response.setTotal(products.size());
-	    return response;
-	}
-	
-	public Response filterProducts(FilterRequest request) {
-	    List<Product> products = null;
-	    if(request.getMinPrice() != 0 || request.getMaxPrice() != 0) {
-	    	products = repository.findByPriceBetween(request.getMinPrice(), request.getMaxPrice());
-	    }
-	    if(request.getMinCount() != 0 || request.getMaxCount() != 0) {
-	    	products = repository.findByCountBetween(request.getMinCount(), request.getMaxCount());
-	    }
-	    if(request.getCategory() != null) {
-	    	products = repository.findByCategory(request.getCategory());
-	    }
-	    for(Product product : products) {
+		List<Product> products = repository.searchByIdOrName(query);
+		for (Product product : products) {
 			List<String> fileIds = product.getFiles();
 			Map<String, String> base64FilesData = fileService.getBase64Files(fileIds);
 			product.setBase64Files(base64FilesData);
 		}
 		Response response = new Response();
 		response.setProducts(products);
-	    response.setTotal(products.size());
-	    return response;
+		response.setTotal(products.size());
+		return response;
 	}
-	
+
+	public Response filterProducts(FilterRequest request) {
+		List<Product> products = null;
+		if(request.getMinPrice() != 0 || request.getMaxPrice() != 0) {
+			products = repository.findByPriceBetween(request.getMinPrice(), request.getMaxPrice());
+		}
+		if(request.getMinCount() != 0 || request.getMaxCount() != 0) {
+			products = repository.findByCountBetween(request.getMinCount(), request.getMaxCount());
+		}
+		if(request.getCategory() != null) {
+			products = repository.findByCategory(request.getCategory());
+		}
+		for(Product product : products) {
+			List<String> fileIds = product.getFiles();
+			Map<String, String> base64FilesData = fileService.getBase64Files(fileIds);
+			product.setBase64Files(base64FilesData);
+		}
+		Response response = new Response();
+		response.setProducts(products);
+		response.setTotal(products.size());
+		return response;
+	}
+
 	public void addSampleImages(Product request) {
 		try {
 			Path path = Paths.get("src/main/resources/images/sampleProduct.png");

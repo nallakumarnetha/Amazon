@@ -57,7 +57,6 @@ public class CommonService {
 	@Autowired
 	private EntityManager entityManager;
 
-
 	public void dumpData() throws IOException {
 		List<String> cart = new ArrayList<>();
 		List<String> orders = new ArrayList<>();

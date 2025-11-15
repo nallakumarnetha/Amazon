@@ -24,3 +24,71 @@
     gap: 4px;
     width: 50px;
 }
+
+.padding {
+    padding: 30px;
+}
+
+.title {
+    gap: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.img-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-items: center;
+}
+
+.img {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.name {
+    font-size: 30px;
+    text-align: center;
+    margin: 10px;
+}
+
+.field-container {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.field-title {
+    width: 50%;
+    text-align: right;
+    font-weight: bold;
+}
+
+.field-body {
+    width: 50%;
+}
+
+.img-center {
+    align-self: center;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.align-center {
+    align-self: center;
+}
+
+.display-none {
+    display: none;
+}
+
+.address-title {
+    font-weight: bold;
+}

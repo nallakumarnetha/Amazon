@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.amazon.common.Response;
 import com.amazon.file.FileService;
+import com.amazon.id.IdService;
 
 @Service
 public class UserService {
@@ -17,6 +18,9 @@ public class UserService {
 
     @Autowired
     private FileService fileService;
+    
+    @Autowired
+    private IdService idService;
     
     static String userId = "u1";	//to do
 
@@ -48,6 +52,7 @@ public class UserService {
 
     // Add new user
     public User addUser(User request) {
+    	request.setUserId(idService.getUserID());
         return repository.save(request);
     }
 

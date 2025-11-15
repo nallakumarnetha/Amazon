@@ -1,18 +1,18 @@
 <div class="order-container">
 
     <div class="order-card">
-        <div style="display: flex; justify-content: space-between;">
+        <div class="card-title-container">
             <div class="card-title">Delivering to {{currentUser?.name | uppercase}}</div>
             <div class="link-button">Change</div>
         </div>
         <div>{{currentUser?.address?.street}}</div>
         <div>{{currentUser?.address?.city}}</div>
         <div>{{currentUser?.address?.pincode}}</div>
-        <div class="link-button" style="margin-top: 10px;">Add delivery instructions</div>
+        <div class="link-button" class="button-margin">Add delivery instructions</div>
     </div>
 
     <div class="order-card">
-        <div style="display: flex; justify-content: space-between;">
+        <div class="card-title-container">
             <div class="card-title">Gift options</div>
             <div class="link-button">Change</div>
         </div>
@@ -21,76 +21,65 @@
     </div>
 
     <div class="order-card">
-        <div style="display: flex; flex-direction: column;">
-            <div style="display: flex; justify-content: space-between;">
-                <div class="card-title">Payment methods</div>
-                <div class="link-button">Change</div>
-            </div>
-            <div><input type="radio" name="payment"> Online</div>
-            <div><input type="radio" name="payment"> COD (Cash On Delivery)</div>
+        <div class="card-title-container">
+            <div class="card-title">Payment methods</div>
+            <div class="link-button">Change</div>
         </div>
+        <div><input type="radio" name="payment"> Online</div>
+        <div><input type="radio" name="payment"> COD (Cash On Delivery)</div>
     </div>
 
     <div class="order-card">
         <div class="card-title">Review items and shipping</div>
         <ng-container *ngFor="let product of products">
-            <div
-                style="display: flex; flex-direction: columns; margin: 10px; align-items: center; justify-content: center;">
-                <div style="flex: 1; display: flex; justify-content: center;">
+            <div class="review-container">
+                <div class="review-img">
                     <ng-container *ngIf="product?.base64_files | keyvalue as filesArray">
                         <ng-container *ngIf="filesArray.length > 0">
                             <img [src]="'data:image/png;base64,' + filesArray[0].value" [alt]="product?.name"
-                                width="50px" height="50px" />
+                                width="50px" height="50px" class="img"/>
                         </ng-container>
                     </ng-container>
                 </div>
-                <div style="flex: 1; display: flex; justify-content: center;">{{product.product_id}}</div>
-                <div style="flex: 6; display: flex; justify-content: center;">{{product.name}}</div>
-                <div style="flex: 1; display: flex; justify-content: center;">{{product.cart_count}}</div>
-                <div style="flex: 1; display: flex; justify-content: center;">{{product.price * product.cart_count |
+                <div class="product-detail">{{product.product_id}}</div>
+                <div class="product-name">{{product.name}}</div>
+                <div class="product-detail">{{product.cart_count}}</div>
+                <div class="product-detail">{{product.price * product.cart_count |
                     currency:'INR'}}</div>
             </div>
         </ng-container>
 
     </div>
 
-    <div class="order-card" style="gap: 4px;">
-        <div style="height: 100px; width: 350px;">
-            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+    <div class="order-card gap">
+        <div class="summary">
+            <div class="summary-title">
                 <div>Items:</div>
-                <div>{{getTotal() | currency:'INR'}}</div>
+                <div>{{total | currency:'INR'}}</div>
             </div>
-            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+            <div class="summary-title">
                 <div>Delivery:</div>
                 <div>{{40 | currency:'INR'}}</div>
             </div>
-            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+            <div class="summary-title">
                 <div>Total:</div>
-                <div>{{getTotal()+40 | currency:'INR'}}</div>
+                <div>{{total+40 | currency:'INR'}}</div>
             </div>
-            <div style="display: flex; flex-direction: row; justify-content: space-between; color: #0b7b3c;">
+            <div class="summary-title free-delivery">
                 <div>FREE Delivery:</div>
                 <div>{{40 | currency:'INR'}}</div>
             </div>
-            <div
-                style="font-weight: bold; margin-top: 10px; display: flex; flex-direction: row; justify-content: space-between;">
+            <div class="summary-title total">
                 <div>Order Total:</div>
-                <div>{{getTotal() | currency:'INR'}}</div>
+                <div>{{total | currency:'INR'}}</div>
             </div>
         </div>
     </div>
 
     <!-- <div class="order-card"> -->
-    <div style="display: flex; justify-content: center; margin: 10px;">
-        <button type="button" (click)="placeOrder()" class="yellow-button" style="width: 100%; font-size: 20px;">Place
+    <div class="place-order">
+        <button type="button" (click)="placeOrder()" class="yellow-button place-order-button">Place
             order</button>
     </div>
-    <!-- <div style="display: flex; justify-content: space-between;">
-            <div class="card-title">Gift options</div>
-            <div class="link-button">Change</div>
-        </div>
-        <div>Gift options selected</div>
-        <div>See details in Review items and shipping section </div> -->
-    <!-- </div> -->
 
 </div>

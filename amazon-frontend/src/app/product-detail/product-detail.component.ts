@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../product/product.model';
 import { ProductService } from '../product/product.service';
 import { CartService } from '../cart/cart.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-product-detail',
@@ -46,5 +47,22 @@ export class ProductDetailComponent {
   byNow(id: string) {
     this.route.navigate(['/order'], { queryParams: { buyNowId: id } });
   }
+
+  decreaseCount(id: string) {
+    this.cartService.decreaseCount(id);
+    // this.productService.
+  }
+
+  increaseCount(id: string) {
+    this.cartService.increaseCount(id);
+  }
+
+  deleteFromCart(id: string) {
+    this.cartService.deleteFromCart(id);
+  }
+
+  // updateProduct(id: string) {
+  //    this.product = this.productService.findProductValue(id);
+  // }
 
 }

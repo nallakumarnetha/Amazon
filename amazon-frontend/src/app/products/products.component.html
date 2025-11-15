@@ -53,7 +53,7 @@
                     <ng-container *ngIf="product?.base64_files | keyvalue as filesArray">
                         <ng-container *ngIf="filesArray.length > 0">
                             <img [src]="'data:image/png;base64,' + filesArray[0].value" [alt]="product?.name"
-                                width="auto" height="15px" />
+                                width="auto" height="15px" class="img"/>
                         </ng-container>
                     </ng-container>
                 </td>

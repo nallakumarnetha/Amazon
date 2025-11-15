@@ -1,1 +1,5 @@
 @import "../common/form.css";
+
+.img {
+    object-fit: contain;
+}
