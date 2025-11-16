@@ -97,10 +97,23 @@
                     <div class="offer">Up to 5% back with Amazon Pay ...</div>
                     <div class="free-delivery">FREE delivery on items over ₹499 </div>
                     <!-- <div> Fulfilled by Amazon</div> -->
-
                     <div class="buttons-group">
-                        <button class="button add-to-cart" (click)="addToCart(product.id)">
-                            Add to Cart</button>
+                        <ng-container *ngIf="product?.cart_count > 0; else addToCartTemplate">
+                            <div class="cart-count">
+                                <div class="counter">
+                                    <div><i class="pi pi-minus change-count" (click)="decreaseCount(product.id!)"></i>
+                                    </div>
+                                    <div><span class="count">{{product.cart_count}}</span></div>
+                                    <div><i class="pi pi-plus change-count" (click)="increaseCount(product.id!)"></i>
+                                    </div>
+                                </div>
+                                <button class="link-button" (click)="deleteFromCart(product.id!)">Delete</button>
+                            </div>
+                        </ng-container>
+                        <ng-template #addToCartTemplate>
+                                <button class="button add-to-cart" (click)="addToCart(product.id)">
+                                    Add to Cart</button>
+                        </ng-template>
                         <ng-container *ngIf="product.count > 0; else outOfStock">
                             <button class="button buy-now" (click)="byNow(product.id)" routerLink="/order">
                                 Buy Now</button>

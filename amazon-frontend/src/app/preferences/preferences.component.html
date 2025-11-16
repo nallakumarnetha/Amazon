@@ -1,1 +1,57 @@
-<p>preferences works!</p>
+<div class="preference-container">
+    <span class="form-title">User Preferences</span>
+    <div>Auto save!</div>
+
+    <div class="body">
+
+        <div class="preference">
+            <div class="preference-title"> AI </div>
+            <div class="preference-body">
+                <input name="ai" type="checkbox" [checked]="preferences?.ai" (change)="onCheckboxChange($event)">
+            </div>
+        </div>
+
+        <div class="preference">
+            <div class="preference-title"> Prime </div>
+            <div class="preference-body">
+                <input name="prime" type="checkbox" [checked]="preferences?.prime" (change)="onCheckboxChange($event)">
+            </div>
+        </div>
+
+        <div class="preference">
+            <div class="preference-title"> Color </div>
+            <div class="preference-body">
+                <select (change)="onDropdownChange($event)" [value]="preferences?.color">
+                    <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="preference">
+            <div class="preference-title">Change Color </div>
+            <div class="preference-body">
+                <div *ngFor="let color of colors">
+                    <input type="radio" name="color" [value]="color" [checked]="preferences?.color === color"
+                        (change)="onRadioChange($event)" />
+                    {{ color }}
+                </div>
+            </div>
+        </div>
+
+        <div class="preference">
+            <div class="preference-title">Text </div>
+            <div class="preference-body">
+                <input id="textInput" type="text" [value]="preferences?.text_value" (input)="onTextChange($event)" />
+            </div>
+        </div>
+
+        <div class="preference">
+            <div class="preference-title">Pick a color </div>
+            <div class="preference-body">
+                <input id="colorInput" type="color" [value]="preferences?.hex_color"
+                    (change)="onColorInputChange($event)" />
+            </div>
+        </div>
+    </div>
+
+</div>

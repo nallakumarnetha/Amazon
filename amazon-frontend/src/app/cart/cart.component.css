@@ -82,11 +82,6 @@ hr {
     margin-left: 0;
 }
 
-/* .limited-deal {
-    color: #cc0c39;
-    font-size: 12px;
-} */
-
 .discount {
     font-size: 12px;
 }
@@ -129,4 +124,10 @@ hr {
     display: flex;
     justify-content: center;
     align-items: flex-start;
+}
+
+.yellow-button:disabled {
+    background-color: #e2e2e2;
+    color: #999;
+    cursor: not-allowed;
 }

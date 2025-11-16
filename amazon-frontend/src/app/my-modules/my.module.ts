@@ -19,7 +19,8 @@ import { PreferencesComponent } from '../preferences/preferences.component';
 import { DemoModeComponent } from '../demo-mode/demo-mode.component';
 import { ToastModule } from 'primeng/toast';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 let myComponents = [MenuComponent, HomeComponent, ProductsComponent, FooterComponent, AddproductComponent
   , FileComponent, CartComponent, CheckoutComponent, PaymentComponent, OrderComponent, OrdersComponent, ProductDetailComponent
@@ -29,9 +30,9 @@ let myComponents = [MenuComponent, HomeComponent, ProductsComponent, FooterCompo
 @NgModule({
   declarations: [...myComponents],
   imports: [
-    CommonModule, MyPrimeNgModule, ReactiveFormsModule, BrowserAnimationsModule, ToastModule
+    CommonModule, MyPrimeNgModule, ReactiveFormsModule, BrowserAnimationsModule, ToastModule, ConfirmDialogModule
   ],
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService],
   exports: [...myComponents]
 })
 export class MyModule { }

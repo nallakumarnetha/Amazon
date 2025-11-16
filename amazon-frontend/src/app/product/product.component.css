@@ -3,3 +3,11 @@
 .img {
     object-fit: contain;
 }
+
+.position-relative {
+    position: relative;
+}
+
+.display-none {
+    display: none;
+}

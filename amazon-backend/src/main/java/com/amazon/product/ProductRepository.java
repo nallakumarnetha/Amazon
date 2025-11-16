@@ -12,7 +12,6 @@ import jakarta.websocket.server.PathParam;
 
 public interface ProductRepository extends JpaRepository<Product, String> {
 	
-//	List<Product> findByNameContainingIgnoreCase(String name);
 	@Query("SELECT p FROM Product p WHERE LOWER(p.productId) LIKE LOWER(:query) OR LOWER(p.name) LIKE LOWER(CONCAT('%', :query, '%'))")
 	List<Product> searchByIdOrName(@Param("query") String query);
 

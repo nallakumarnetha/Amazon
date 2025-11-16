@@ -301,7 +301,8 @@ public class CommonService {
 		// order 1
 		Order order = new Order();
 		order.setUserId(user.getId());
-		order.setProductId(orders.get(0));
+		
+		order.setProductId(productService.findProduct(orders.get(0)).getProductId());
 		order.setCount(2);
 		order.setAmount(2924);
 		order.setPaymentId("p_id_1");
@@ -313,7 +314,7 @@ public class CommonService {
 		// order 2
 		order = new Order();
 		order.setUserId(user.getId());
-		order.setProductId(orders.get(1));
+		order.setProductId(productService.findProduct(orders.get(1)).getProductId());
 		order.setCount(2);
 		order.setAmount(11866);
 		order.setPaymentId("p_id_2");
@@ -325,7 +326,7 @@ public class CommonService {
 		// order 3
 		order = new Order();
 		order.setUserId(user.getId());
-		order.setProductId(orders.get(2));
+		order.setProductId(productService.findProduct(orders.get(2)).getProductId());
 		order.setCount(2);
 		order.setAmount(25454);
 		order.setPaymentId("p_id_3");
@@ -337,7 +338,7 @@ public class CommonService {
 		// order 4
 		order = new Order();
 		order.setUserId(user.getId());
-		order.setProductId(orders.get(3));
+		order.setProductId(productService.findProduct(orders.get(3)).getProductId());
 		order.setCount(2);
 		order.setAmount(4470);
 		order.setPaymentId("p_id_4");
@@ -349,7 +350,7 @@ public class CommonService {
 		// order 5
 		order = new Order();
 		order.setUserId(user.getId());
-		order.setProductId(orders.get(4));
+		order.setProductId(productService.findProduct(orders.get(4)).getProductId());
 		order.setCount(2);
 		order.setAmount(9458);
 		order.setPaymentId("p_id_5");
@@ -361,7 +362,7 @@ public class CommonService {
 		// order 6
 		order = new Order();
 		order.setUserId(user.getId());
-		order.setProductId(orders.get(5));
+		order.setProductId(productService.findProduct(orders.get(5)).getProductId());
 		order.setCount(2);
 		order.setAmount(4986);
 		order.setPaymentId("p_id_6");
@@ -371,26 +372,16 @@ public class CommonService {
 		order = orderService.addOrder(order);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Transactional
 	public void clearData() {
-	    entityManager.createNativeQuery("""
-	        SET FOREIGN_KEY_CHECKS = 0;
-	    """).executeUpdate();
+	    entityManager.createNativeQuery("SET FOREIGN_KEY_CHECKS = 0;").executeUpdate();
 
-	    List<String> tableNames = entityManager
-	            .createNativeQuery("SHOW TABLES")
-	            .getResultList();
+	    entityManager.createNativeQuery("TRUNCATE TABLE product").executeUpdate();
+	    entityManager.createNativeQuery("TRUNCATE TABLE cart").executeUpdate();
+	    entityManager.createNativeQuery("TRUNCATE TABLE orders").executeUpdate();
 
-	    for (Object tableName : tableNames) {
-	        entityManager.createNativeQuery("TRUNCATE TABLE " + tableName).executeUpdate();
-	    }
-
-	    entityManager.createNativeQuery("""
-	        SET FOREIGN_KEY_CHECKS = 1;
-	    """).executeUpdate();
+	    entityManager.createNativeQuery("SET FOREIGN_KEY_CHECKS = 1;").executeUpdate();
 	}
-
 
 }
 

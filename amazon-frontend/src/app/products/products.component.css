@@ -3,3 +3,7 @@
 .img {
     object-fit: contain;
 }
+
+.bold {
+    font-weight: bold;
+}

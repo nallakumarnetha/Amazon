@@ -1,5 +1,6 @@
 package com.amazon.order;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -64,6 +65,7 @@ public class OrderService {
 	
 	public Response searchOrders(String query) {
 	    List<Order> orders = repository.searchByProductIdOrPaymentId(query);
+	    orders.addAll(repository.searchById(query));
 	    Response response = new Response();
 	    response.setOrders(orders);
 	    response.setTotal(orders.size());

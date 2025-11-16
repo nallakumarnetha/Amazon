@@ -1,8 +1,9 @@
-<p-toast></p-toast>
-<div class="demo">
-    <label>This will create a sample data of Users, Products, Cart, Orders</label>
-    <button type="button" (click)="dumpData()" class="save-button demo-button">Dump data</button>
-    <br>
-    <label>This will clears everything in database (Users, Products, Cart, Orders) | Only data</label>
-    <button type="button" (click)="clearData()" class="cancel-button demo-button">Clear data</button>
-</div>
+    <p-toast></p-toast>
+    <p-confirmDialog></p-confirmDialog>
+    <div class="demo">
+        <label>This will create a sample data of Products, Cart, Orders</label>
+        <button type="button" (click)="confirmDumpData()" class="save-button button">Dump data</button>
+        <br>
+        <label>This will clears everything in database (Products, Cart, Orders) | Only data</label>
+        <button type="button" (click)="confirmClearData()" class="cancel-button button">Clear data</button>
+    </div>

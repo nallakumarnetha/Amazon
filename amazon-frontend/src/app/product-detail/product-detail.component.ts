@@ -13,7 +13,7 @@ import { BehaviorSubject } from 'rxjs';
 export class ProductDetailComponent {
 
   product: Product = {};
-  showAnimation = false;
+  productValue: Product = {};
 
   constructor(private activatedRoute: ActivatedRoute, private productService: ProductService,
     private cartService: CartService, private route: Router
@@ -23,25 +23,23 @@ export class ProductDetailComponent {
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
+    // Load initial product details
     this.productService.findProduct(id!).subscribe(
       res => this.product = res
     );
+    // Listen to cart updates
+    this.cartService.cartObservable$.subscribe(res => {
+      const updatedProduct = res.find(p => p.id === id);
+      if (updatedProduct) {
+        this.product.cart_count = updatedProduct.cart_count;
+      } else {
+        this.product.cart_count = 0; // <- item removed
+      }
+    });
   }
 
   addToCart(id?: string) {
     this.cartService.addToCart(id);
-    this.addToCartAnimation();
-  }
-
-  addToCartAnimation() {
-    const audio = new Audio('assets/audios/placeorder.mp3');
-    audio.load();
-    audio.play().catch(err => console.log('Audio play failed:', err));
-
-    this.showAnimation = true;
-    setTimeout(() => {
-      this.showAnimation = false;
-    }, 5000);
   }
 
   byNow(id: string) {
@@ -60,9 +58,5 @@ export class ProductDetailComponent {
   deleteFromCart(id: string) {
     this.cartService.deleteFromCart(id);
   }
-
-  // updateProduct(id: string) {
-  //    this.product = this.productService.findProductValue(id);
-  // }
 
 }

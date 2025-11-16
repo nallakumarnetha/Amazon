@@ -35,6 +35,14 @@ export class HomeComponent {
   ngOnInit() {
     this.loadProducts();
 
+    // Listen for cart updates
+    this.cartService.cartObservable$.subscribe(cartItems => {
+      this.products = this.products.map(p => {
+        const match = cartItems.find(ci => ci.id === p.id);
+        return match ? { ...p, cart_count: match.cart_count } : { ...p, cart_count: 0 };
+      });
+    });
+
     // Listen for search updates
     this.commonService.search$.subscribe(query => {
       if (query.length > 0) {
@@ -92,20 +100,8 @@ export class HomeComponent {
     }
   }
 
-  addToCart(id?: string) {
+  addToCart(id: string) {
     this.cartService.addToCart(id);
-    this.addToCartAnimation();
-  }
-
-  addToCartAnimation() {
-    const audio = new Audio('assets/audios/placeorder.mp3');
-    audio.load();
-    audio.play().catch(err => console.log('Audio play failed:', err));
-
-    this.showAnimation = true;
-    setTimeout(() => {
-      this.showAnimation = false;
-    }, 5000);
   }
 
   byNow(id: string) {
@@ -115,6 +111,18 @@ export class HomeComponent {
   onCategoryChange(event: any) {
     const value = event.target.value;
     this.commonService.updateCategory(value);
+  }
+
+  increaseCount(id: string) {
+    this.cartService.increaseCount(id);
+  }
+
+  decreaseCount(id: string) {
+    this.cartService.decreaseCount(id);
+  }
+
+  deleteFromCart(id: string) {
+    this.cartService.deleteFromCart(id);
   }
 
 }

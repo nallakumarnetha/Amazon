@@ -9,11 +9,6 @@ import { FilterRequest } from "../common/common.model";
 })
 export class ProductService {
 
-  // BehaviorSubject
-  product: Product = {};
-  productSubject = new BehaviorSubject<Product>(this.product!);
-  productObservable$ = this.productSubject.asObservable();
-
   constructor(private http: HttpClient) { }
 
   private baseUrl = 'http://localhost:8080/amazon/products'
@@ -49,13 +44,5 @@ export class ProductService {
   filterProducts(request: FilterRequest): Observable<ProductListResponse> {
     return this.http.post<ProductListResponse>(`${this.baseUrl}/filter`, request);
   }
-
-  // findProductValue(id: string): Product {
-  //   this.http.get<Product>(`${this.baseUrl}/${id}`).subscribe(res => {
-  //     this.product = res;
-  //     this.productSubject.next(this.product);
-  //   });
-  //   return this.product;
-  // }
 
 }

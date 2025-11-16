@@ -53,15 +53,14 @@
   <div class="hover"><a routerLink="/products">Products</a></div>
   <div class="hover"><a routerLink="/cart">Cart</a></div>
   <div class="hover"><a routerLink="/orders">Orders</a></div>
+  <div class="hover"><a routerLink="/preferences">Preferences</a></div>
   <div class="hover"><a routerLink="/demo-mode">Demo mode</a></div>
   |
-  <div class="hover"><a>Preferences</a></div>
-  <div class="hover"><a>Prime</a></div>
-  <div class="hover"><a>CustomerServie</a></div>
-  <div class="hover"><a>Rufus AI</a></div>
-
+  <div *ngIf="preferences?.prime" class="hover"><a>Prime</a></div>
+  <div *ngIf="preferences?.ai" class="hover"><a>Rufus AI</a></div>
   <div class="hover"><a>Sell</a></div>
   <div class="hover"><a>Admin</a></div>
+  <div class="hover"><a>CustomerServie</a></div>
 
 </div>
 

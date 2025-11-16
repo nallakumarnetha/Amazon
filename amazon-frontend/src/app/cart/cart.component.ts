@@ -64,4 +64,8 @@ export class CartComponent {
     this.selectAllActive = true;
   }
 
+  get hasActiveItems(): boolean {
+    return this.products?.some(p => p.status === Status.Active) ?? false;
+  }
+
 }

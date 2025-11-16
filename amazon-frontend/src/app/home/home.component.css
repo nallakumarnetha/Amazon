@@ -1,3 +1,5 @@
+@import "../cart/cart.component.css";
+
 :host {
     margin: 20px;
 }
@@ -6,7 +8,6 @@
     display: flex;
     gap: 10px;
 }
-
 
 .side-bar {
     background-color: #f8f8f8;
@@ -130,15 +131,9 @@
     gap: 2px;
 }
 
-
-
-
-
-
-
-
-
-
+:host ::ng-deep .cart-count {
+    margin-left: 83px !important;   
+}
 
 /*start - add to cart animation*/
 .order-success {

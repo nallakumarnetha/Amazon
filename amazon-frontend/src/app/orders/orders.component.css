@@ -1,133 +1,140 @@
  @import '../common/table.css';
 
-.order-success {
-    margin-top: 70px;
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    /* background-color: hwb(189 7% 47%); */
-    /* color: white; */
-    color: white;
-    background-color: #0b7b3c;
-    padding: 20px 40px;
-    border-radius: 12px;
-    border: none;
-    font-size: 20px;
-    text-align: center;
-    animation: fadeInOut 2.5s ease-in-out;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-}
+ .order-success {
+     margin-top: 70px;
+     position: fixed;
+     top: 40%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     /* background-color: hwb(189 7% 47%); */
+     /* color: white; */
+     color: white;
+     background-color: #0b7b3c;
+     padding: 20px 40px;
+     border-radius: 12px;
+     border: none;
+     font-size: 20px;
+     text-align: center;
+     animation: fadeInOut 2.5s ease-in-out;
+     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+     z-index: 1000;
+ }
 
-@keyframes fadeInOut {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, -60%) scale(0.8);
-    }
+ @keyframes fadeInOut {
+     0% {
+         opacity: 0;
+         transform: translate(-50%, -60%) scale(0.8);
+     }
 
-    15% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.05);
-    }
+     15% {
+         opacity: 1;
+         transform: translate(-50%, -50%) scale(1.05);
+     }
 
-    50% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-    }
+     50% {
+         opacity: 1;
+         transform: translate(-50%, -50%) scale(1);
+     }
 
-    85% {
-        opacity: 1;
-    }
+     85% {
+         opacity: 1;
+     }
 
-    100% {
-        opacity: 0;
-        transform: translate(-50%, -40%) scale(0.8);
-    }
-}
+     100% {
+         opacity: 0;
+         transform: translate(-50%, -40%) scale(0.8);
+     }
+ }
 
-.order-btn {
-    background-color: hwb(189 7% 47%);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
+ .order-btn {
+     background-color: hwb(189 7% 47%);
+     color: white;
+     padding: 10px 20px;
+     border: none;
+     border-radius: 8px;
+     cursor: pointer;
+ }
 
-.order-btn:hover {
-    background-color: hwb(189 7% 47%);
-}
- 
+ .order-btn:hover {
+     background-color: hwb(189 7% 47%);
+ }
 
+ .pending {
+     color: orange;
+ }
 
+ .processing {
+     color: blue;
+ }
 
+ .shipped {
+     color: deepskyblue;
+ }
 
+ .delivered {
+     color: green;
+ }
 
+ .cancelled {
+     color: red;
+ }
 
+ .returned {
+     color: gray;
+ }
 
+ .bold {
+     font-weight: bold;
+ }
 
-
-.pending {
-    color: orange;
-}
-
-.processing {
-    color: blue;
-}
-
-.shipped {
-    color: deepskyblue;
-}
-
-.delivered {
-    color: green;
-}
-
-.cancelled {
-    color: red;
-}
-
-.returned {
-    color: gray;
-}
-
-.bold {
-    font-weight: bold;
-}
+ .size {
+     font-size: 10px;
+ }
 
 
 
 
 
+ /* animation start */
+ .toast {
+     position: fixed;
+     bottom: 30px;
+     left: 50%;
+     transform: translateX(-50%);
+     background: rgba(0, 0, 0, 0.85);
+     color: white;
+     padding: 12px 25px;
+     border-radius: 8px;
+     font-size: 16px;
+     animation: fadeToast 3s ease-in-out;
+     z-index: 2000;
+ }
+
+ @keyframes fadeToast {
+     0% {
+         opacity: 0;
+         transform: translateX(-50%) translateY(20px);
+     }
+
+     15% {
+         opacity: 1;
+         transform: translateX(-50%) translateY(0);
+     }
+
+     85% {
+         opacity: 1;
+     }
+
+     100% {
+         opacity: 0;
+         transform: translateX(-50%) translateY(20px);
+     }
+ }
 
 
-/* animation start */
-.toast {
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.85);
-  color: white;
-  padding: 12px 25px;
-  border-radius: 8px;
-  font-size: 16px;
-  animation: fadeToast 3s ease-in-out;
-  z-index: 2000;
-}
-
-@keyframes fadeToast {
-  0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-  15% { opacity: 1; transform: translateX(-50%) translateY(0); }
-  85% { opacity: 1; }
-  100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-}
 
 
-
-
-/* 
+ /* 
 .order-success {
     position: fixed;
     top: 0;
@@ -229,4 +236,4 @@
     }
 } */
 
-/* animation end */
+ /* animation end */

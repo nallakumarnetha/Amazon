@@ -7,11 +7,12 @@
             <button *ngIf="!selectAllActive" (click)="deselectAll()" class="link-button">Deselect all items</button>
             <button *ngIf="selectAllActive" (click)="selectAll()" class="link-button">Select all items</button>
         </div>
-        <div><button type="button" routerLink="/order" class="yellow-button">Proceed to Buy</button></div>
+        <div><button type="button" routerLink="/order" class="yellow-button" [disabled]="!hasActiveItems">Proceed to
+                Buy</button></div>
     </div>
     <span class="price-font">Price</span>
     <hr>
-    
+
     <!-- cart items -->
     <ng-container *ngFor="let product of products">
         <div class="cart-item">
@@ -23,7 +24,7 @@
                 <ng-container *ngIf="product?.base64_files | keyvalue as filesArray">
                     <ng-container *ngIf="filesArray.length > 0">
                         <img [src]="'data:image/png;base64,' + filesArray[0].value" [alt]="product?.name" width="180px"
-                            height="180px" class="img"/>
+                            height="180px" class="img" />
                     </ng-container>
                 </ng-container>
             </div>

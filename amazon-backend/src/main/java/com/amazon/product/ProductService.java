@@ -67,9 +67,15 @@ public class ProductService {
 		Page<Product> productPage = repository.findAll(pageable);
 		List<Product> products = productPage.getContent();
 		for(Product product : products) {
+			// set base64 files
 			List<String> fileIds = product.getFiles();
 			Map<String, String> base64FilesData = fileService.getBase64Files(fileIds);
 			product.setBase64Files(base64FilesData);
+			//set cart count
+			Cart cart = cartService.findCartByProductId(product.getId());
+			if(cart != null) {
+				product.setCartCount(cart.getCount());
+			}
 		}
 		Response response = new Response();
 		response.setProducts(products);

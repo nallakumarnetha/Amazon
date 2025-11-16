@@ -6,13 +6,13 @@
             </ng-container>
         </ng-container>
     </div>
-    <div>
+    <div class="left-margin">
         <div class="heading">{{product.name}}</div>
         <div class="sub-heading">About this item</div>
         <div> • Designed to offer quality, durability, and value for everyday use.</div>
         <div> • Suitable for personal use or gifting on any occasion</div>
         <div class="detail-card">
-            <div class="detail-heading" style="padding-top: 10px;">
+            <div class="detail-heading padding-top">
                 <div class="detail-content">Product ID:</div>
                 <div>{{product.product_id}}</div>
             </div>
@@ -23,10 +23,7 @@
             <div class="detail-price">{{product.price | currency:'INR'}}</div>
         </div>
         <div class="options-container">
-            <ng-container *ngIf="product?.cart_count > 0; else addToCart">
-
-
-
+            <ng-container *ngIf="product?.cart_count > 0; else addToCartTemplate">
                 <div class="cart-count">
                     <div class="counter">
                         <div><i class="pi pi-minus change-count" (click)="decreaseCount(product.id!)"></i></div>
@@ -35,17 +32,11 @@
                     </div>
                     <button class="link-button" (click)="deleteFromCart(product.id!)">Delete</button>
                 </div>
-
-
-                
             </ng-container>
-            <ng-template #addToCart>
+            <ng-template #addToCartTemplate>
                 <button class="button button-add-to-cart" (click)="addToCart(product.id)">
                     Add to Cart</button>
             </ng-template>
-
-
-
             <ng-container *ngIf="product?.count > 0; else outOfStock">
                 <button class="button button-buy-now" (click)="byNow(product.id)" routerLink="/order">
                     Buy Now</button>

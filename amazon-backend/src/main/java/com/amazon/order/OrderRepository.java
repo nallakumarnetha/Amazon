@@ -7,8 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.amazon.product.Category;
+import com.amazon.product.Product;
 
 public interface OrderRepository extends JpaRepository<Order, String> {
+	
+	@Query("SELECT o FROM Order o WHERE LOWER(o.orderId) LIKE LOWER(:query)")
+	List<Order> searchById(@Param("query") String query);
 	
 	@Query("SELECT o FROM Order o WHERE LOWER(o.productId) LIKE LOWER(CONCAT('%', :query, '%')) OR LOWER(o.paymentId) LIKE LOWER(CONCAT('%', :query, '%'))")
 	List<Order> searchByProductIdOrPaymentId(@Param("query") String query);

@@ -26,3 +26,9 @@
 .img {
     object-fit: contain;
 }
+
+.category-field {
+    display: flex;
+    flex-direction: row;
+    gap: 10px
+}

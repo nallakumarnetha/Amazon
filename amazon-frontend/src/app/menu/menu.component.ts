@@ -5,6 +5,8 @@ import { CommonService } from "../common/common.service";
 import { Category } from "../product/product.model";
 import { UserService } from "../user/user.service";
 import { User } from "../user/user.model";
+import { Preferences } from "../preferences/preferences.model";
+import { PreferencesService } from "../preferences/preferences.service";
 
 @Component({
   selector: 'app-menu',
@@ -18,15 +20,18 @@ export class MenuComponent {
   categories = Object.values(Category);
   currentUser?: User;
   isSearchFocused?: boolean;
+  preferences?: Preferences;
 
   constructor(private cartService: CartService, private changeDetecorRef: ChangeDetectorRef,
-    private commonService: CommonService, private userService: UserService
+    private commonService: CommonService, private userService: UserService,
+    private preferencesService: PreferencesService
   ) {
   }
 
   ngOnInit() {
     this.updateCartCount();
     this.updateDeliverTo();
+    this.loadPreferences();
   }
 
   toggleSideBar() {
@@ -53,9 +58,15 @@ export class MenuComponent {
   }
 
   updateDeliverTo() {
-    this.userService.getCurrentUser().subscribe( res => {
+    this.userService.getCurrentUser().subscribe(res => {
       this.currentUser = res;
-  });
+    });
+  }
+
+  loadPreferences() {
+    this.preferencesService.preferencesSubject.subscribe(
+      res => this.preferences = res
+    );
   }
 
 }

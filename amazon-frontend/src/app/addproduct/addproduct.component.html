@@ -18,7 +18,7 @@
       <label for="count" class="form-control-title">Count</label>
       <input formControlName="count" type="number" class="form-control">
 
-      <div style="display: flex; flex-direction: row; gap:10px">
+      <div class="category-field">
         <label for="category" class="form-control-title">Category</label>
         <div *ngIf="productForm.get('category')?.invalid" class="error">
           Required *

@@ -8,6 +8,41 @@
     gap: 5px;
 }
 
-.demo-button {
+.button {
     width: 200px;
+}
+
+:host ::ng-deep .accept-btn {
+    background-color: red !important;
+    color: white !important;
+    width: 150px;
+    height: 35px;
+    box-shadow: none;
+    border: 0;
+}
+
+:host ::ng-deep .reject-btn {
+    background-color: black !important;
+    color: white !important;
+    width: 150px;
+    height: 35px;
+    box-shadow: none;
+    border: 0;
+}
+
+:host ::ng-deep .bg-color {
+    background-color: #127788 !important
+}
+
+:host ::ng-deep .p-confirm-dialog .p-button .p-button-icon,
+:host ::ng-deep .p-confirm-dialog .p-button .p-button-icon-left,
+:host ::ng-deep .p-confirm-dialog .p-button .p-button-icon-right {
+    display: none !important;
+    font-family: Arial, sans-serif !important;
+    font-weight: normal !important;
+}
+
+:host ::ng-deep .p-confirm-dialog .p-button .p-button-label {
+    font-family: Arial, sans-serif !important;
+    font-weight: normal !important;
 }
