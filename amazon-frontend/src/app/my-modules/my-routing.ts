@@ -13,6 +13,9 @@ import { ProductDetailComponent } from "../product-detail/product-detail.compone
 import { UserComponent } from "../user/user.component";
 import { PreferencesComponent } from "../preferences/preferences.component";
 import { DemoModeComponent } from "../demo-mode/demo-mode.component";
+import { SignupComponent } from "../signup/signup.component";
+import { LoginComponent } from "../login/login.component";
+import { MyAuthGuard } from "../auth/myauth.guard";
 
 let myRoutes: Routes = [
     { path: 'home', component: HomeComponent },
@@ -22,12 +25,14 @@ let myRoutes: Routes = [
     { path: 'cart', component: CartComponent },
     { path: 'checkout', component: CheckoutComponent },
     { path: 'payment', component: PaymentComponent },
-    { path: 'order', component: OrderComponent },
+    { path: 'order', component: OrderComponent, canActivate: [MyAuthGuard] },
     { path: 'orders', component: OrdersComponent },
     { path: 'product-detail/:id', component: ProductDetailComponent },
     { path: 'user', component: UserComponent },
     { path: 'preferences', component: PreferencesComponent },
     { path: 'demo-mode', component: DemoModeComponent },
+    { path: 'sign-up', component: SignupComponent },
+    { path: 'login', component: LoginComponent },
     { path: '**', redirectTo: '/home' }
 ];
 

@@ -21,18 +21,28 @@ import { ToastModule } from 'primeng/toast';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { SignupComponent } from '../signup/signup.component';
+import { LoginComponent } from '../login/login.component';
+import { PasswordModule } from 'primeng/password';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MyInterceptor } from '../common/myinterceptor.interceptor';
+
 
 let myComponents = [MenuComponent, HomeComponent, ProductsComponent, FooterComponent, AddproductComponent
   , FileComponent, CartComponent, CheckoutComponent, PaymentComponent, OrderComponent, OrdersComponent, ProductDetailComponent
-  , UserComponent, PreferencesComponent, DemoModeComponent
+  , UserComponent, PreferencesComponent, DemoModeComponent, SignupComponent, LoginComponent
 ];
 
 @NgModule({
   declarations: [...myComponents],
   imports: [
-    CommonModule, MyPrimeNgModule, ReactiveFormsModule, BrowserAnimationsModule, ToastModule, ConfirmDialogModule
+    CommonModule, MyPrimeNgModule, ReactiveFormsModule, BrowserAnimationsModule, ToastModule, ConfirmDialogModule, PasswordModule
   ],
-  providers: [MessageService, ConfirmationService],
+  providers: [MessageService, ConfirmationService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: MyInterceptor,
+    multi: true
+  }],
   exports: [...myComponents]
 })
 export class MyModule { }

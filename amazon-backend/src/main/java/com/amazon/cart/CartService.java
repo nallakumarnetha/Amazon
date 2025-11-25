@@ -17,6 +17,7 @@ import com.amazon.common.Status;
 import com.amazon.file.FileService;
 import com.amazon.product.Product;
 import com.amazon.product.ProductRepository;
+import com.amazon.user.UserService;
 
 @Service
 public class CartService {
@@ -29,16 +30,17 @@ public class CartService {
 	
 	@Autowired
 	private FileService fileService;
-
-	static String userId = "u1";	//to do
+	
+	@Autowired
+	private UserService userService;
 
 	public Response findProductsByUserId(Status status) {
 		List<Product> products = new ArrayList<>();
 		List<Cart> cartProducts = null;
 		if(status == null) {
-			cartProducts = repository.findByUserId(userId);
+			cartProducts = repository.findByUserId(userService.getCurrentUser().getId());
 		} else {
-			cartProducts = repository.findByUserIdAndStatus(userId, status);
+			cartProducts = repository.findByUserIdAndStatus(userService.getCurrentUser().getId(), status);
 		}
 		cartProducts.forEach(p -> { 
 			Product product = productRepository.findById(p.getProductId()).orElse(null);
@@ -56,10 +58,10 @@ public class CartService {
 
 	public Response addToCart(String productId) {
 		Response response = new Response();
-		Cart cart = repository.findByUserIdAndProductId(userId, productId);
+		Cart cart = repository.findByUserIdAndProductId(userService.getCurrentUser().getId(), productId);
 		if(cart == null) {
 			Cart newCart = new Cart();
-			newCart.setUserId(userId);
+			newCart.setUserId(userService.getCurrentUser().getId());
 			newCart.setProductId(productId);
 			newCart.setStatus(Status.Active);
 			newCart.setCount(1);
@@ -69,7 +71,7 @@ public class CartService {
 	}
 
 	public Response deleteFromCart(String productId) {
-		Cart cart = repository.findByUserIdAndProductId(userId, productId);
+		Cart cart = repository.findByUserIdAndProductId(userService.getCurrentUser().getId(), productId);
 		if (cart != null) {
 			repository.delete(cart);
 		}
@@ -80,7 +82,7 @@ public class CartService {
 
 	public Response increaseCount(String productId) {
 		Response response = new Response();
-		Cart cart = repository.findByUserIdAndProductId(userId, productId);
+		Cart cart = repository.findByUserIdAndProductId(userService.getCurrentUser().getId(), productId);
 		if (cart != null) {
 			cart.setCount(cart.getCount() + 1);
 			repository.save(cart);
@@ -91,7 +93,7 @@ public class CartService {
 
 	public Response decreaseCount(String productId) {
 		Response response = new Response();
-		Cart cart = repository.findByUserIdAndProductId(userId, productId);
+		Cart cart = repository.findByUserIdAndProductId(userService.getCurrentUser().getId(), productId);
 		if (cart != null && cart.getCount() > 1) {
 			cart.setCount(cart.getCount() - 1);
 			repository.save(cart);
@@ -105,7 +107,7 @@ public class CartService {
 	
 	public Response changeStatus(String productId, Status status) {
 		Response response = new Response();
-		Cart cart = repository.findByUserIdAndProductId(userId, productId);
+		Cart cart = repository.findByUserIdAndProductId(userService.getCurrentUser().getId(), productId);
 		if (cart != null) {
 			cart.setStatus(status);
 			repository.save(cart);
@@ -115,7 +117,7 @@ public class CartService {
 	}
 	
 	public Cart findCartByProductId(String productId) {
-		Cart response = repository.findByProductIdAndUserId(productId, userId);
+		Cart response = repository.findByProductIdAndUserId(productId, userService.getCurrentUser().getId());
 		return response;
 	}
 

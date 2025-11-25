@@ -81,7 +81,7 @@ public class CommonService {
 		user.setRole(Role.Admin);
 		user.setLanguage(Language.Telugu);
 		user.setFiles(fileIds);
-		user = userService.addUser(user);
+		user = userService.addUser(user, null);
 	
 		// end-user
 		path = Paths.get("src/main/resources/images/kumar_enduser.png");
@@ -103,7 +103,7 @@ public class CommonService {
 		user.setRole(Role.Enduser);
 		user.setLanguage(Language.Telugu);
 		user.setFiles(fileIds);
-		user = userService.addUser(user);
+		user = userService.addUser(user, null);
 		
 		// ----------------products-----------------------
 		// product 1

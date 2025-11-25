@@ -4,27 +4,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.amazon.common.Response;
+import com.amazon.user.UserService;
 
 @Service
 public class PreferencesService {
 
 	@Autowired
 	private PreferencesRepository repository;
-
-	static String userId = "u1";	//to do
+	
+	@Autowired
+	private UserService userService;
 
 	public Preferences find() {
-		Preferences preferences = repository.findByUserId(userId);
+		Preferences preferences = repository.findByUserId(userService.getCurrentUser().getId());
 		if(preferences == null) {
 			preferences = new Preferences();
-			preferences.setUserId(userId);
+			preferences.setUserId(userService.getCurrentUser().getId());
 			preferences = repository.save(preferences);
 		}
 		return preferences;
 	}
 
 	public Preferences update(Preferences request) {
-		Preferences preferences = repository.findByUserId(userId);
+		Preferences preferences = repository.findByUserId(userService.getCurrentUser().getId());
 		preferences.setAi(request.isAi());
 		preferences.setPrime(request.isPrime()); 
 		preferences.setColor(request.getColor());

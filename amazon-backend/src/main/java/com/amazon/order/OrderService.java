@@ -13,6 +13,9 @@ import com.amazon.common.FilterRequest;
 import com.amazon.common.Response;
 import com.amazon.id.IdService;
 import com.amazon.product.Product;
+import com.amazon.user.Role;
+import com.amazon.user.User;
+import com.amazon.user.UserService;
 
 @Service
 public class OrderService {
@@ -23,18 +26,37 @@ public class OrderService {
 	@Autowired
 	private IdService idService;
 	
-	static String userId = "u1";	//to do
+	@Autowired
+	private UserService userService;
+	
+//	public Response findAllOrders(int page, int size) {
+//		Sort sort = Sort.by(Sort.Direction.DESC, "audit.modifiedDate");
+//		List<Order> orders = repository.findAll(PageRequest.of(page, size, sort)).getContent();
+//		Response response = new Response();
+//		response.setOrders(orders);
+//		long total = repository.count();
+//		response.setTotal(total);
+//		return response;
+//	}
 
 	public Response findAllOrders(int page, int size) {
+		User user = userService.getCurrentUser();
+		List<Order> orders = null;
+		long total = 0;
 		Sort sort = Sort.by(Sort.Direction.DESC, "audit.modifiedDate");
-		List<Order> orders = repository.findAll(PageRequest.of(page, size, sort)).getContent();
+		if(user.getRole() == Role.Admin) {
+			orders = repository.findAll(PageRequest.of(page, size, sort)).getContent();
+			total = repository.count();
+		} else {
+			orders = repository.findByUserId(userService.getCurrentUser().getId(), PageRequest.of(page, size, sort)).getContent();
+			total = repository.countByUserId(user.getId()); 
+		}
 		Response response = new Response();
 		response.setOrders(orders);
-		long total = repository.count();
 		response.setTotal(total);
 		return response;
 	}
-
+	
 	public Order findOrder(String id) {
 		return repository.findById(id).orElse(null);
 	}
@@ -44,7 +66,7 @@ public class OrderService {
 			order.setStatus(OrderStatus.Pending);
 		}
 		order.setOrderId(idService.getOrderID());
-		order.setUserId(userId);
+		order.setUserId(userService.getCurrentUser().getId());
 		return repository.save(order);
 	}
 

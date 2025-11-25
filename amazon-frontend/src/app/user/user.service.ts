@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Address, User } from './user.model';
+import { Router } from '@angular/router';
 
 export interface UserListResponse {
   users: User[];
@@ -20,7 +21,7 @@ export class UserService {
 
   private baseUrl = 'http://localhost:8080/amazon/users';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   findAllUsers(page: number, size: number): Observable<UserListResponse> {
     return this.http.get<UserListResponse>(`${this.baseUrl}?page=${page}&size=${size}`);
@@ -46,6 +47,13 @@ export class UserService {
     return this.http.get<User>(`${this.baseUrl}/current-user`);
   }
 
+  login(user: User): Observable<User> {
+    return this.http.post<User>(`${this.baseUrl}/login`, user);
+  }
+
+  registerUser(user: User): Observable<User> {
+    return this.http.post<User>(`${this.baseUrl}/register`, user);
+  }
 
   // ============ address================
   private addressBaseUrl = 'http://localhost:8080/amazon/addresses';
@@ -70,5 +78,16 @@ export class UserService {
     return this.http.delete<AddressListResponse>(`${this.addressBaseUrl}/${id}`);
   }
 
+  // ============ authentication ================
+
+  // login(user: User) {
+  //   this.http.post<User>(`${this.baseUrl}/login`, user);
+  // }
+
+
+
+  logout(): Observable<User> {
+    return this.http.post<User>(`${this.baseUrl}/logout`, null);
+  }
 
 }

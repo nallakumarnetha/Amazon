@@ -22,7 +22,10 @@ export class AddproductComponent {
   constructor(private fb: FormBuilder, private productService: ProductService, private router: Router,
     private fileService: FileService) {
     this.productForm = this.fb.group({
-      name: '', price: 0, count: 0, category: ['', Validators.required]
+      name: '',
+      price: 0,
+      count: 0,
+      category: ['', Validators.required]
     });
   }
   addProduct(): void {

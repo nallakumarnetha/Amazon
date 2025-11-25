@@ -59,8 +59,7 @@ export class UserComponent {
   }
 
   loadUser() {
-    this.id = 'u1'; // TODO: take from session
-    this.userService.findUser(this.id).subscribe(res => {
+    this.userService.getCurrentUser().subscribe(res => {
       if (res.base64_files && !(res.base64_files instanceof Map)) {
         res.base64_files = new Map(Object.entries(res.base64_files));
       }
@@ -71,7 +70,6 @@ export class UserComponent {
         this.address.city = res.city;
         this.address.pincode = res.pincode;
       });
-
       this.updatedUserForm?.patchValue(this.user);
     });
   }
@@ -140,4 +138,18 @@ export class UserComponent {
       this.user.base64_files.delete(id);
     }
   }
+
+  logoutUser() {
+    this.userService.logout().subscribe({
+      next: (res: any) => {
+        if (res.status === 200) {
+          this.router.navigate(['/login']);
+        }
+      },
+      error: (err: any) => {
+        console.error('Logout failed', err);
+      }
+    });
+  }
+
 }

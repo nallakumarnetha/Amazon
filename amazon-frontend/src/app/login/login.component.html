@@ -1,0 +1,16 @@
+<div routerLink='/sign-up'>Signup</div>
+
+<div> <a href="" (click)="loginWithGoogle()">Sign in with Google</a></div>
+
+<form [formGroup]="loginUserForm" (ngSubmit)="loginUser()">
+    <label for="user-name">User Name</label>
+    <input formControlName="user_name" type="text">
+
+    <br>
+    <label for="password">Password</label>
+    <input formControlName="password" type="password">
+<br>
+    <button type="button" (click)="goHome()">Cancel</button>
+    <button type="submit"> Login </button>
+
+</form>

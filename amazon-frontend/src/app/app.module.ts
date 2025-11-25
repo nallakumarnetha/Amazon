@@ -12,7 +12,6 @@ import { MyModule } from './my-modules/my.module';
 import { MyRouting } from './my-modules/my-routing';
 import { MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [

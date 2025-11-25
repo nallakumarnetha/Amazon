@@ -46,6 +46,7 @@ public class Product {
 	@JsonProperty("product_id")
 	private String productId;
 
+	@Column(length = 1000)
 	private String name;
 
 	private double price;

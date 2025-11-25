@@ -1,0 +1,94 @@
+<div class="form-container">
+    <form [formGroup]="registerUserForm" (ngSubmit)="registerUser()" class="form">
+        <div class="form-header">
+            <span class="form-title"> Sign up  | Create an account</span>
+            <span class="form-subtitle"> Register an account </span>
+        </div>
+
+        <div class="form-body">
+            <div class="form-body-title title">
+                <span>Please enter your details here</span>
+            </div>
+
+            <!-- start -->
+            <!-- <div class="image-preview-container img-center">
+                <ng-container *ngIf="user?.base64_files as base64_files">
+                    <ng-container *ngIf="base64_files | keyvalue as filesMap">
+                        <ng-container *ngFor="let element of filesMap">
+                            <div class="position-relative">
+                                <img [src]="'data:image/png;base64,' + element.value" [alt]="user?.name" width="200"
+                                    height="200" class="img">
+                                <i class="pi pi-times remove-button" (click)="onRemoveFile(element.key)"></i>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+            </div>
+            <div class="align-center">
+                <i class="pi pi-upload" (click)="triggerFileSelect(myFileInputId)"></i>
+                <input #myFileInputId type="file" multiple (change)="onFileSelected($event)" class="display-none">
+            </div> -->
+            <!-- end -->
+
+            <!-- <label for="user_id" class="form-control-title">Id</label>
+            <input formControlName="user_id" type="text" class="form-control" readonly> -->
+
+            <label for="name" class="form-control-title">Name</label>
+            <input formControlName="name" type="text" class="form-control">
+
+            <label for="first_name" class="form-control-title">First name</label>
+            <input formControlName="first_name" type="text" class="form-control">
+
+            <label for="last_name" class="form-control-title">Last name</label>
+            <input formControlName="last_name" type="text" class="form-control">
+
+            <label for="phone_number" class="form-control-title">Phone number</label>
+            <input formControlName="phone_number" type="text" class="form-control">
+
+            <label for="gender" class="form-control-title">Gender</label>
+            <select formControlName="gender" id="gender" class="form-control">
+                <!-- <option value="" disabled selected>Select gender</option> -->
+                <option *ngFor="let gen of genders" [value]="gen">{{ gen }}</option>
+            </select>
+
+            <label for="role" class="form-control-title">Role</label>
+            <select formControlName="role" id="role" class="form-control">
+                <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+            </select>
+
+            <label for="language" class="form-control-title">Language</label>
+            <select formControlName="language" id="language" class="form-control">
+                <option *ngFor="let language of languages" [value]="language">{{ language }}</option>
+            </select>
+
+            <span class="address-title">Address</span>
+
+            <label for="street" class="form-control-title">Street</label>
+            <input formControlName="user.address.street" type="text" class="form-control">
+
+            <label for="city" class="form-control-title">City</label>
+            <input formControlName="user.address.city" type="text" class="form-control">
+
+            <label for="pincode" class="form-control-title">Pincode</label>
+            <input formControlName="user.address.pincode" type="text" class="form-control">
+
+            Credentials:
+            <label for="user-name" class="form-control-title">User name</label>
+            <input formControlName="user_name" type="text" class="form-control">
+
+            <label for="password" class="form-control-title">Password</label>
+            <div *ngIf="registerUserForm.get('password')?.invalid" class="error">
+                Required *
+            </div>
+            <!-- <input formControlName="user.password" type="password" class="form-control" [toggleMask]="true"> -->
+            <p-password formControlName="password" [toggleMask]="true" [feedback]="false" styleClass="form-control">
+            </p-password>
+
+            <div class="form-footer">
+                <button routerLink="/login" class="cancel-button">Cancel</button>
+                <button type="submit" class="save-button" [disabled]="registerUserForm.invalid"> Singup </button>
+            </div>
+
+        </div>
+    </form>
+</div>

@@ -92,3 +92,22 @@
 .address-title {
     font-weight: bold;
 }
+
+.sign-out-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.sign-out {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    a {
+        color: black;
+
+        &:hover {
+            color: #c45500;
+        }
+    }
+}

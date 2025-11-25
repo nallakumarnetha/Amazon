@@ -12,6 +12,10 @@ export class User {
     language?: Language;
     files?: string[];
     base64_files?: Map<string, string>;
+    user_name?: string;
+    password?: string;
+    access_token?: string;
+    // auth_type?: AuthType;
 }
 
 export class Address {
@@ -38,3 +42,8 @@ export enum Language {
     Hindi = 'Hindi',
     English = 'English'
 }
+
+// export enum AuthType {
+//     BASIC_TOKEN = 'BASIC_TOKEN',
+//     OAUTH2_AUTHORIZATION_CODE = 'OAUTH2_AUTHORIZATION_CODE'
+// }

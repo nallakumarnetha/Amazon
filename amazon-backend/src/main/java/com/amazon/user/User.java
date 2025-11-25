@@ -1,16 +1,23 @@
 package com.amazon.user;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import com.amazon.address.Address;
+import com.amazon.common.Audit;
+import com.amazon.common.Response;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
@@ -22,7 +29,8 @@ import jakarta.persistence.Transient;
 
 @Entity
 @JsonInclude(value = Include.NON_EMPTY)
-public class User {
+@EntityListeners(AuditingEntityListener.class)
+public class User extends Response {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
@@ -37,7 +45,7 @@ public class User {
 	@JsonProperty("last_name")
 	private String lastName;
 
-	private String name;
+	private String name;	// full name = firstName + lastName
 
 	@JsonProperty("phone_number")
 	private String phoneNumber;
@@ -60,7 +68,44 @@ public class User {
 	@Transient
 	@JsonProperty("base64_files")
 	private Map<String,String> base64Files;
+	
+	private String email;
+	
+	private Date dob;	
+	
+	// auth start
+	
+	@Enumerated(EnumType.STRING)
+	@JsonProperty("auth_type")
+	private AuthType authType;
+	
+    @Column(name = "user_name", unique = true)
+	@JsonProperty("user_name")
+	private String userName;
+	
+	private String password;
+	
+	@JsonProperty("access_token")
+	private String accessToken;	// JWT = JSON Web Token
+	
+	@JsonProperty("google_user_id")
+	private String googleUserId;
+	
+	@JsonProperty("google_refresh_token")
+	private String googleRefreshToken;
+	
+	@JsonProperty("microsoft_user_id")
+	private String microsoftUserId;		// for future purpose
+	
+	// auth end
 
+	@Embedded
+	private Audit audit;
+	
+	public User() {
+		this.audit = new Audit();
+	}
+	
 	public String getId() {
 		return id;
 	}
@@ -156,5 +201,85 @@ public class User {
 	public void setBase64Files(Map<String, String> base64Files) {
 		this.base64Files = base64Files;
 	}
+
+	public AuthType getAuthType() {
+		return authType;
+	}
+
+	public void setAuthType(AuthType authType) {
+		this.authType = authType;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
+	public Audit getAudit() {
+		return audit;
+	}
+
+	public void setAudit(Audit audit) {
+		this.audit = audit;
+	}
+
+	public String getGoogleUserId() {
+		return googleUserId;
+	}
+
+	public void setGoogleUserId(String googleUserId) {
+		this.googleUserId = googleUserId;
+	}
 	
+	public String getGoogleRefreshToken() {
+		return googleRefreshToken;
+	}
+
+	public void setGoogleRefreshToken(String googleRefreshToken) {
+		this.googleRefreshToken = googleRefreshToken;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
+	public String getMicrosoftUserId() {
+		return microsoftUserId;
+	}
+
+	public void setMicrosoftUserId(String microsoftUserId) {
+		this.microsoftUserId = microsoftUserId;
+	}
+
 }

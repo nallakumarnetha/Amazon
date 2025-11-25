@@ -1,9 +1,15 @@
+<!-- Read view  -->
 <div [hidden]="isUpdate">
     <div class="form-container">
         <form [formGroup]="updatedUserForm" (ngSubmit)="updateUser()" class="form">
 
             <div class="form-header">
-                <span class="form-title"> Your account </span> 
+                <div class="sign-out-header">
+                    <div class="form-title"> Your account </div>
+                    <div class="sign-out"> <a href="#" (click)="logoutUser()">Sign Out </a>
+                        <!-- <i class="pi pi-power-off"></i> -->
+                    </div>
+                </div>
                 <span class="form-subtitle">These are user details </span>
             </div>
 
@@ -87,6 +93,8 @@
         </form>
     </div>
 </div>
+
+<!-- Edit view  -->
 <div [hidden]="!isUpdate">
     <div class="form-container">
         <form [formGroup]="updatedUserForm" (ngSubmit)="updateUser()" class="form">
