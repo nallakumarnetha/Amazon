@@ -5,7 +5,7 @@ import java.util.Base64;
 public class Constants {
 
 	// token based - basic user name and password
-	public static final String SECRET = "P3s9A!kL@q8ZxB#tF$w7Gh2Np6DvQ1Uy";
+	public static final String SECRET = "";
 	
 	
 	// Oauth 2.0 - Authorization Code Flow | Google
