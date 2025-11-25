@@ -1,10 +1,10 @@
 export class Constants {
 
-    public static readonly CLIENT_ID_GOOGLE = '853320511518-v0s4mpgoqivhcs8ui04ekmjts4e4qf9v.apps.googleusercontent.com';
+    public static readonly CLIENT_ID_GOOGLE = '';
 
-    public static readonly CLIENT_SECRET_GOOGLE = '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';
+    public static readonly CLIENT_SECRET_GOOGLE = '';
 
-    public static readonly PROJECT_ID_GOOGLE = 'my-project-01-479011';
+    public static readonly PROJECT_ID_GOOGLE = '';
 
     public static readonly AUTH_URI_GOOGLE = 'https://accounts.google.com/o/oauth2/auth';
 
