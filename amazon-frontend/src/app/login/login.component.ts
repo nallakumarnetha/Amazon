@@ -63,8 +63,8 @@ export class LoginComponent {
       `&scope=${Constants.SCOPE_GOOGLE}` +
       `&access_type=${Constants.ACCESS_TYPE_GOOGLE}` +
       `&prompt=${Constants.PROMPT_GOOGLE}`;
-    window.location.href = url;
-    // window.open(url, '_blank');
+    // window.location.href = url;
+    window.open(url, '_blank');
   }
 
   goHome() {

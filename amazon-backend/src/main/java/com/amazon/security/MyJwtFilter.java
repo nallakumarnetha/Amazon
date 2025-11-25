@@ -38,7 +38,7 @@ public class MyJwtFilter extends OncePerRequestFilter {
 		noLoginApis.add("/amazon/users/login");
 		noLoginApis.add("/amazon/users/register");
 		noLoginApis.add("/amazon/users/oauth2/callback");
-		noLoginApis.add("/amazon/products");
+//		noLoginApis.add("/amazon/products");
 		for (String path : noLoginApis) { 
 			if (request.getRequestURI().startsWith(path)) { 
 				filterChain.doFilter(request, response); 
