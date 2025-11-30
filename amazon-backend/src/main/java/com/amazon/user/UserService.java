@@ -465,13 +465,6 @@ public class UserService {
 
 	public User isUserExists(User request) {
 		User user = null;
-//		if(request.getId() != null) {
-//			user = repository.findById(request.getId()).orElse(null);
-//			if(user != null) {
-//				user.setMessage("User already exists with given id!");
-//				return user;
-//			}
-//		}
 		if(user == null && request.getUserName() != null) {
 			user = repository.findByUserName(request.getUserName());
 			if(user != null) {

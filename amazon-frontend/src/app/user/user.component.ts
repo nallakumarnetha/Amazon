@@ -74,11 +74,6 @@ export class UserComponent {
       }
       this.user = res;
       this.id = res.id;
-      // this.userService.findAddress(res.address || '').subscribe(res => {
-      //   this.address.street = res.street;
-      //   this.address.city = res.city;
-      //   this.address.pincode = res.pincode;
-      // });
       if (res.dob) {
         const d = new Date(res.dob);
         res.dob = d.toISOString().substring(0, 10);  // string yyyy-MM-dd

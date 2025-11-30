@@ -59,22 +59,6 @@ export class SignupComponent {
     });
   }
 
-  // registerUser() {
-  //   this.submitted = true;
-  //   this.serverError = '';
-  //   if (this.registerUserForm.invalid) {
-  //     return;
-  //   }
-  //   let user = this.registerUserForm.value;
-  //   this.userService.registerUser(user).subscribe(res => {
-  //     // localStorage.setItem('jwt', res.jwt!);
-  //     this.router.navigate(['/products']);
-  //   },
-  //     err => {
-  //       this.serverError = err.error?.message || 'Registration failed!';
-  //     });
-  // }
-
   registerUser(): void {
     this.submitted = true;
     this.serverError = '';
@@ -125,7 +109,6 @@ export class SignupComponent {
     
   }
 
-
   ngOnInit() {
     // hide menu & footer globally
     this.renderer.addClass(document.body, 'full-page');
@@ -173,39 +156,4 @@ export class SignupComponent {
     }
   }
 
-  /*  onFileSelected(event: any) {
-      this.selectedFiles = Array.from(event.target.files);
-  
-      this.selectedFiles.forEach(file => {
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          const base64Data = e.target.result.split(',')[1];
-          this.user.base64_files!.set(file.name, base64Data);
-          this.cd.markForCheck();
-        };
-        reader.readAsDataURL(file);
-      });
-    }
-  
-    triggerFileSelect(fileInput: HTMLInputElement): void {
-      fileInput.click();
-    }
-  
-    // removeFile(fileName: string) {
-    //   const index = this.selectedFiles.findIndex(f => f.name === fileName);
-    //   if (index > -1) this.selectedFiles.splice(index, 1);
-    //   this.user.base64_files?.delete(fileName);
-    // }
-  
-    onRemoveFile(id: string) {
-      console.log('removing user file');
-      const index = this.user?.files?.indexOf(id);
-      if (index! > -1) {
-        this.user?.files?.splice(index!, 1);
-      }
-  
-      if (this.user?.base64_files instanceof Map) {
-        this.user.base64_files.delete(id);
-      }
-    }*/
 }

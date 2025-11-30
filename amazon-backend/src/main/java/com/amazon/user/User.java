@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.amazon.address.Address;
+import com.amazon.user.Address;
 import com.amazon.common.Audit;
 import com.amazon.common.Response;
 import com.fasterxml.jackson.annotation.JsonInclude;

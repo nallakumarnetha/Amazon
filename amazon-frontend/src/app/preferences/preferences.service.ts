@@ -20,10 +20,6 @@ export class PreferencesService {
 
     private baseUrl = 'http://localhost:8080/amazon/preferences'
 
-    // ngOnInit() {
-    //     // this.findPreferences();
-    // }
-
     findPreferences(): void {
         this.http.get(`${this.baseUrl}`).subscribe(res => {
             this.preferences = res;
@@ -42,8 +38,5 @@ export class PreferencesService {
         console.log('pppppp');
         this.preferencesSubject.next(this.preferences);
     }
-    // updatePreferencesSubject() {
-    //     this.preferencesSubject.next({ ...this.preferences });
-    // }
 
 }

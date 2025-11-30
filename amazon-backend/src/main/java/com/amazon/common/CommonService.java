@@ -24,7 +24,7 @@ import com.amazon.order.OrderStatus;
 import com.amazon.product.Category;
 import com.amazon.product.Product;
 import com.amazon.product.ProductService;
-import com.amazon.address.Address;
+import com.amazon.user.Address;
 import com.amazon.user.Gender;
 import com.amazon.user.Language;
 import com.amazon.user.Role;

@@ -43,8 +43,3 @@ export enum Language {
     Hindi = 'Hindi',
     English = 'English'
 }
-
-// export enum AuthType {
-//     BASIC_TOKEN = 'BASIC_TOKEN',
-//     OAUTH2_AUTHORIZATION_CODE = 'OAUTH2_AUTHORIZATION_CODE'
-// }

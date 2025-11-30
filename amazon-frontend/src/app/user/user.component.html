@@ -199,15 +199,6 @@
 
                 <span class="group-title">Address</span>
 
-                <!-- <label for="street" class="form-control-title">Street</label>
-                <input formControlName="user.address.street" type="text" class="form-control">
-
-                <label for="city" class="form-control-title">City</label>
-                <input formControlName="user.address.city" type="text" class="form-control">
-
-                <label for="pincode" class="form-control-title">Pincode</label>
-                <input formControlName="user.address.pincode" type="text" class="form-control"> -->
-
                 <div formGroupName="address" class="no-div-style">
 
                     <label for="street" class="form-control-title">Street</label>
@@ -228,12 +219,6 @@
                 </div>
                 <input formControlName="user_name" type="text" class="form-control">
 
-                <!-- <label for="password" class="form-control-title">Password</label>
-                <div class="error-msg" *ngIf="submitted && updatedUserForm.get('password')?.invalid">
-                    Password is required.
-                </div>
-                <p-password formControlName="password" [toggleMask]="true" [feedback]="false" styleClass="form-control p-password-field">
-                </p-password> -->
                 <label for="password" class="form-control-title">Password</label>
                 <div class="error-msg" *ngIf="submitted && updatedUserForm.get('password')?.invalid">
                     Password is required.

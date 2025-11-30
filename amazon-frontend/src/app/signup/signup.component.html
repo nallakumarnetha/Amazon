@@ -58,7 +58,6 @@
 
             <label for="gender" class="form-control-title">Gender</label>
             <select formControlName="gender" id="gender" class="form-control">
-                <!-- <option value="" disabled selected>Select gender</option> -->
                 <option *ngFor="let gen of genders" [value]="gen">{{ gen }}</option>
             </select>
 
@@ -77,14 +76,6 @@
 
             <span class="group-title"><b>Address</b></span>
 
-            <!-- <label for="street" class="form-control-title">Street</label>
-            <input formControlName="user.address.street" type="text" class="form-control">
-
-            <label for="city" class="form-control-title">City</label>
-            <input formControlName="user.address.city" type="text" class="form-control">
-
-            <label for="pincode" class="form-control-title">Pincode</label>
-            <input formControlName="user.address.pincode" type="text" class="form-control"> -->
             <div formGroupName="address" class="no-div-style">
 
                 <label for="street" class="form-control-title">Street</label>

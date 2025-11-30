@@ -1,4 +1,4 @@
-package com.amazon.address;
+package com.amazon.user;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 

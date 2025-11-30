@@ -2,7 +2,7 @@ package com.amazon.common;
 
 import java.util.List;
 
-import com.amazon.address.Address;
+import com.amazon.user.Address;
 import com.amazon.order.Order;
 import com.amazon.product.Product;
 import com.amazon.user.User;
