@@ -114,6 +114,10 @@
     }
 }
 
+.text-center {
+    text-align: center;
+}
+
 ::ng-deep .p-password .p-inputtext {
     width: 100% !important;
     height: 30px !important;
