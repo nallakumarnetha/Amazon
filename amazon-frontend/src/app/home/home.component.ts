@@ -24,7 +24,7 @@ export class HomeComponent {
   allLoaded = false;
   showAnimation = false;
   // order: Order = {};
-  categories = Object.values(Category).slice(0, 4);;
+  categories = Object.values(Category).slice(0, 4);
 
   constructor(private productService: ProductService, private cartService: CartService,
     private route: Router, private orderService: OrderService,

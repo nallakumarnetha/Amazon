@@ -56,12 +56,10 @@ public class Order {
 	
 	private OrderStatus status;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn
-	private Address address;
-	
 	@Enumerated(EnumType.STRING)
 	private com.amazon.product.Category category;
+	
+	private String address;
 	
 	@Embedded
 	private Audit audit;
@@ -126,14 +124,6 @@ public class Order {
 		this.paymentId = paymentId;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
 	public OrderStatus getStatus() {
 		return status;
 	}
@@ -148,6 +138,14 @@ public class Order {
 
 	public void setCategory(com.amazon.product.Category category) {
 		this.category = category;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public Audit getAudit() {

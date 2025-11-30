@@ -33,7 +33,7 @@ export class OrderComponent {
       this.productService.findProduct(id).subscribe(productRes => {
         this.cartService.findCart(productRes.id!).subscribe(
           cartRes => {
-            productRes.cart_count = cartRes.count;
+            productRes.cart_count = cartRes?.count || 1;
             this.products = [productRes];
             this.updateTotal();
           }
@@ -58,6 +58,7 @@ export class OrderComponent {
       this.order.amount = product.price! * product.cart_count!;
       this.order.payment_id = 'p1';
       this.order.category = product.category;
+      this.order.address = this.currentUser?.address?.city;
       this.orderService.addOrder(this.order!).subscribe();
 
       // delete ordered products from cart

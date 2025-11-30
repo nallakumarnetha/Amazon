@@ -56,6 +56,11 @@
                 </div>
 
                 <div class="field-container">
+                    <div class="field-title">Email</div>
+                    <div class="field-body">{{user.email}}</div>
+                </div>
+
+                <div class="field-container">
                     <div class="field-title">Phone number</div>
                     <div class="field-body">{{user.phone_number}}</div>
                 </div>
@@ -76,6 +81,11 @@
                 </div>
 
                 <div class="field-container">
+                    <div class="field-title">DOB</div>
+                    <div class="field-body">{{user.dob | date:'yyyy-MM-dd'}}</div>
+                </div>
+
+                <div class="field-container">
                     <div class="field-title">Street</div>
                     <div class="field-body">{{user?.address?.street}}</div>
                 </div>
@@ -89,13 +99,26 @@
                     <div class="field-title">Pincode</div>
                     <div class="field-body">{{user?.address?.pincode}}</div>
                 </div>
+
+                <!-- <b>Credentials:</b> -->
+                <div class="field-container">
+                    <div class="field-title">User name</div>
+                    <div class="field-body">{{user.user_name}}</div>
+                </div>
+
+                <div class="field-container" [hidden]>
+                    <div class="field-title">Password</div>
+                    <div class="field-body">**********</div>
+                </div>
+
             </div>
         </form>
     </div>
 </div>
 
 <!-- Edit view  -->
-<div [hidden]="!isUpdate">
+<!-- <div [hidden]="!isUpdate"> -->
+<div *ngIf="isUpdate">
     <div class="form-container">
         <form [formGroup]="updatedUserForm" (ngSubmit)="updateUser()" class="form">
             <div class="form-header">
@@ -132,6 +155,9 @@
                 <input formControlName="user_id" type="text" class="form-control" readonly>
 
                 <label for="name" class="form-control-title">Name</label>
+                <div class="error-msg" *ngIf="submitted && updatedUserForm.get('name')?.invalid">
+                    Name is required.
+                </div>
                 <input formControlName="name" type="text" class="form-control">
 
                 <label for="first_name" class="form-control-title">First name</label>
@@ -139,6 +165,15 @@
 
                 <label for="last_name" class="form-control-title">Last name</label>
                 <input formControlName="last_name" type="text" class="form-control">
+
+                <label for="email" class="form-control-title">Email</label>
+                <div class="error-msg" *ngIf="submitted && updatedUserForm.get('email')?.invalid">
+                    Email is required.
+                </div>
+                <span class="error-msg" *ngIf="submitted && updatedUserForm.get('email')?.errors?.['email']">
+                    Invalid email.
+                </span>
+                <input formControlName="email" type="email" class="form-control">
 
                 <label for="phone_number" class="form-control-title">Phone number</label>
                 <input formControlName="phone_number" type="text" class="form-control">
@@ -159,19 +194,59 @@
                     <option *ngFor="let language of languages" [value]="language">{{ language }}</option>
                 </select>
 
-                <span class="address-title">Address</span>
+                <label for="dob" class="form-control-title">DOB</label>
+                <input formControlName="dob" type="date" class="form-control">
 
-                <label for="street" class="form-control-title">Street</label>
+                <span class="group-title">Address</span>
+
+                <!-- <label for="street" class="form-control-title">Street</label>
                 <input formControlName="user.address.street" type="text" class="form-control">
 
                 <label for="city" class="form-control-title">City</label>
                 <input formControlName="user.address.city" type="text" class="form-control">
 
                 <label for="pincode" class="form-control-title">Pincode</label>
-                <input formControlName="user.address.pincode" type="text" class="form-control">
+                <input formControlName="user.address.pincode" type="text" class="form-control"> -->
 
+                <div formGroupName="address" class="no-div-style">
+
+                    <label for="street" class="form-control-title">Street</label>
+                    <input formControlName="street" type="text" class="form-control">
+
+                    <label for="city" class="form-control-title">City</label>
+                    <input formControlName="city" type="text" class="form-control">
+
+                    <label for="pincode" class="form-control-title">Pincode</label>
+                    <input formControlName="pincode" type="text" class="form-control">
+
+                </div>
+
+                <span class="group-title">Credentials</span>
+                <label for="user-name" class="form-control-title">Username</label>
+                <div class="error-msg" *ngIf="submitted && updatedUserForm.get('user_name')?.invalid">
+                    Username is required.
+                </div>
+                <input formControlName="user_name" type="text" class="form-control">
+
+                <!-- <label for="password" class="form-control-title">Password</label>
+                <div class="error-msg" *ngIf="submitted && updatedUserForm.get('password')?.invalid">
+                    Password is required.
+                </div>
+                <p-password formControlName="password" [toggleMask]="true" [feedback]="false" styleClass="form-control p-password-field">
+                </p-password> -->
+                <label for="password" class="form-control-title">Password</label>
+                <div class="error-msg" *ngIf="submitted && updatedUserForm.get('password')?.invalid">
+                    Password is required.
+                </div>
+                <p-password formControlName="password" [toggleMask]="true" [feedback]="false"
+                    styleClass="form-control p-password-field">
+                </p-password>
+
+                <div class="error-msg" *ngIf="serverError" style="text-align: center;">
+                    {{ serverError }}
+                </div>
                 <div class="form-footer">
-                    <button routerLink="/user" class="cancel-button">Cancel</button>
+                    <button (click)="isUpdate = !isUpdate" class="cancel-button" type="button">Cancel</button>
                     <button type="submit" class="save-button"> Update </button>
                 </div>
 

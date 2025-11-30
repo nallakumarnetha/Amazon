@@ -1,7 +1,9 @@
-<div class="form-container">
+<div class="form-container bg">
+
     <form [formGroup]="registerUserForm" (ngSubmit)="registerUser()" class="form">
+        <img src="assets/images/amazon-white-logo.png" width="120px" height="40px" class="logo">
         <div class="form-header">
-            <span class="form-title"> Sign up  | Create an account</span>
+            <span class="form-title"> Sign up | Create an account</span>
             <span class="form-subtitle"> Register an account </span>
         </div>
 
@@ -11,7 +13,7 @@
             </div>
 
             <!-- start -->
-            <!-- <div class="image-preview-container img-center">
+            <div class="image-preview-container img-center">
                 <ng-container *ngIf="user?.base64_files as base64_files">
                     <ng-container *ngIf="base64_files | keyvalue as filesMap">
                         <ng-container *ngFor="let element of filesMap">
@@ -27,13 +29,12 @@
             <div class="align-center">
                 <i class="pi pi-upload" (click)="triggerFileSelect(myFileInputId)"></i>
                 <input #myFileInputId type="file" multiple (change)="onFileSelected($event)" class="display-none">
-            </div> -->
+            </div>
             <!-- end -->
-
-            <!-- <label for="user_id" class="form-control-title">Id</label>
-            <input formControlName="user_id" type="text" class="form-control" readonly> -->
-
             <label for="name" class="form-control-title">Name</label>
+            <div class="error-msg" *ngIf="submitted && registerUserForm.get('name')?.invalid">
+                Name is required.
+            </div>
             <input formControlName="name" type="text" class="form-control">
 
             <label for="first_name" class="form-control-title">First name</label>
@@ -41,6 +42,16 @@
 
             <label for="last_name" class="form-control-title">Last name</label>
             <input formControlName="last_name" type="text" class="form-control">
+
+            <label for="email" class="form-control-title">Email</label>
+            <div class="error-msg" *ngIf="submitted && registerUserForm.get('email')?.invalid">
+                Email is required.
+            </div>
+            <span class="error-msg" *ngIf="submitted && registerUserForm.get('email')?.errors?.['email']">
+                Invalid email.
+            </span>
+            <input formControlName="email" type="email" class="form-control">
+
 
             <label for="phone_number" class="form-control-title">Phone number</label>
             <input formControlName="phone_number" type="text" class="form-control">
@@ -61,32 +72,52 @@
                 <option *ngFor="let language of languages" [value]="language">{{ language }}</option>
             </select>
 
-            <span class="address-title">Address</span>
+            <label for="dob" class="form-control-title">DOB</label>
+            <input formControlName="dob" type="date" class="form-control">
 
-            <label for="street" class="form-control-title">Street</label>
+            <span class="group-title"><b>Address</b></span>
+
+            <!-- <label for="street" class="form-control-title">Street</label>
             <input formControlName="user.address.street" type="text" class="form-control">
 
             <label for="city" class="form-control-title">City</label>
             <input formControlName="user.address.city" type="text" class="form-control">
 
             <label for="pincode" class="form-control-title">Pincode</label>
-            <input formControlName="user.address.pincode" type="text" class="form-control">
+            <input formControlName="user.address.pincode" type="text" class="form-control"> -->
+            <div formGroupName="address" class="no-div-style">
 
-            Credentials:
+                <label for="street" class="form-control-title">Street</label>
+                <input formControlName="street" type="text" class="form-control">
+
+                <label for="city" class="form-control-title">City</label>
+                <input formControlName="city" type="text" class="form-control">
+
+                <label for="pincode" class="form-control-title">Pincode</label>
+                <input formControlName="pincode" type="text" class="form-control">
+
+            </div>
+            <span class="group-title"><b>Credentials</b></span>
             <label for="user-name" class="form-control-title">User name</label>
+            <div class="error-msg" *ngIf="submitted && registerUserForm.get('user_name')?.invalid">
+                Username is required.
+            </div>
             <input formControlName="user_name" type="text" class="form-control">
 
             <label for="password" class="form-control-title">Password</label>
-            <div *ngIf="registerUserForm.get('password')?.invalid" class="error">
-                Required *
+            <div class="error-msg" *ngIf="submitted && registerUserForm.get('password')?.invalid">
+                Password is required.
             </div>
-            <!-- <input formControlName="user.password" type="password" class="form-control" [toggleMask]="true"> -->
-            <p-password formControlName="password" [toggleMask]="true" [feedback]="false" styleClass="form-control">
+            <p-password formControlName="password" [toggleMask]="true" [feedback]="false"
+                styleClass="form-control p-password-field">
             </p-password>
 
+            <div class="error-msg err" *ngIf="serverError">
+                {{ serverError }}
+            </div>
             <div class="form-footer">
-                <button routerLink="/login" class="cancel-button">Cancel</button>
-                <button type="submit" class="save-button" [disabled]="registerUserForm.invalid"> Singup </button>
+                <button routerLink="/home" class="cancel-button">Cancel</button>
+                <button type="submit" class="save-button"> Singup </button>
             </div>
 
         </div>

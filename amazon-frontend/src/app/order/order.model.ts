@@ -8,7 +8,8 @@ export interface Order {
     amount?: number;
     payment_id?: string;
     status?: OrderStatus;
-    category?: Category
+    category?: Category;
+    address?: string
 }
 
 export class OrderListResponse {

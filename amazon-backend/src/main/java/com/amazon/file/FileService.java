@@ -51,6 +51,9 @@ public class FileService {
 		Map<String, String> base64Files = new HashMap<>();
 		for(String id : ids) {
 			File file = repository.findById(id).orElse(null);
+			if(file == null) {
+				continue;
+			}
 			byte[] fileData = file.getData();
 			String base64FileData = Base64.getEncoder().encodeToString(fileData);
 			base64Files.put(id, base64FileData);

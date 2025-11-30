@@ -25,6 +25,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Transient;
 
 @Entity
@@ -53,8 +54,8 @@ public class User extends Response {
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "address_id")
 	private Address address;
 
 	@Enumerated(EnumType.STRING)
@@ -69,6 +70,7 @@ public class User extends Response {
 	@JsonProperty("base64_files")
 	private Map<String,String> base64Files;
 	
+	@Column(name = "email", unique = true)
 	private String email;
 	
 	private Date dob;	
@@ -83,7 +85,8 @@ public class User extends Response {
 	@JsonProperty("user_name")
 	private String userName;
 	
-	private String password;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
 	
 	@JsonProperty("access_token")
 	private String accessToken;	// JWT = JSON Web Token

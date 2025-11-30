@@ -10,20 +10,26 @@
       <span class="form-body-title">Fill the product details</span>
 
       <label for="name" class="form-control-title">Name</label>
+      <div class="error-msg" *ngIf="submitted && productForm.get('name')?.invalid">
+        Name is required.
+      </div>
       <input formControlName="name" type="text" class="form-control">
 
       <label for="price" class="form-control-title">Price</label>
+       <div class="error-msg" *ngIf="submitted && productForm.get('price')?.invalid">
+        Price is required.
+      </div>
       <input formControlName="price" type="number" class="form-control">
 
       <label for="count" class="form-control-title">Count</label>
       <input formControlName="count" type="number" class="form-control">
 
-      <div class="category-field">
+      <!-- <div class="category-field"> -->
         <label for="category" class="form-control-title">Category</label>
-        <div *ngIf="productForm.get('category')?.invalid" class="error">
-          Required *
+        <div class="error-msg" *ngIf="submitted && productForm.get('category')?.invalid">
+          Category is required.
         </div>
-      </div>
+      <!-- </div> -->
       <select formControlName="category" class="form-control">
         <option value="" disabled>Select category</option>
         <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
@@ -39,13 +45,13 @@
           </div>
         </ng-container>
       </div>
-      <i class="pi pi-plus" (click)="myFileInputId.click()"></i>
+      <i class="pi pi-plus cursor-pointer" (click)="myFileInputId.click()"></i>
       <input #myFileInputId type="file" multiple (change)="onFileSelected($event)" class="display-none">
       <!--  end -->
 
       <div class="form-footer">
         <button routerLink="/products" class="cancel-button">Cancel</button>
-        <button type="submit" class="save-button" [disabled]="productForm.invalid"> Save and Finish </button>
+        <button type="submit" class="save-button"> Save and Finish </button>
       </div>
 
     </div>

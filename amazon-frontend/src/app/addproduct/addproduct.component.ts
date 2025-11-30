@@ -18,17 +18,26 @@ export class AddproductComponent {
   fileIds: string[] = [];
   selectedFilesBase64: { id: string, data: string }[] = [];
   categories = Object.values(Category).filter(cat => cat !== Category.All);
+  submitted = false;
+  serverError = '';
 
   constructor(private fb: FormBuilder, private productService: ProductService, private router: Router,
     private fileService: FileService) {
     this.productForm = this.fb.group({
-      name: '',
-      price: 0,
+      name: ['', Validators.required],
+      price: [0, [Validators.required, Validators.min(1)]],
       count: 0,
       category: ['', Validators.required]
     });
   }
+  
   addProduct(): void {
+    this.submitted = true;
+    this.serverError = '';
+    if (this.productForm.invalid) {
+      return;
+    }
+
     const addProductFun = () => {
       console.log('add product');
       let productObservable: Observable<Product> = this.productService.addProduct(this.product!);

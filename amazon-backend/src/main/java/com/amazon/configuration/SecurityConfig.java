@@ -43,7 +43,8 @@ public class SecurityConfig {
                 .requestMatchers("/users/login", 
                 		"/users/register",
                 		"/users/oauth2/callback",
-                		"/products").permitAll()
+                		"/products",
+                		"/files").permitAll()
                 .anyRequest().authenticated()
             )
         .addFilterBefore(myJwtFilter, UsernamePasswordAuthenticationFilter.class);

@@ -61,6 +61,7 @@ public class CommonService {
 		List<String> cart = new ArrayList<>();
 		List<String> orders = new ArrayList<>();
 		// ----------------users-----------------------
+		/*
 		// admin
 		Path path = Paths.get("src/main/resources/images/kumar_admin.png");
 		byte[] imageBytes = Files.readAllBytes(path);
@@ -104,8 +105,20 @@ public class CommonService {
 		user.setLanguage(Language.Telugu);
 		user.setFiles(fileIds);
 		user = userService.addUser(user, null);
-		
+		*/
 		// ----------------products-----------------------
+//		Path path = Paths.get("src/main/resources/images/kumar_admin.png");
+//		byte[] imageBytes = Files.readAllBytes(path);
+//		MultipartFile multipartFile = new CustomMultipartFile("file", "arts.png", "image/png", imageBytes);
+//		List<String> fileIds = fileService.uploadFile(List.of(multipartFile));
+		
+		Path path = null;
+		byte[] imageBytes = null;
+		MultipartFile multipartFile = null;
+		List<String> fileIds = null;
+		User user = userService.getCurrentUser();
+		Address	address = user.getAddress();
+
 		// product 1
 		path = Paths.get("src/main/resources/images/arts.png");
 		imageBytes = Files.readAllBytes(path);
@@ -307,7 +320,7 @@ public class CommonService {
 		order.setAmount(2924);
 		order.setPaymentId("p_id_1");
 		order.setStatus(OrderStatus.Pending);
-		order.setAddress(address);
+		order.setAddress(address.getCity());
 		order.setCategory(Category.Books);
 		order = orderService.addOrder(order);
 		
@@ -319,7 +332,7 @@ public class CommonService {
 		order.setAmount(11866);
 		order.setPaymentId("p_id_2");
 		order.setStatus(OrderStatus.Processing);
-		order.setAddress(address);
+		order.setAddress(address.getCity());
 		order.setCategory(Category.Clothes);
 		order = orderService.addOrder(order);
 		
@@ -331,7 +344,7 @@ public class CommonService {
 		order.setAmount(25454);
 		order.setPaymentId("p_id_3");
 		order.setStatus(OrderStatus.Shipped);
-		order.setAddress(address);
+		order.setAddress(address.getCity());
 		order.setCategory(Category.Electronics);
 		order = orderService.addOrder(order);
 		
@@ -343,7 +356,7 @@ public class CommonService {
 		order.setAmount(4470);
 		order.setPaymentId("p_id_4");
 		order.setStatus(OrderStatus.Delivered);
-		order.setAddress(address);
+		order.setAddress(address.getCity());
 		order.setCategory(Category.Footwear);
 		order = orderService.addOrder(order);
 		
@@ -355,7 +368,7 @@ public class CommonService {
 		order.setAmount(9458);
 		order.setPaymentId("p_id_5");
 		order.setStatus(OrderStatus.Cancelled);
-		order.setAddress(address);
+		order.setAddress(address.getCity());
 		order.setCategory(Category.Furniture);
 		order = orderService.addOrder(order);
 		
@@ -367,7 +380,7 @@ public class CommonService {
 		order.setAmount(4986);
 		order.setPaymentId("p_id_6");
 		order.setStatus(OrderStatus.Returned);
-		order.setAddress(address);
+		order.setAddress(address.getCity());
 		order.setCategory(Category.Grocery);
 		order = orderService.addOrder(order);
 	}

@@ -7,7 +7,7 @@ export class User {
     name?: string;
     phone_number?: string;
     gender?: Gender;
-    address?: string;
+    address?: Address;
     role?: Role;
     language?: Language;
     files?: string[];
@@ -15,7 +15,8 @@ export class User {
     user_name?: string;
     password?: string;
     access_token?: string;
-    // auth_type?: AuthType;
+    email?: string;
+    dob?: Date | string;
 }
 
 export class Address {

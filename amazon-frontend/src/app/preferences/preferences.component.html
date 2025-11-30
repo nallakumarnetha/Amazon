@@ -2,7 +2,7 @@
     <span class="form-title">User Preferences</span>
     <div>Auto save!</div>
 
-    <div class="body">
+    <div class="body full-page">
 
         <div class="preference">
             <div class="preference-title"> AI </div>
@@ -13,6 +13,13 @@
 
         <div class="preference">
             <div class="preference-title"> Prime </div>
+            <div class="preference-body">
+                <input name="prime" type="checkbox" [checked]="preferences?.prime" (change)="onCheckboxChange($event)">
+            </div>
+        </div>
+
+        <div class="preference">
+            <div class="preference-title"> Send email on place order </div>
             <div class="preference-body">
                 <input name="prime" type="checkbox" [checked]="preferences?.prime" (change)="onCheckboxChange($event)">
             </div>

@@ -21,6 +21,7 @@ export class MenuComponent {
   currentUser?: User;
   isSearchFocused?: boolean;
   preferences?: Preferences;
+  lastScrollTop = 0;
 
   constructor(private cartService: CartService, private changeDetecorRef: ChangeDetectorRef,
     private commonService: CommonService, private userService: UserService,
@@ -32,6 +33,7 @@ export class MenuComponent {
     this.updateCartCount();
     this.updateDeliverTo();
     this.loadPreferences();
+    this.onScroll();
   }
 
   toggleSideBar() {
@@ -42,7 +44,8 @@ export class MenuComponent {
     this.cartService.cartObservable$.subscribe(
       cart => {
         this.cartCount = cart.length;
-        this.changeDetecorRef.detectChanges();
+        // this.changeDetecorRef.detectChanges();
+        // this.changeDetecorRef.markForCheck();
       }
     );
   }
@@ -65,8 +68,31 @@ export class MenuComponent {
 
   loadPreferences() {
     this.preferencesService.preferencesSubject.subscribe(
-      res => this.preferences = res
+      res => {
+        this.preferences = res;
+        // this.changeDetecorRef.detectChanges();
+        // this.changeDetecorRef.markForCheck();
+      }
     );
   }
+
+  onScroll() {
+    window.addEventListener("scroll", () => {
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll < this.lastScrollTop) {
+        // Scrolling UP
+        document.querySelector(".menu-one-container")
+          ?.classList.add("sticky-up");
+      } else {
+        // Scrolling DOWN
+        document.querySelector(".menu-one-container")
+          ?.classList.remove("sticky-up");
+      }
+
+      this.lastScrollTop = currentScroll;
+    });
+  }
+
 
 }

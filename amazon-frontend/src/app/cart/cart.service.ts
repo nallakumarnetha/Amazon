@@ -1,10 +1,11 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Renderer2 } from "@angular/core";
 import { BehaviorSubject, forkJoin, map, Observable, of } from "rxjs";
 import { Product, ProductListResponse } from "../product/product.model";
 import { HttpClient } from "@angular/common/http";
 import { ProductService } from "../product/product.service";
 import { Status } from "./cart.component";
 import { Cart } from "./cart.model";
+import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
@@ -19,7 +20,7 @@ export class CartService {
     private baseUrl = 'http://localhost:8080/amazon/cart'
     cartProduct?: Product;
 
-    constructor(private http: HttpClient, private productService: ProductService) {
+    constructor(private http: HttpClient, private productService: ProductService, private router: Router) {
         if (!this.isLoggedIn) {
             const cartStr = localStorage.getItem('cart');
             if (cartStr && cartStr !== 'undefined' && cartStr !== 'null') {

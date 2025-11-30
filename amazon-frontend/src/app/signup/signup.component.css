@@ -1,1 +1,83 @@
 @import '../common/form.css';
+@import '../common/common.css';
+
+.bg {
+    background-color: white;
+}
+
+.logo {
+    display: block;
+    margin: 0 auto;
+}
+
+.group-title {
+    text-align: center;
+}
+
+.display-none {
+    display: none;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.img {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.remove-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color:grey;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.align-center {
+    align-self: center;
+}
+
+::ng-deep .p-password .p-inputtext {
+    width: 100% !important;
+    height: 30px !important;
+    margin: 0 !important;
+    margin-bottom: 10px !important;
+    padding: 0 8px !important;
+    border: 1px solid grey !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    box-sizing: border-box !important;
+}
+
+::ng-deep .p-password .p-inputtext:focus {
+    border-color: #999 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border: 1.9px solid black !important; 
+}
+
+::ng-deep .p-inputtext.p-inputtext-focus {
+    box-shadow: 1px solid black !important;
+}
+
+::ng-deep .p-password {
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+::ng-deep .p-password .p-password-toggle-icon {
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    right: 8px !important;
+}

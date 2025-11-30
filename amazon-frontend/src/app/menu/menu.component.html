@@ -7,9 +7,9 @@
   <div class="deliver-container hover">
     <div> <i class="pi pi-map-marker"></i> </div>
     <div class="address-details">
-      <div class="user-name">Deliver to {{currentUser?.first_name.slice(0, 8)}}</div>
-      <div class="address">{{currentUser?.address?.city.slice(0, 8)}}
-        {{currentUser?.address?.pincode.slice(0, 6)}}</div>
+      <div class="user-name">Deliver to {{currentUser?.first_name?.slice(0, 8) || 'Kumar'}}</div>
+      <div class="address">{{currentUser?.address?.city?.slice(0, 8) || 'Begumpeta'}}
+        {{currentUser?.address?.pincode?.slice(0, 6) || '508105'}}</div>
     </div>
   </div>
 
@@ -55,11 +55,13 @@
   <div class="hover"><a routerLink="/orders">Orders</a></div>
   <div class="hover"><a routerLink="/preferences">Preferences</a></div>
   <div class="hover"><a routerLink="/demo-mode">Demo mode</a></div>
-  |
+  <div > | </div>
   <div *ngIf="preferences?.prime" class="hover"><a>Prime</a></div>
   <div *ngIf="preferences?.ai" class="hover"><a>Rufus AI</a></div>
   <div class="hover"><a>Sell</a></div>
-  <div class="hover"><a>Admin</a></div>
+  <div *ngIf="currentUser?.role === 'Admin'" class="hover">
+    <a>Admin</a>
+  </div>
   <div class="hover"><a>CustomerServie</a></div>
 
 </div>
@@ -72,12 +74,12 @@
       <b class="user-name-size">Hello, {{currentUser?.name | uppercase}}</b>
     </div>
     <b>Digital Content & Devices</b>
-    <a href="">aaa</a>
-    <b>Shop by Department</b>
-    <a href="">bbb</a>
+    <a href="">Echo & Alexa</a>
+    <b>Shop by Category</b>
+    <a href="">Mobiles, Computers</a>
     <b>Programs & Features</b>
-    <a href="">ccc</a>
+    <a href="">Gift Cards & Mobile Recharges</a>
     <b>Help & Settings</b>
-    <a href="">ddd</a>
+    <a href="">Your Account</a>
   </div>
 </p-sidebar>

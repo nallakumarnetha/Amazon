@@ -53,6 +53,7 @@ public class CartService {
 		});
 		Response response = new Response();
 		response.setProducts(products);
+		response.setTotal(products.size());
 		return response;
 	}
 

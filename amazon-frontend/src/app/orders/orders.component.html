@@ -39,6 +39,7 @@
                 <th>Count</th>
                 <th>Amount</th>
                 <th>Payment ID</th>
+                <th>Address</th>
                 <th>Category</th>
                 <th>Status</th>
             </tr>
@@ -50,6 +51,7 @@
                 <td>{{order.count}}</td>
                 <td>{{order.amount}}</td>
                 <td>{{order.payment_id}}</td>
+                <td>{{order.address}}</td>
                 <td>{{order.category}}</td>
                 <td [ngClass]="order.status ? order.status.toLowerCase() : ''">
                     {{ order.status || 'N/A' }}

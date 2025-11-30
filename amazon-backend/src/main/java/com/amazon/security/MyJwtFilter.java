@@ -38,7 +38,7 @@ public class MyJwtFilter extends OncePerRequestFilter {
 		noLoginApis.add("/amazon/users/login");
 		noLoginApis.add("/amazon/users/register");
 		noLoginApis.add("/amazon/users/oauth2/callback");
-//		noLoginApis.add("/amazon/products");
+		noLoginApis.add("/amazon/files");
 		for (String path : noLoginApis) { 
 			if (request.getRequestURI().startsWith(path)) { 
 				filterChain.doFilter(request, response); 
@@ -90,10 +90,11 @@ public class MyJwtFilter extends OncePerRequestFilter {
 	private String extractTokenFromCookies(HttpServletRequest request) {
 		// 1. Try cookie first
 		Cookie[] cookies = request.getCookies();
-		if (cookies == null) return null;
-		for (Cookie c : cookies) {
-			if (c.getName().equals("_wsid")) {	   // JWT in cookie
-				return c.getValue();
+		if(cookies != null) {
+			for (Cookie c : cookies) {
+				if (c.getName().equals("_wsid")) {	   // JWT in cookie
+					return c.getValue();
+				}
 			}
 		}
 		// 2. If not in cookie → try Authorization header

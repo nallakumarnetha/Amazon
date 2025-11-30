@@ -56,27 +56,27 @@ export class UserService {
   }
 
   // ============ address================
-  private addressBaseUrl = 'http://localhost:8080/amazon/addresses';
+  // private addressBaseUrl = 'http://localhost:8080/amazon/addresses';
 
-  findAllAddresses(page: number, size: number): Observable<AddressListResponse> {
-    return this.http.get<AddressListResponse>(`${this.addressBaseUrl}?page=${page}&size=${size}`);
-  }
+  // findAllAddresses(page: number, size: number): Observable<AddressListResponse> {
+  //   return this.http.get<AddressListResponse>(`${this.addressBaseUrl}?page=${page}&size=${size}`);
+  // }
 
-  findAddress(id: string): Observable<Address> {
-    return this.http.get<Address>(`${this.addressBaseUrl}/${id}`);
-  }
+  // findAddress(id: string): Observable<Address> {
+  //   return this.http.get<Address>(`${this.addressBaseUrl}/${id}`);
+  // }
 
-  addAddress(address: Address): Observable<Address> {
-    return this.http.post<Address>(this.addressBaseUrl, address);
-  }
+  // addAddress(address: Address): Observable<Address> {
+  //   return this.http.post<Address>(this.addressBaseUrl, address);
+  // }
 
-  updateAddress(id: string | undefined, address: Address): Observable<Address> {
-    return this.http.put<Address>(`${this.addressBaseUrl}/${id}`, address);
-  }
+  // updateAddress(id: string | undefined, address: Address): Observable<Address> {
+  //   return this.http.put<Address>(`${this.addressBaseUrl}/${id}`, address);
+  // }
 
-  deleteAddress(id: string): Observable<AddressListResponse> {
-    return this.http.delete<AddressListResponse>(`${this.addressBaseUrl}/${id}`);
-  }
+  // deleteAddress(id: string): Observable<AddressListResponse> {
+  //   return this.http.delete<AddressListResponse>(`${this.addressBaseUrl}/${id}`);
+  // }
 
   // ============ authentication ================
 

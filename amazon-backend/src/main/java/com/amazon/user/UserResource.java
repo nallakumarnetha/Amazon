@@ -1,5 +1,6 @@
 package com.amazon.user;
 
+import java.io.IOException;
 import java.net.http.HttpResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.amazon.common.Response;
+import com.amazon.exception.CustomException;
 import com.amazon.product.Product;
 import com.amazon.product.ProductService;
 
@@ -47,9 +49,9 @@ public class UserResource {
 	}
 
 	@PutMapping("/{id}")
-	public User updateUser(@PathVariable String id, @RequestBody User request) {
-		User response = service.updateUser(id, request);
-		return response;
+	public User updateUser(@PathVariable String id, @RequestBody User request, HttpServletResponse response) throws CustomException {
+		User user = service.updateUser(id, request, response);
+		return user;
 	}
 
 	@DeleteMapping("/{id}")
@@ -84,8 +86,9 @@ public class UserResource {
 	}
 	
 	@GetMapping("oauth2/callback")
-	public void googleCallback(@RequestParam String code, HttpServletResponse response) {
+	public void googleCallback(@RequestParam String code, HttpServletResponse response) throws IOException {
 		service.googleCallback(code, response);
+		response.sendRedirect("http://localhost:4200/home");
 	}
 	
 }

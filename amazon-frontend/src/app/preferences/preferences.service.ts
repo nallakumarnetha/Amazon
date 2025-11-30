@@ -14,9 +14,15 @@ export class PreferencesService {
     preferencesSubject = new BehaviorSubject<Preferences>(this.preferences!);
     preferencesObservable$ = this.preferencesSubject.asObservable();
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+        this.findPreferences();
+    }
 
     private baseUrl = 'http://localhost:8080/amazon/preferences'
+
+    // ngOnInit() {
+    //     // this.findPreferences();
+    // }
 
     findPreferences(): void {
         this.http.get(`${this.baseUrl}`).subscribe(res => {
@@ -33,7 +39,11 @@ export class PreferencesService {
     }
 
     updatePreferencesSubject() {
+        console.log('pppppp');
         this.preferencesSubject.next(this.preferences);
     }
+    // updatePreferencesSubject() {
+    //     this.preferencesSubject.next({ ...this.preferences });
+    // }
 
 }

@@ -20,7 +20,7 @@ public class Preferences {
 	@JsonProperty("user_id")
 	private String userId;
 	
-	private boolean ai;
+	private boolean ai = true;
 
 	@Enumerated(EnumType.STRING)
 	private Color color = Color.Blue;
@@ -31,7 +31,7 @@ public class Preferences {
 	@JsonProperty("hex_color")
 	private String hexColor;
 	
-	private boolean prime;
+	private boolean prime = true;
 
 	public String getId() {
 		return id;

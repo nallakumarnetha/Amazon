@@ -9,6 +9,13 @@
   background-color: #131921;
 }
 
+.menu-one-container.sticky-up {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #131921;
+}
+
 .menu-one-container a {
   color: white !important;
 }

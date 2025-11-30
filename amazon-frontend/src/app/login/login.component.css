@@ -1,1 +1,141 @@
 @import '../common/form.css';
+
+.login-container {
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.login-form {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    border: 1px solid #d3d3d3;
+    border-radius: 6px;
+    padding: 26px;
+    margin-top: 10px;
+    padding-bottom: 15px;
+    width: 350px;
+}
+
+.signin-title {
+    font-weight: 500px;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.form1 {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.form-control1 {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    font-size: 13px;
+    gap: 4px;
+    margin-top: 10px;
+}
+
+.form-control1 input:focus {
+    border: 2px solid grey;
+    outline: none;
+    border-radius: 5px;
+    /* box-shadow: 0 0 3px rgba(0,0,0,0.2); */
+}
+
+
+.login-button {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.or {
+    text-align: center;
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+
+.control {
+    height: 30px;
+    margin: 0px;
+    padding: 0px;
+    /* margin-bottom: 10px; */
+    width: 300px;
+}
+
+.blue-text {
+    color: #2162a1;
+    text-decoration: underline;
+}
+
+.google-button {
+    background-color: white;
+    border: 1px solid grey;
+    height: 30px;
+    width: 285px;
+}
+
+.login-with-google {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #dadce0;
+    background-color: #fff;
+    cursor: pointer;
+    align-self: center;
+}
+
+.terms-and-conditions {
+    font-size: 12px;
+}
+
+.sign-up {
+    width: 350px;
+    font-size: 13px;
+    margin: 0 auto;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 20px;
+    padding: 8px;
+    text-align: center;
+}
+
+.hr-container {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+    width: 350px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.hr-line {
+    flex-grow: 1;
+    border: 0;
+    border-top: 1px solid #ccc;
+    height: 0.8px;
+}
+
+.hr {
+    margin: 0 6px;
+    color: #666;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.forgot-password {
+    color: #2162a1;
+    font-weight: 100;
+    text-align: right;
+    font-size: 12px;
+}

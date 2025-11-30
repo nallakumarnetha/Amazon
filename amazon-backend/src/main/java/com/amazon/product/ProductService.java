@@ -34,6 +34,7 @@ import com.amazon.file.File;
 import com.amazon.file.FileRepository;
 import com.amazon.file.FileService;
 import com.amazon.id.IdService;
+import com.amazon.user.UserService;
 
 import jakarta.transaction.Transactional;
 import jakarta.websocket.server.PathParam;
@@ -55,6 +56,9 @@ public class ProductService {
 
 	@Autowired
 	private CartService cartService;
+	
+	@Autowired
+	private UserService userService;
 
 	// CRUD start
 
@@ -72,9 +76,11 @@ public class ProductService {
 			Map<String, String> base64FilesData = fileService.getBase64Files(fileIds);
 			product.setBase64Files(base64FilesData);
 			//set cart count
-			Cart cart = cartService.findCartByProductId(product.getId());
-			if(cart != null) {
-				product.setCartCount(cart.getCount());
+			if(userService.getCurrentUser() != null) {
+				Cart cart = cartService.findCartByProductId(product.getId());
+				if(cart != null) {
+					product.setCartCount(cart.getCount());
+				}
 			}
 		}
 		Response response = new Response();

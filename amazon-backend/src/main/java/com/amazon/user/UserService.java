@@ -2,6 +2,10 @@ package com.amazon.user;
 
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
@@ -19,13 +23,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.amazon.common.Constants;
+import com.amazon.common.CustomMultipartFile;
 import com.amazon.common.Response;
+import com.amazon.exception.CustomException;
 import com.amazon.file.FileService;
 import com.amazon.id.IdService;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -77,6 +85,11 @@ public class UserService {
 	}
 
 	public User addUser(User request, HttpServletResponse response) {
+		User user = isUserExists(request);
+		if(user != null) {
+			response.setStatus(400);
+			return user;
+		}
 		request.setUserId(idService.getUserID());
 		updateFullName(request);
 		String hashedPassword = hashPassword(request.getPassword());
@@ -89,9 +102,18 @@ public class UserService {
 		return entity;
 	}
 
-	public User updateUser(String id, User request) {
+	public User updateUser(String id, User request, HttpServletResponse response) throws CustomException {
 		User entity = repository.findById(id).orElse(null);
-		if (entity == null) return null;
+		if (entity == null) {
+			return null;
+		}
+
+		// check username, password uniqueness
+		User user = isUserExists(request);
+		if(user != null && user.getId() != id) {
+			response.setStatus(400);
+			return user;
+		}
 
 		if (request.getName() != null && !request.getName().isEmpty()) {
 			entity.setName(request.getName());
@@ -105,18 +127,31 @@ public class UserService {
 			entity.setLastName(request.getLastName());
 		}
 
+		if (request.getEmail() != null && !request.getEmail().isEmpty()) {
+			/* just to test custom exception
+			if(!request.getEmail().contains(".")) {
+				throw new CustomException(400, "Email must contain dot(.)");
+			}
+			*/
+			entity.setEmail(request.getEmail());
+		}
+		
 		if (request.getPhoneNumber() != null && !request.getPhoneNumber().isEmpty()) {
 			entity.setPhoneNumber(request.getPhoneNumber());
 		}
+		
 		if (request.getGender() != null) {
 			entity.setGender(request.getGender());
 		}
+		
 		if (request.getLanguage() != null) {
 			entity.setLanguage(request.getLanguage());
 		}
+		
 		if (request.getRole() != null) {
 			entity.setRole(request.getRole());
 		}
+		
 		if (request.getFiles() != null && !request.getFiles().isEmpty()) {
 			entity.setFiles(request.getFiles());
 		}
@@ -125,15 +160,34 @@ public class UserService {
 			entity.setUserName(request.getUserName());
 		}
 
-		if (request.getPassword() != null && !request.getPassword().isEmpty()) {
-			entity.setPassword(request.getPassword());
+		if (request.getPassword() != null && !request.getPassword().isEmpty()
+				&& !request.getPassword().matches("\\*+")) {
+			String hashedPassword = hashPassword(request.getPassword());
+			entity.setPassword(hashedPassword);
 		}
 
 		if (request.getAccessToken() != null && !request.getAccessToken().isEmpty()) {
 			entity.setAccessToken(request.getAccessToken());
 		}
-
-		return repository.save(entity);
+		
+		if (request.getDob() != null) {
+			entity.setDob(request.getDob());
+		}
+		
+		if (request.getAddress() != null) {
+			if(request.getAddress().getStreet() != null && !request.getAddress().getStreet().isEmpty()) {
+				entity.getAddress().setStreet(request.getAddress().getStreet());
+			}
+			if(request.getAddress().getCity() != null && !request.getAddress().getCity().isEmpty()) {
+				entity.getAddress().setCity(request.getAddress().getCity());
+			}
+			if(request.getAddress().getPincode() != null && !request.getAddress().getPincode().isEmpty()) {
+				entity.getAddress().setPincode(request.getAddress().getPincode());
+			}
+		}
+		entity = repository.save(entity);
+		entity.setPassword("**********");
+		return entity;
 	}
 
 	public Response removeUser(String id) {
@@ -151,6 +205,8 @@ public class UserService {
 			name = user.getFirstName();
 		} else if (user.getLastName() != null) {
 			name = user.getLastName();
+		} else if(user.getName() != null) {
+			name = user.getName();
 		}
 		user.setName(name);
 	}
@@ -181,12 +237,15 @@ public class UserService {
 	public ResponseEntity<User> login(User user, HttpServletResponse response) {
 		User entity = repository.findByUserName(user.getUserName());
 		if(entity == null) {
-			user.setMessage("User not found");
+			entity = repository.findByEmail(user.getUserName());
+		}
+		if(entity == null) {
+			user.setMessage("User not found !");
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(user);
 		}
 		boolean isValid = validatePassword(user.getPassword(), entity.getPassword());
 		if(!isValid) {
-			user.setMessage("Incorrect password");
+			user.setMessage("Incorrect password !");
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(user);
 		}
 		String accessToken = generateAccessToken(entity);
@@ -245,17 +304,19 @@ public class UserService {
 
 	public User getDetailsFromToken(String token) {
 		User user = new User();
+		Claims claims = null;
 		try {
-			Claims claims = Jwts.parserBuilder()
+			claims = Jwts.parserBuilder()
 					.setSigningKey(Keys.hmacShaKeyFor(Constants.SECRET.getBytes(StandardCharsets.UTF_8)))
 					.build()
 					.parseClaimsJws(token)
 					.getBody();
-			user.setId(claims.getSubject());
-			user.setUserName(claims.get("user_name", String.class));
-		} catch (Exception e) {
-			return null;
+		} catch (ExpiredJwtException ex) {
+			// the claims still exist inside exception, even token expired
+	        claims = ex.getClaims();
 		}
+		user.setId(claims.getSubject());
+		user.setUserName(claims.get("user_name", String.class));
 		return user;
 	}
 
@@ -318,12 +379,15 @@ public class UserService {
 
 	public void registerOrLoginGoogleUser(Map<String, Object> userInfo, User tokens, HttpServletResponse response) {
 		String id = (String) userInfo.get("id");
-		User entity = repository.findByGoogleUserId(id);
 		String email = (String) userInfo.get("email");
 		String name = (String) userInfo.get("name");	// full name
 		String givenName = (String) userInfo.get("given_name");	// first name
 		String familyName = (String) userInfo.get("family_name");	// last name
 		String picture = (String) userInfo.get("picture");
+		User entity = repository.findByGoogleUserId(id);
+		if(entity == null) {
+			entity = repository.findByEmail(email);
+		}
 		if(entity == null) {
 			entity = new User();
 		}
@@ -334,8 +398,8 @@ public class UserService {
 		entity.setLastName(familyName);
 		entity.setAuthType(AuthType.OAUTH2_AUTHORIZATION_CODE);
 		entity.setGoogleRefreshToken(tokens.getGoogleRefreshToken());
-		// user picture
-			entity.setFiles(null);
+		List<String> fileIds = downloadAndSetImages(List.of(picture));
+		entity.setFiles(fileIds);
 		entity = repository.save(entity);	// create/update
 		String accessToken = generateAccessToken(entity);
 		entity.setAccessToken(accessToken);
@@ -384,6 +448,43 @@ public class UserService {
 		return response;
 	}
 	
+	private List<String> downloadAndSetImages(List<String> imagePaths) {
+		List<String> fileIds = null;
+		List<MultipartFile> multipartFiles = new ArrayList<MultipartFile>();
+		String imgName = "image_" + System.currentTimeMillis() + ".png";
+		for(String path: imagePaths) {
+			byte[] imageBytes = restTemplate.getForObject(path, byte[].class);
+			MultipartFile multipartFile = new CustomMultipartFile("files", imgName, "image/png", imageBytes);
+			multipartFiles.add(multipartFile);
+		}
+		fileIds = fileService.uploadFile(multipartFiles);
+		return fileIds;
+	}
+	
 	// auth - end
 
-}
+	public User isUserExists(User request) {
+		User user = null;
+//		if(request.getId() != null) {
+//			user = repository.findById(request.getId()).orElse(null);
+//			if(user != null) {
+//				user.setMessage("User already exists with given id!");
+//				return user;
+//			}
+//		}
+		if(user == null && request.getUserName() != null) {
+			user = repository.findByUserName(request.getUserName());
+			if(user != null) {
+				user.setMessage("User already exists with given user name!");
+				return user;
+			}
+		}
+		if(user == null && request.getEmail() != null) {
+			user = repository.findByEmail(request.getEmail());
+			if(user != null) {
+				user.setMessage("User already exists with given email!");
+				return user;}
+		}
+		return user;
+	}
+	}
