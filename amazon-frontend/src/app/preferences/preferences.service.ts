@@ -35,7 +35,6 @@ export class PreferencesService {
     }
 
     updatePreferencesSubject() {
-        console.log('pppppp');
         this.preferencesSubject.next(this.preferences);
     }
 

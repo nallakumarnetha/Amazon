@@ -9,8 +9,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddproductComponent } from '../addproduct/addproduct.component';
 import { FileComponent } from '../file/file.component';
 import { CartComponent } from '../cart/cart.component';
-import { CheckoutComponent } from '../checkout/checkout.component';
-import { PaymentComponent } from '../payment/payment.component';
 import { OrderComponent } from '../order/order.component';
 import { OrdersComponent } from '../orders/orders.component';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
@@ -29,7 +27,7 @@ import { MyInterceptor } from '../common/myinterceptor.interceptor';
 
 
 let myComponents = [MenuComponent, HomeComponent, ProductsComponent, FooterComponent, AddproductComponent
-  , FileComponent, CartComponent, CheckoutComponent, PaymentComponent, OrderComponent, OrdersComponent, ProductDetailComponent
+  , FileComponent, CartComponent, OrderComponent, OrdersComponent, ProductDetailComponent
   , UserComponent, PreferencesComponent, DemoModeComponent, SignupComponent, LoginComponent
 ];
 
