@@ -1,0 +1,31 @@
+# Backend stage
+FROM eclipse-temurin:17-jdk-alpine AS backend
+WORKDIR /app/backend
+COPY amazon-backend/ .
+RUN ./mvnw clean package -DskipTests
+
+# Frontend stage
+FROM node:18 AS frontend-build
+WORKDIR /app/frontend
+COPY amazon-frontend/ .
+RUN npm install
+RUN npm run build --prod
+
+# Final stage
+FROM alpine:latest
+RUN apk add --no-cache openjdk17 nginx bash supervisor
+WORKDIR /app
+
+# Copy backend jar
+COPY --from=backend /app/backend/target/your-backend.jar ./backend.jar
+
+# Copy frontend build to nginx
+COPY --from=frontend-build /app/frontend/dist/ /usr/share/nginx/html
+
+# Copy supervisord config
+COPY supervisord.conf /etc/supervisord.conf
+
+EXPOSE 8080 4200
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+
