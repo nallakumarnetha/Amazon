@@ -1,4 +1,4 @@
-package com.amazon.id;
+package com.common_service.id;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

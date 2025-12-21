@@ -1,4 +1,4 @@
-package com.amazon.common;
+package com.common_service.common;
 
 import org.slf4j.LoggerFactory;
 

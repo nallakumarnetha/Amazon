@@ -1,4 +1,4 @@
-package com.amazon.preferences;
+package com.common_service.preferences;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

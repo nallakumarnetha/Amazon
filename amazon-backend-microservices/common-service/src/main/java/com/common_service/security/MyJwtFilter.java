@@ -1,4 +1,4 @@
-package com.amazon.security;
+package com.common_service.security;
 
 import java.io.IOException;
 import java.util.ArrayList;

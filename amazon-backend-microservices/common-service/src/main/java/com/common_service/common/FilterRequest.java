@@ -1,4 +1,4 @@
-package com.amazon.common;
+package com.common_service.common;
 
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.amazon.file;
+package com.file_service.file;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

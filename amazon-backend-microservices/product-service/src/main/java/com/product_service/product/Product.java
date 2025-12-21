@@ -1,4 +1,4 @@
-package com.amazon.product;
+package com.product_service.product;
 
 import java.util.ArrayList;
 import java.util.List;

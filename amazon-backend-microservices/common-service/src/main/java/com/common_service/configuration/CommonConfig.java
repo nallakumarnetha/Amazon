@@ -1,4 +1,4 @@
-package com.amazon.configuration;
+package com.common_service.configuration;
 
 import java.net.URI;
 import java.util.Properties;

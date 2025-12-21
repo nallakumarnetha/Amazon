@@ -1,4 +1,4 @@
-package com.amazon.file;
+package com.file_service.file;
 
 public enum FileType {
 	JPG, 

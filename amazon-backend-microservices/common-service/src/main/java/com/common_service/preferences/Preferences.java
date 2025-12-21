@@ -1,4 +1,4 @@
-package com.amazon.preferences;
+package com.common_service.preferences;
 
 import com.amazon.common.Color;
 import com.fasterxml.jackson.annotation.JsonProperty;

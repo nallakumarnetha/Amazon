@@ -1,4 +1,4 @@
-package com.amazon.user;
+package com.user_service.user;
 
 public enum Language {
 	Telugu, 

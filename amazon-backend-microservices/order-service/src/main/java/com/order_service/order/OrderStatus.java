@@ -1,4 +1,4 @@
-package com.amazon.order;
+package com.order_service.order;
 
 public enum OrderStatus {
     Pending,

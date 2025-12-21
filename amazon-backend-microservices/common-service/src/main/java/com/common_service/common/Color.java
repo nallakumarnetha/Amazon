@@ -1,4 +1,4 @@
-package com.amazon.common;
+package com.common_service.common;
 
 public enum Color {
 	Red, 

@@ -1,4 +1,4 @@
-package com.amazon.cart;
+package com.cart_service.cart;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 

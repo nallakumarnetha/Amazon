@@ -1,4 +1,4 @@
-package com.amazon.exception;
+package com.common_service.exception;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

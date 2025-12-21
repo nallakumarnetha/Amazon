@@ -1,4 +1,4 @@
-package com.amazon.product;
+package com.product_service.product;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.amazon.common.Response;
+import com.amazon.product.Product;
 
 import jakarta.websocket.server.PathParam;
 

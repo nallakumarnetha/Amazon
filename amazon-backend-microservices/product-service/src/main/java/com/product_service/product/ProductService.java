@@ -1,4 +1,4 @@
-package com.amazon.product;
+package com.product_service.product;
 
 import static com.amazon.common.Logger.log;
 

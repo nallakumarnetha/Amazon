@@ -1,4 +1,4 @@
-package com.amazon.configuration;
+package com.common_service.configuration;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

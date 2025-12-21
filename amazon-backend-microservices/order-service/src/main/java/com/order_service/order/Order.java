@@ -1,4 +1,4 @@
-package com.amazon.order;
+package com.order_service.order;
 
 import java.util.List;
 import java.util.Locale.Category;

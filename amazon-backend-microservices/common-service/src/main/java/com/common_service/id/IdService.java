@@ -1,4 +1,4 @@
-package com.amazon.id;
+package com.common_service.id;
 
 import java.util.List;
 
