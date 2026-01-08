@@ -13,20 +13,20 @@ public class PreferencesService {
 	private PreferencesRepository repository;
 	
 	@Autowired
-	private UserService userService;
+	private UserClient userClient;
 
 	public Preferences find() {
-		Preferences preferences = repository.findByUserId(userService.getCurrentUser().getId());
+		Preferences preferences = repository.findByUserId(userClient.getCurrentUser().getId());
 		if(preferences == null) {
 			preferences = new Preferences();
-			preferences.setUserId(userService.getCurrentUser().getId());
+			preferences.setUserId(userClient.getCurrentUser().getId());
 			preferences = repository.save(preferences);
 		}
 		return preferences;
 	}
 
 	public Preferences update(Preferences request) {
-		Preferences preferences = repository.findByUserId(userService.getCurrentUser().getId());
+		Preferences preferences = repository.findByUserId(userClient.getCurrentUser().getId());
 		preferences.setAi(request.isAi());
 		preferences.setPrime(request.isPrime()); 
 		preferences.setColor(request.getColor());

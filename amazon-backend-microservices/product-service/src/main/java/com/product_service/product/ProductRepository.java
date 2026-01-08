@@ -18,6 +18,6 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 
 	List<Product> findByPriceBetween(double min, double max);
 	List<Product> findByCountBetween(long min, long max);
-	List<Product> findByCategory(Category category);
+	List<Product> findByCategory(XCategory category);
 	
 }

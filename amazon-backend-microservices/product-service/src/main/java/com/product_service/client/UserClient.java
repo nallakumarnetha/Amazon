@@ -1,13 +1,8 @@
 package com.product_service.client;
 
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import com.shared_contract.api.user_service.UserAPI;
 
-@FeignClient(name="USER-SERVICE")
-public interface UserClient {
+@FeignClient(name = "USER-SERVICE")
+public interface UserClient extends UserAPI {
 
-	@GetMapping("users/{id}")
-	User getUser(@PathVariable("id") long id);
-	
 }

@@ -29,7 +29,6 @@ import com.amazon.common.Constants;
 import com.amazon.common.CustomMultipartFile;
 import com.amazon.common.Response;
 import com.amazon.exception.CustomException;
-import com.amazon.file.FileService;
 import com.amazon.id.IdService;
 
 import io.jsonwebtoken.Claims;
@@ -49,7 +48,7 @@ public class UserService {
 	private UserRepository repository;
 
 	@Autowired
-	private FileService fileService;
+	private FileClient fileClient;
 
 	@Autowired
 	private IdService idService;
@@ -65,7 +64,7 @@ public class UserService {
 		for (User user : users) {
 			List<String> fileIds = user.getFiles(); // assuming User has List<String> files
 			if (fileIds != null && !fileIds.isEmpty()) {
-				Map<String, String> base64FilesData = fileService.getBase64Files(fileIds);
+				Map<String, String> base64FilesData = fileClient.getBase64Files(fileIds);
 				user.setBase64Files(base64FilesData);
 			}
 		}
@@ -78,7 +77,7 @@ public class UserService {
 	public User findUserById(String id) {
 		User user = repository.findById(id).orElse(null);
 		if (user != null && user.getFiles() != null && !user.getFiles().isEmpty()) {
-			Map<String, String> base64FilesData = fileService.getBase64Files(user.getFiles());
+			Map<String, String> base64FilesData = fileClient.getBase64Files(user.getFiles());
 			user.setBase64Files(base64FilesData);
 		}
 		return user;
@@ -396,7 +395,7 @@ public class UserService {
 		entity.setName(name);
 		entity.setFirstName(givenName);
 		entity.setLastName(familyName);
-		entity.setAuthType(AuthType.OAUTH2_AUTHORIZATION_CODE);
+		entity.setAuthType(XAuthType.OAUTH2_AUTHORIZATION_CODE);
 		entity.setGoogleRefreshToken(tokens.getGoogleRefreshToken());
 		List<String> fileIds = downloadAndSetImages(List.of(picture));
 		entity.setFiles(fileIds);
@@ -457,7 +456,7 @@ public class UserService {
 			MultipartFile multipartFile = new CustomMultipartFile("files", imgName, "image/png", imageBytes);
 			multipartFiles.add(multipartFile);
 		}
-		fileIds = fileService.uploadFile(multipartFiles);
+		fileIds = fileClient.uploadFile(multipartFiles);
 		return fileIds;
 	}
 	

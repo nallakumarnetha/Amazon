@@ -54,7 +54,7 @@ public class Order {
 	@JsonProperty("payment_id")
 	private String paymentId;
 	
-	private OrderStatus status;
+	private XOrderStatus status;
 	
 	@Enumerated(EnumType.STRING)
 	private com.amazon.product.Category category;
@@ -124,11 +124,11 @@ public class Order {
 		this.paymentId = paymentId;
 	}
 
-	public OrderStatus getStatus() {
+	public XOrderStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(OrderStatus status) {
+	public void setStatus(XOrderStatus status) {
 		this.status = status;
 	}
 	

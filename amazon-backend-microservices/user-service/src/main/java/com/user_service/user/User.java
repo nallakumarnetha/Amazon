@@ -52,17 +52,17 @@ public class User extends Response {
 	private String phoneNumber;
 
 	@Enumerated(EnumType.STRING)
-	private Gender gender;
+	private XGender gender;
 
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "address_id")
 	private Address address;
 
 	@Enumerated(EnumType.STRING)
-	private Role role;
+	private XRole role;
 	
 	@Enumerated(EnumType.STRING)
-	private Language language;
+	private XLanguage language;
 	
 	private List<String> files;
 	
@@ -79,7 +79,7 @@ public class User extends Response {
 	
 	@Enumerated(EnumType.STRING)
 	@JsonProperty("auth_type")
-	private AuthType authType;
+	private XAuthType authType;
 	
     @Column(name = "user_name", unique = true)
 	@JsonProperty("user_name")
@@ -157,11 +157,11 @@ public class User extends Response {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public Gender getGender() {
+	public XGender getGender() {
 		return gender;
 	}
 
-	public void setGender(Gender gender) {
+	public void setGender(XGender gender) {
 		this.gender = gender;
 	}
 
@@ -173,19 +173,19 @@ public class User extends Response {
 		this.address = address;
 	}
 
-	public Role getRole() {
+	public XRole getRole() {
 		return role;
 	}
 
-	public void setRole(Role role) {
+	public void setRole(XRole role) {
 		this.role = role;
 	}
 
-	public Language getLanguage() {
+	public XLanguage getLanguage() {
 		return language;
 	}
 
-	public void setLanguage(Language language) {
+	public void setLanguage(XLanguage language) {
 		this.language = language;
 	}
 
@@ -205,11 +205,11 @@ public class User extends Response {
 		this.base64Files = base64Files;
 	}
 
-	public AuthType getAuthType() {
+	public XAuthType getAuthType() {
 		return authType;
 	}
 
-	public void setAuthType(AuthType authType) {
+	public void setAuthType(XAuthType authType) {
 		this.authType = authType;
 	}
 

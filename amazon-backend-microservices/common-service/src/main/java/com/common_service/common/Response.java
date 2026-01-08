@@ -20,13 +20,13 @@ public class Response {
 
 	private String message;
 
-	private List<Product> products;
+	private List<ProductDTO> products;
 
-	private List<User> users;
+	private List<UserDTO> users;
 	
-	private List<Order> orders;
+	private List<OrderDTO> orders;
 	
-	private List<Address> addresses;
+	private List<AddressDTO> addresses;
 
 	public int getStart() {
 		return start;
@@ -60,35 +60,35 @@ public class Response {
 		this.message = message;
 	}
 
-	public List<Product> getProducts() {
+	public List<ProductDTO> getProducts() {
 		return products;
 	}
 
-	public void setProducts(List<Product> products) {
+	public void setProducts(List<ProductDTO> products) {
 		this.products = products;
 	}
 
-	public List<User> getUsers() {
+	public List<UserDTO> getUsers() {
 		return users;
 	}
 
-	public void setUsers(List<User> users) {
+	public void setUsers(List<UserDTO> users) {
 		this.users = users;
 	}
 
-	public List<Order> getOrders() {
+	public List<OrderDTO> getOrders() {
 		return orders;
 	}
 
-	public void setOrders(List<Order> orders) {
+	public void setOrders(List<OrderDTO> orders) {
 		this.orders = orders;
 	}
 
-	public List<Address> getAddresses() {
+	public List<AddressDTO> getAddresses() {
 		return addresses;
 	}
 
-	public void setAddresses(List<Address> addresses) {
+	public void setAddresses(List<AddressDTO> addresses) {
 		this.addresses = addresses;
 	}
 	

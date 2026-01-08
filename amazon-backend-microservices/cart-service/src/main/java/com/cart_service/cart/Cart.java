@@ -2,9 +2,6 @@ package com.cart_service.cart;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.amazon.common.Status;
-import com.amazon.product.Product;
-import com.amazon.user.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,12 +10,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+
+import com.shared_contract.original.Status;
 
 @Entity
 @JsonInclude(value = Include.NON_EMPTY)

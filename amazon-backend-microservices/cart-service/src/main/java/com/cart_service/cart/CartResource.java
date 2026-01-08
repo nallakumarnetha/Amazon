@@ -1,6 +1,6 @@
 package com.cart_service.cart;
 
-import static com.amazon.common.Logger.log;
+import static com.shared_contract.original.Logger.log;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,10 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amazon.common.Response;
-import com.amazon.common.Status;
-import com.amazon.product.Product;
-import com.amazon.product.ProductService;
 
 @RestController
 @RequestMapping("cart")

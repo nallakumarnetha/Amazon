@@ -46,19 +46,16 @@ public class ProductService {
 	private ProductRepository repository;
 
 	@Autowired
-	private FileService fileService;
+	private FileClient fileClient;
 
 	@Autowired
 	private IdService idService;
 
 	@Autowired
-	private CartRepository cartRepository;
+	private CartClient cartClient;
 
 	@Autowired
-	private CartService cartService;
-	
-	@Autowired
-	private UserService userService;
+	private UserClient userClient;
 
 	// CRUD start
 
@@ -73,11 +70,11 @@ public class ProductService {
 		for(Product product : products) {
 			// set base64 files
 			List<String> fileIds = product.getFiles();
-			Map<String, String> base64FilesData = fileService.getBase64Files(fileIds);
+			Map<String, String> base64FilesData = fileClient.getBase64Files(fileIds);
 			product.setBase64Files(base64FilesData);
 			//set cart count
-			if(userService.getCurrentUser() != null) {
-				Cart cart = cartService.findCartByProductId(product.getId());
+			if(userClient.getCurrentUser() != null) {
+				CartDTO cart = cartClient.findCartByProductId(product.getId());
 				if(cart != null) {
 					product.setCartCount(cart.getCount());
 				}
@@ -95,10 +92,10 @@ public class ProductService {
 		Product response = repository.findById(id).orElse(null);
 		// set base64 files
 		List<String> fileIds = response.getFiles();
-		Map<String, String> base64FilesData = fileService.getBase64Files(fileIds);
+		Map<String, String> base64FilesData = fileClient.getBase64Files(fileIds);
 		response.setBase64Files(base64FilesData);
 		//set cart count
-		Cart cart = cartService.findCartByProductId(id);
+		CartDTO cart = cartClient.findCartByProductId(id);
 		if(cart != null) {
 			response.setCartCount(cart.getCount());
 		}
@@ -139,7 +136,7 @@ public class ProductService {
 
 	@Transactional
 	public Response deleteProduct(String id) {
-		cartRepository.deleteByProductId(id);
+		cartClient.deleteByProductId(id);
 		repository.deleteById(id);
 		Response response = new Response();
 		response.setMessage("product deleted");
@@ -152,7 +149,7 @@ public class ProductService {
 		List<Product> products = repository.searchByIdOrName(query);
 		for (Product product : products) {
 			List<String> fileIds = product.getFiles();
-			Map<String, String> base64FilesData = fileService.getBase64Files(fileIds);
+			Map<String, String> base64FilesData = fileClient.getBase64Files(fileIds);
 			product.setBase64Files(base64FilesData);
 		}
 		Response response = new Response();
@@ -174,7 +171,7 @@ public class ProductService {
 		}
 		for(Product product : products) {
 			List<String> fileIds = product.getFiles();
-			Map<String, String> base64FilesData = fileService.getBase64Files(fileIds);
+			Map<String, String> base64FilesData = fileClient.getBase64Files(fileIds);
 			product.setBase64Files(base64FilesData);
 		}
 		Response response = new Response();
@@ -188,7 +185,7 @@ public class ProductService {
 			Path path = Paths.get("src/main/resources/images/sampleProduct.png");
 			byte[] imageBytes = Files.readAllBytes(path);
 			MultipartFile multipartFile = new CustomMultipartFile("files", "file1.txt", "image/png", imageBytes);
-			List<String> fileIds = fileService.uploadFile(List.of(multipartFile));
+			List<String> fileIds = fileClient.uploadFile(List.of(multipartFile));
 			request.setFiles(fileIds);
 		} catch(Exception ex) {
 			log.info("failed to add sample image");

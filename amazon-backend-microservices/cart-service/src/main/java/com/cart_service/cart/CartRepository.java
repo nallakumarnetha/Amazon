@@ -1,11 +1,9 @@
 package com.cart_service.cart;
 
 import java.util.List;
+import com.shared_contract.original.Status;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.amazon.common.Status;
-import com.amazon.product.Product;
 
 public interface CartRepository extends JpaRepository<Cart, String> {
 	public List<Cart> findByUserId(String id);

@@ -23,7 +23,7 @@ public class Preferences {
 	private boolean ai = true;
 
 	@Enumerated(EnumType.STRING)
-	private Color color = Color.Blue;
+	private XColor color = XColor.Blue;
 	
 	@JsonProperty("text_value")
 	private String textValue;
@@ -57,11 +57,11 @@ public class Preferences {
 		this.ai = ai;
 	}
 
-	public Color getColor() {
+	public XColor getColor() {
 		return color;
 	}
 
-	public void setColor(Color color) {
+	public void setColor(XColor color) {
 		this.color = color;
 	}
 

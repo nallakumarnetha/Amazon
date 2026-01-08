@@ -36,13 +36,13 @@ public class OrderService {
 	private IdService idService;
 
 	@Autowired
-	private UserService userService;
+	private UserClient userClient;
 
 	@Autowired
 	private JavaMailSender mailSender;
 
 	public Response findAllOrders(int page, int size) {
-		User user = userService.getCurrentUser();
+		UserDTO user = userClient.getCurrentUser();
 		List<Order> orders = null;
 		long total = 0;
 		Sort sort = Sort.by(Sort.Direction.DESC, "audit.modifiedDate");
@@ -50,7 +50,7 @@ public class OrderService {
 			orders = repository.findAll(PageRequest.of(page, size, sort)).getContent();
 			total = repository.count();
 		} else {
-			orders = repository.findByUserId(userService.getCurrentUser().getId(), PageRequest.of(page, size, sort)).getContent();
+			orders = repository.findByUserId(userClient.getCurrentUser().getId(), PageRequest.of(page, size, sort)).getContent();
 			total = repository.countByUserId(user.getId()); 
 		}
 		Response response = new Response();
@@ -65,10 +65,10 @@ public class OrderService {
 
 	public Order addOrder(Order order) {
 		if(order.getStatus() == null) {
-			order.setStatus(OrderStatus.Pending);
+			order.setStatus(XOrderStatus.Pending);
 		}
 		order.setOrderId(idService.getOrderID());
-		order.setUserId(userService.getCurrentUser().getId());
+		order.setUserId(userClient.getCurrentUser().getId());
 		Order entity = repository.save(order);
 		// sendEmailOnPlaceorder(entity);
 		return entity;
@@ -116,7 +116,7 @@ public class OrderService {
 	}
 	private void sendEmailOnPlaceorder(Order entity) {
 		try {
-			User user = userService.findUserById(entity.getUserId());
+			UserDTO user = userClient.findUserById(entity.getUserId());
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true); // multipart
 			helper.setTo(user.getEmail());

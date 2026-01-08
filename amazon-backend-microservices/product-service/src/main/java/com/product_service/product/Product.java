@@ -6,8 +6,6 @@ import java.util.Map;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.amazon.common.Audit;
-import com.amazon.common.Status;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -57,10 +55,10 @@ public class Product {
 	private long cartCount;	// CartProduct
 	
 	@Transient
-	private Status status;	// CartProduct
+	private XStatus status;	// CartProduct
 	
 	@Enumerated(EnumType.STRING)
-	private com.amazon.product.Category category;
+	private XCategory category;
 	
 	@Embedded
 	private Audit audit;
@@ -136,11 +134,11 @@ public class Product {
 		this.count = count;
 	}
 
-	public Status getStatus() {
+	public XStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(XStatus status) {
 		this.status = status;
 	}
 
@@ -152,11 +150,11 @@ public class Product {
 		this.cartCount = cartCount;
 	}
 
-	public com.amazon.product.Category getCategory() {
+	public com.amazon.product.XCategory getCategory() {
 		return category;
 	}
 
-	public void setCategory(com.amazon.product.Category category) {
+	public void setCategory(com.XCategory.product.Category category) {
 		this.category = category;
 	}
 	

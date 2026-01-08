@@ -80,7 +80,7 @@ public class UserResource {
 	
 	@PostMapping("register")
 	public User registerUser(@RequestBody User request, HttpServletResponse response) {
-		request.setAuthType(AuthType.BASIC_TOKEN);
+		request.setAuthType(XAuthType.BASIC_TOKEN);
 		User userResponse = service.addUser(request, response);
 		return userResponse;
 	}
