@@ -3,9 +3,7 @@ package com.common_service.preferences;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.amazon.common.Response;
-
-import static com.amazon.common.Logger.log;
+import static com.shared_contract.original.Logger.log;
 
 @RestController
 @RequestMapping("preferences")

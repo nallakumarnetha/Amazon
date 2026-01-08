@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
 
-import com.amazon.user.User;
-import com.amazon.user.UserService;
+import com.user_service.user.User;
+import com.user_service.user.UserService;
+
 
 @Component
 public class AuditorAwareImpl implements AuditorAware<String> {

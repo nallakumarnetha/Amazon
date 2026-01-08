@@ -6,18 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
 
-import com.amazon.user.User;
-import com.amazon.user.UserService;
+import com.product_service.client.UserClient;
+import com.shared_contract.dto.user_service.UserDTO;
 
 @Component
 public class AuditorAwareImpl implements AuditorAware<String> {
 	
 	@Autowired
-	private UserService userService;
+	private UserClient userClient;
 	
     @Override
     public Optional<String> getCurrentAuditor() {
-    	User user = userService.getCurrentUser();
+    	UserDTO user = userClient.getCurrentUser();
     	if(user != null) {
     		return Optional.ofNullable(user.getName());
     	}

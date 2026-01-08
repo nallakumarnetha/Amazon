@@ -1,6 +1,6 @@
 package com.product_service.product;
 
-import static com.amazon.common.Logger.log;
+import static com.shared_contract.original.Logger.log;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,19 +22,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.amazon.cart.Cart;
-import com.amazon.cart.CartRepository;
-import com.amazon.cart.CartService;
-import com.amazon.common.Audit;
-import com.amazon.common.CustomMultipartFile;
-import com.amazon.common.FilterRequest;
-//import com.amazon.common.ID;
-import com.amazon.common.Response;
-import com.amazon.file.File;
-import com.amazon.file.FileRepository;
-import com.amazon.file.FileService;
-import com.amazon.id.IdService;
-import com.amazon.user.UserService;
+import com.product_service.client.CartClient;
+import com.product_service.client.FileClient;
+import com.product_service.client.UserClient;
+import com.product_service.id.IdService;
+import com.shared_contract.dto.cart_service.CartDTO;
+import com.shared_contract.original.CustomMultipartFile;
+import com.shared_contract.original.FilterRequest;
 
 import jakarta.transaction.Transactional;
 import jakarta.websocket.server.PathParam;
@@ -136,7 +130,7 @@ public class ProductService {
 
 	@Transactional
 	public Response deleteProduct(String id) {
-		cartClient.deleteByProductId(id);
+		cartClient.deleteFromCart(id);
 		repository.deleteById(id);
 		Response response = new Response();
 		response.setMessage("product deleted");

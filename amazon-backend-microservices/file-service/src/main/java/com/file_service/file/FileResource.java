@@ -1,6 +1,7 @@
 package com.file_service.file;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.amazon.common.Response;
 
 @RestController
 @RequestMapping("files")
@@ -25,4 +24,9 @@ public class FileResource {
 		return response;
 	}
 	
+	@PostMapping("/base64")
+	public Map<String, String> getBase64Files(@RequestBody List<String> ids) {
+		Map<String, String> base64Files = service.getBase64Files(ids);
+		return base64Files;
+	}
 }

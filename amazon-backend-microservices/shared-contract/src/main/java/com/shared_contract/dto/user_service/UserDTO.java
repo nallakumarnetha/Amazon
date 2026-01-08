@@ -5,24 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.user_service.user.Address;
-import com.user_service.user.Audit;
-import com.user_service.user.XAuthType;
-import com.user_service.user.XGender;
-import com.user_service.user.XLanguage;
-import com.user_service.user.XRole;
+import com.shared_contract.original.user_service.AuthType;
+import com.shared_contract.original.user_service.Gender;
+import com.shared_contract.original.user_service.Language;
+import com.shared_contract.original.user_service.Role;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Transient;
 
 public class UserDTO {
 
@@ -44,11 +31,11 @@ public class UserDTO {
 
 	private Gender gender;
 
-	private Address address;
+	private AddressDTO address;
 
-	private XRole role;
+	private Role role;
 	
-	private XLanguage language;
+	private Language language;
 	
 	private List<String> files;
 	
@@ -62,7 +49,7 @@ public class UserDTO {
 	// auth start
 	
 	@JsonProperty("auth_type")
-	private XAuthType authType;
+	private AuthType authType;
 	
 	@JsonProperty("user_name")
 	private String userName;
@@ -140,11 +127,11 @@ public class UserDTO {
 		this.gender = gender;
 	}
 
-	public Address getAddress() {
+	public AddressDTO getAddress() {
 		return address;
 	}
 
-	public void setAddress(Address address) {
+	public void setAddress(AddressDTO address) {
 		this.address = address;
 	}
 

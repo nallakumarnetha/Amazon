@@ -1,12 +1,10 @@
 package com.shared_contract.original;
 
-import org.springframework.stereotype.Component;
-
-import com.amazon.order.OrderStatus;
-import com.amazon.product.Category;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.shared_contract.original.order_service.OrderStatus;
+import com.shared_contract.original.product_service.Category;
 
 @JsonInclude(value = Include.NON_EMPTY)
 public class FilterRequest {

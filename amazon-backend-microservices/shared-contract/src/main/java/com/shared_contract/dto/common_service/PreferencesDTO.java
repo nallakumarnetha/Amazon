@@ -1,15 +1,9 @@
 package com.shared_contract.dto.common_service;
 
-import com.common_service.preferences.Color;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.shared_contract.original.Color;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-public interface PreferencesDTO {
+public class PreferencesDTO {
 
 	private String id;
 	

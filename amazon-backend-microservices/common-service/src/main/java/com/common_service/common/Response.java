@@ -2,12 +2,12 @@ package com.common_service.common;
 
 import java.util.List;
 
-import com.amazon.user.Address;
-import com.amazon.order.Order;
-import com.amazon.product.Product;
-import com.amazon.user.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.shared_contract.dto.order_service.OrderDTO;
+import com.shared_contract.dto.product_service.ProductDTO;
+import com.shared_contract.dto.user_service.AddressDTO;
+import com.shared_contract.dto.user_service.UserDTO;
 
 @JsonInclude(value = Include.NON_EMPTY)
 public class Response {

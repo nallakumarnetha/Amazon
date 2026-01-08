@@ -1,17 +1,11 @@
 package com.user_service.user;
 
-import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -25,11 +19,11 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.amazon.common.Constants;
-import com.amazon.common.CustomMultipartFile;
-import com.amazon.common.Response;
-import com.amazon.exception.CustomException;
-import com.amazon.id.IdService;
+import com.shared_contract.original.CustomException;
+import com.shared_contract.original.CustomMultipartFile;
+import com.shared_contract.original.user_service.AuthType;
+import com.user_service.client.FileClient;
+import com.user_service.id.IdService;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -38,6 +32,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+
+import com.user_service.common.Constants;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -395,7 +391,7 @@ public class UserService {
 		entity.setName(name);
 		entity.setFirstName(givenName);
 		entity.setLastName(familyName);
-		entity.setAuthType(XAuthType.OAUTH2_AUTHORIZATION_CODE);
+		entity.setAuthType(AuthType.OAUTH2_AUTHORIZATION_CODE);
 		entity.setGoogleRefreshToken(tokens.getGoogleRefreshToken());
 		List<String> fileIds = downloadAndSetImages(List.of(picture));
 		entity.setFiles(fileIds);

@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amazon.common.FilterRequest;
-import com.amazon.common.Response;
+import com.shared_contract.original.FilterRequest;
 
-import static com.amazon.common.Logger.log;
+import static com.shared_contract.original.Logger.log;
 
 import java.awt.print.Pageable;
 

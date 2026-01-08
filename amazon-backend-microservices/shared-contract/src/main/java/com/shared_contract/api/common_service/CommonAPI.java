@@ -1,14 +1,11 @@
 package com.shared_contract.api.common_service;
 
-import java.io.IOException;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 
 @RequestMapping("common")
 public interface CommonAPI {
-
-	@GetMapping("dump-data")
-	ResponseDTO dumpData();
 	
-	@DeleteMapping("clear-data")
-	ResponseDTO clearData();
+	// no APIs are used in other services
 	
 }

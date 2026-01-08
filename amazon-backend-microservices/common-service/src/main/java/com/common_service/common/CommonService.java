@@ -1,11 +1,6 @@
 package com.common_service.common;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,22 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.amazon.cart.CartService;
-import com.amazon.file.FileService;
-import com.amazon.order.Order;
-import com.amazon.order.OrderService;
-import com.amazon.order.OrderStatus;
-import com.amazon.product.Category;
-import com.amazon.product.Product;
-import com.amazon.product.ProductService;
-import com.amazon.user.Address;
-import com.amazon.user.Gender;
-import com.amazon.user.Language;
-import com.amazon.user.Role;
-import com.amazon.user.User;
-import com.amazon.user.UserService;
+import com.common_service.client.CartClient;
+import com.common_service.client.FileClient;
+import com.common_service.client.OrderClient;
+import com.common_service.client.ProductClient;
+import com.common_service.client.UserClient;
+import com.shared_contract.dto.order_service.OrderDTO;
+import com.shared_contract.dto.product_service.ProductDTO;
+import com.shared_contract.dto.user_service.AddressDTO;
+import com.shared_contract.dto.user_service.UserDTO;
+import com.shared_contract.original.CustomMultipartFile;
+import com.shared_contract.original.order_service.OrderStatus;
+import com.shared_contract.original.product_service.Category;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
@@ -315,7 +307,7 @@ public class CommonService {
 		OrderDTO order = new OrderDTO();
 		order.setUserId(user.getId());
 		
-		order.setProductId(productClient.findProduct(orders.get(0)).getProductId());
+		order.setProductId(productClient.findProductById(orders.get(0)).getProductId());
 		order.setCount(2);
 		order.setAmount(2924);
 		order.setPaymentId("p_id_1");
@@ -327,7 +319,7 @@ public class CommonService {
 		// order 2
 		order = new OrderDTO();
 		order.setUserId(user.getId());
-		order.setProductId(productClient.findProduct(orders.get(1)).getProductId());
+		order.setProductId(productClient.findProductById(orders.get(1)).getProductId());
 		order.setCount(2);
 		order.setAmount(11866);
 		order.setPaymentId("p_id_2");
@@ -339,7 +331,7 @@ public class CommonService {
 		// order 3
 		order = new OrderDTO();
 		order.setUserId(user.getId());
-		order.setProductId(productClient.findProduct(orders.get(2)).getProductId());
+		order.setProductId(productClient.findProductById(orders.get(2)).getProductId());
 		order.setCount(2);
 		order.setAmount(25454);
 		order.setPaymentId("p_id_3");
@@ -351,7 +343,7 @@ public class CommonService {
 		// order 4
 		order = new OrderDTO();
 		order.setUserId(user.getId());
-		order.setProductId(productClient.findProduct(orders.get(3)).getProductId());
+		order.setProductId(productClient.findProductById(orders.get(3)).getProductId());
 		order.setCount(2);
 		order.setAmount(4470);
 		order.setPaymentId("p_id_4");
@@ -363,7 +355,7 @@ public class CommonService {
 		// order 5
 		order = new OrderDTO();
 		order.setUserId(user.getId());
-		order.setProductId(productClient.findProduct(orders.get(4)).getProductId());
+		order.setProductId(productClient.findProductById(orders.get(4)).getProductId());
 		order.setCount(2);
 		order.setAmount(9458);
 		order.setPaymentId("p_id_5");
@@ -375,14 +367,14 @@ public class CommonService {
 		// order 6
 		order = new OrderDTO();
 		order.setUserId(user.getId());
-		order.setProductId(productClient.findProduct(orders.get(5)).getProductId());
+		order.setProductId(productClient.findProductById(orders.get(5)).getProductId());
 		order.setCount(2);
 		order.setAmount(4986);
 		order.setPaymentId("p_id_6");
 		order.setStatus(OrderStatus.Returned);
 		order.setAddress(address.getCity());
 		order.setCategory(Category.Grocery);
-		order = orderService.addOrder(order);
+		order = orderClient.addOrder(order);
 	}
 	
 	@Transactional

@@ -1,9 +1,6 @@
 package com.order_service.order;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,19 +9,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-//
-//import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-//import org.springframework.ws.mime.MimeMessage;
+
+import com.order_service.client.UserClient;
+import com.order_service.id.IdService;
+import com.shared_contract.dto.user_service.UserDTO;
+import com.shared_contract.original.FilterRequest;
+import com.shared_contract.original.order_service.OrderStatus;
+import com.shared_contract.original.user_service.Role;
+
 import jakarta.mail.internet.MimeMessage;
-
-import com.amazon.common.FilterRequest;
-import com.amazon.common.Response;
-import com.amazon.id.IdService;
-import com.amazon.user.Role;
-import com.amazon.user.User;
-import com.amazon.user.UserService;
-
 
 @Service
 public class OrderService {
@@ -65,7 +59,7 @@ public class OrderService {
 
 	public Order addOrder(Order order) {
 		if(order.getStatus() == null) {
-			order.setStatus(XOrderStatus.Pending);
+			order.setStatus(OrderStatus.Pending);
 		}
 		order.setOrderId(idService.getOrderID());
 		order.setUserId(userClient.getCurrentUser().getId());

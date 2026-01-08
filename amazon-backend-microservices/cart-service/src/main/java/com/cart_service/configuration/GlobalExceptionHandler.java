@@ -1,4 +1,11 @@
 package com.cart_service.configuration;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import com.shared_contract.original.CustomException;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 

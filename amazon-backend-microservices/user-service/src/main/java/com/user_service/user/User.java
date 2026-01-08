@@ -6,11 +6,13 @@ import java.util.Map;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.amazon.user.Address;
-import com.amazon.common.Audit;
-import com.amazon.common.Response;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.shared_contract.original.user_service.AuthType;
+import com.shared_contract.original.user_service.Gender;
+import com.shared_contract.original.user_service.Language;
+import com.shared_contract.original.user_service.Role;
+import com.user_service.common.Audit;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import jakarta.persistence.CascadeType;
@@ -52,17 +54,17 @@ public class User extends Response {
 	private String phoneNumber;
 
 	@Enumerated(EnumType.STRING)
-	private XGender gender;
+	private Gender gender;
 
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "address_id")
 	private Address address;
 
 	@Enumerated(EnumType.STRING)
-	private XRole role;
+	private Role role;
 	
 	@Enumerated(EnumType.STRING)
-	private XLanguage language;
+	private Language language;
 	
 	private List<String> files;
 	
@@ -79,7 +81,7 @@ public class User extends Response {
 	
 	@Enumerated(EnumType.STRING)
 	@JsonProperty("auth_type")
-	private XAuthType authType;
+	private AuthType authType;
 	
     @Column(name = "user_name", unique = true)
 	@JsonProperty("user_name")
@@ -157,11 +159,11 @@ public class User extends Response {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public XGender getGender() {
+	public Gender getGender() {
 		return gender;
 	}
 
-	public void setGender(XGender gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 
@@ -173,19 +175,19 @@ public class User extends Response {
 		this.address = address;
 	}
 
-	public XRole getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(XRole role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 
-	public XLanguage getLanguage() {
+	public Language getLanguage() {
 		return language;
 	}
 
-	public void setLanguage(XLanguage language) {
+	public void setLanguage(Language language) {
 		this.language = language;
 	}
 
@@ -205,11 +207,11 @@ public class User extends Response {
 		this.base64Files = base64Files;
 	}
 
-	public XAuthType getAuthType() {
+	public AuthType getAuthType() {
 		return authType;
 	}
 
-	public void setAuthType(XAuthType authType) {
+	public void setAuthType(AuthType authType) {
 		this.authType = authType;
 	}
 

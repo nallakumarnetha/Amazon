@@ -1,20 +1,15 @@
 package com.order_service.order;
 
-import java.util.List;
 import java.util.Locale.Category;
-import java.util.Map;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.amazon.common.Audit;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.order_service.common.Audit;
+import com.shared_contract.original.order_service.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -23,10 +18,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import com.amazon.user.Address;
 
 @Entity
 @Table(name = "orders")	//order is reserved keyword in db
@@ -54,10 +46,10 @@ public class Order {
 	@JsonProperty("payment_id")
 	private String paymentId;
 	
-	private XOrderStatus status;
+	private OrderStatus status;
 	
 	@Enumerated(EnumType.STRING)
-	private com.amazon.product.Category category;
+	private Category category;
 	
 	private String address;
 	
@@ -124,19 +116,19 @@ public class Order {
 		this.paymentId = paymentId;
 	}
 
-	public XOrderStatus getStatus() {
+	public OrderStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(XOrderStatus status) {
+	public void setStatus(OrderStatus status) {
 		this.status = status;
 	}
 	
-	public com.amazon.product.Category getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 
-	public void setCategory(com.amazon.product.Category category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 

@@ -2,10 +2,6 @@ package com.user_service.user;
 
 import java.util.List;
 
-import com.common_service.common.Address;
-import com.common_service.common.Order;
-import com.common_service.common.Product;
-import com.common_service.common.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 

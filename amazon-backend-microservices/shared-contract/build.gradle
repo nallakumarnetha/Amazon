@@ -10,8 +10,12 @@ repositories {
 }
 
 dependencies {
-    api 'jakarta.validation:jakarta.validation-api:3.0.2'
-    api 'com.fasterxml.jackson.core:jackson-annotations:2.17.1'
+   api 'javax.validation:validation-api:2.0.1.Final'
+   api 'com.fasterxml.jackson.core:jackson-annotations:2.17.1'
+   // for API/web annotations 
+   api 'org.springframework:spring-web:5.3.39'
+   // for Logger
+   api 'org.slf4j:slf4j-api:1.7.36'
 }
 
 java {

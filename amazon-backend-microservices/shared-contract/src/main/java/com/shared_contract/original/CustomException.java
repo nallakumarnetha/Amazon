@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CustomException extends Exception {
 	
+	private static final long serialVersionUID = 1L;
+
 	@JsonProperty("status code")
 	private int statusCode;
 	

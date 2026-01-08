@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.shared_contract.dto.product_service.ProductDTO;
 
-import com.shared_contract.product_service.ProductDTO;
 
 @JsonInclude(value = Include.NON_EMPTY)
 public class Response {

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.shared_contract.original.Status;
+import com.shared_contract.original.product_service.Category;
 
 public class ProductDTO {
 

@@ -15,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amazon.common.Response;
-import com.amazon.exception.CustomException;
-import com.amazon.product.Product;
-import com.amazon.product.ProductService;
+import com.shared_contract.original.CustomException;
+import com.shared_contract.original.user_service.AuthType;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.websocket.server.PathParam;
@@ -80,7 +78,7 @@ public class UserResource {
 	
 	@PostMapping("register")
 	public User registerUser(@RequestBody User request, HttpServletResponse response) {
-		request.setAuthType(XAuthType.BASIC_TOKEN);
+		request.setAuthType(AuthType.BASIC_TOKEN);
 		User userResponse = service.addUser(request, response);
 		return userResponse;
 	}

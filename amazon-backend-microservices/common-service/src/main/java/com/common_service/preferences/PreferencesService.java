@@ -3,8 +3,8 @@ package com.common_service.preferences;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.amazon.common.Response;
-import com.amazon.user.UserService;
+import com.common_service.client.UserClient;
+
 
 @Service
 public class PreferencesService {

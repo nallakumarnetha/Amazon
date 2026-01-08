@@ -1,6 +1,7 @@
 package com.cart_service.cart;
 
 import static com.shared_contract.original.Logger.log;
+import com.shared_contract.original.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;

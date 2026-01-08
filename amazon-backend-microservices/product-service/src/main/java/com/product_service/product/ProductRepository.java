@@ -6,8 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.amazon.common.Response;
-import com.amazon.product.Product;
+import com.shared_contract.original.product_service.Category;
 
 import jakarta.websocket.server.PathParam;
 
@@ -18,6 +17,6 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 
 	List<Product> findByPriceBetween(double min, double max);
 	List<Product> findByCountBetween(long min, long max);
-	List<Product> findByCategory(XCategory category);
+	List<Product> findByCategory(Category category);
 	
 }

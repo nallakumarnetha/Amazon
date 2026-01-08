@@ -2,13 +2,10 @@ package com.user_service.user;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.amazon.common.Audit;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.user_service.common.Audit;
 
-import jakarta.persistence.Access;
-import jakarta.persistence.AccessType;
-import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;

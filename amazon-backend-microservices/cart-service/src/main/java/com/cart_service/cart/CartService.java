@@ -5,21 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.amazon.common.Response;
-import com.amazon.common.Status;
-import com.amazon.file.FileService;
-import com.amazon.product.Product;
-import com.amazon.product.ProductRepository;
-import com.amazon.user.UserService;
 import com.cart_service.cart.client.FileClient;
 import com.cart_service.cart.client.ProductClient;
+import com.cart_service.cart.client.UserClient;
+import com.shared_contract.dto.product_service.ProductDTO;
+import com.shared_contract.original.Status;
 
 @Service
 public class CartService {
@@ -45,7 +37,7 @@ public class CartService {
 			cartProducts = repository.findByUserIdAndStatus(userClient.getCurrentUser().getId(), status);
 		}
 		cartProducts.forEach(p -> { 
-			ProductDTO product = productClient.findById(p.getProductId()).orElse(null);
+			ProductDTO product = productClient.findProductById(p.getProductId());
 			product.setCartCount(p.getCount());
 			product.setStatus(p.getStatus());
 			List<String> fileIds = product.getFiles();

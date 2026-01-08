@@ -1,7 +1,7 @@
 package com.common_service.preferences;
 
-import com.amazon.common.Color;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.shared_contract.original.Color;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -23,7 +23,7 @@ public class Preferences {
 	private boolean ai = true;
 
 	@Enumerated(EnumType.STRING)
-	private XColor color = XColor.Blue;
+	private Color color = Color.Blue;
 	
 	@JsonProperty("text_value")
 	private String textValue;
@@ -57,11 +57,11 @@ public class Preferences {
 		this.ai = ai;
 	}
 
-	public XColor getColor() {
+	public Color getColor() {
 		return color;
 	}
 
-	public void setColor(XColor color) {
+	public void setColor(Color color) {
 		this.color = color;
 	}
 

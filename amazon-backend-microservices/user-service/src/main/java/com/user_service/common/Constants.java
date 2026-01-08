@@ -1,6 +1,5 @@
 package com.user_service.common;
 
-import java.util.Base64;
 
 public class Constants {
 

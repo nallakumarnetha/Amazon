@@ -1,7 +1,5 @@
 package com.order_service.common;
 
-import java.util.Base64;
-
 public class Constants {
 
 	// email
@@ -14,6 +12,5 @@ public class Constants {
 	public static final String MAIL_PROTOCOL = "smtp";
 	public static final String MAIL_SMTP_AUTH = "true";
 	public static final String MAIL_SMTP_STARTTLS = "true";
-
 	
 }

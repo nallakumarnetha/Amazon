@@ -9,6 +9,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.product_service.common.Audit;
+import com.shared_contract.original.Status;
+import com.shared_contract.original.product_service.Category;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -55,10 +58,10 @@ public class Product {
 	private long cartCount;	// CartProduct
 	
 	@Transient
-	private XStatus status;	// CartProduct
+	private Status status;	// CartProduct
 	
 	@Enumerated(EnumType.STRING)
-	private XCategory category;
+	private Category category;
 	
 	@Embedded
 	private Audit audit;
@@ -134,11 +137,11 @@ public class Product {
 		this.count = count;
 	}
 
-	public XStatus getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(XStatus status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 
@@ -150,11 +153,11 @@ public class Product {
 		this.cartCount = cartCount;
 	}
 
-	public com.amazon.product.XCategory getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 
-	public void setCategory(com.XCategory.product.Category category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 	
