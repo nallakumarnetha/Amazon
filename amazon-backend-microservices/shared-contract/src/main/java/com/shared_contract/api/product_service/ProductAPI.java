@@ -8,12 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.shared_contract.dto.product_service.ProductDTO;
 
-@RequestMapping("products")
 public interface ProductAPI {
 
-	@PostMapping
+	@PostMapping("products")
 	ProductDTO addProduct(@RequestBody ProductDTO request);
 	
-	@GetMapping("/{id}")
-	ProductDTO findProductById(@PathVariable String id);
+	@GetMapping("products/{id}")
+	ProductDTO findProductById(@PathVariable("id") String id);
 }

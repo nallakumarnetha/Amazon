@@ -6,13 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.shared_contract.dto.user_service.UserDTO;
 
-@RequestMapping("users")
 public interface UserAPI {
 
-	@GetMapping("/{id}")
-	UserDTO findUserById(@PathVariable String id);
+	@GetMapping("users/{id}")
+	UserDTO findUserById(@PathVariable("id") String id);
 
-	@GetMapping("current-user")
+	@GetMapping("users/current-user")
 	UserDTO getCurrentUser();
 	
 }

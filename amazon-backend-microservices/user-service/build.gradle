@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.3.6'
+	id 'org.springframework.boot' version '3.2.6'
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
@@ -41,10 +41,14 @@ dependencies {
 	// ----------------microservices start----------------
 	// spring cloud
 	//implementation 'org.springframework.cloud:spring-cloud-dependencies:2025.0.0'
-	implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
+	//implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
 
 	// OpenFeign
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+	
+	//eureka
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
 	// ----------------microservices end----------------
 }
 

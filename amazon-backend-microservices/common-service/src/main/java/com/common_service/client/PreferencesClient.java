@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 
 import com.shared_contract.api.common_service.PreferencesAPI;
 
-@FeignClient(name = "COMMON-SERVICE")
+@FeignClient(name = "COMMON-SERVICE", contextId = "preferencesClient")
 public interface PreferencesClient extends PreferencesAPI {
 
 }

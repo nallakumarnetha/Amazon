@@ -6,10 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.shared_contract.dto.order_service.OrderDTO;
 
-@RequestMapping("orders")
 public interface OrderAPI {
 
-	@PostMapping
+	@PostMapping("orders")
 	OrderDTO addOrder(@RequestBody OrderDTO request);
 
 }
