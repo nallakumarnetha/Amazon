@@ -29,8 +29,8 @@ public class ProductResource {
 	// CRUD start
 
 	@GetMapping
-	public Response findAllProducts(@RequestParam(required = false, defaultValue = "0") int page,
-			@RequestParam(required = false, defaultValue = "10") int size) {
+	public Response findAllProducts(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
+			@RequestParam(name = "size", required = false, defaultValue = "10") int size) {
 		log.info("request recieved: find all products");
 		Response response = service.findAllProducts(page, size);
 		log.info("response sent: find all products");
@@ -38,7 +38,7 @@ public class ProductResource {
 	}
 
 	@GetMapping("/{id}")
-	public Product findProductById(@PathVariable String id) {
+	public Product findProductById(@PathVariable("id") String id) {
 		log.info("request recieved: find product by id");
 		Product response = service.findProduct(id);
 		log.info("response sent: find product by id");
@@ -54,7 +54,7 @@ public class ProductResource {
 	}
 
 	@PutMapping("/{id}")
-	public Product updateProduct(@PathVariable String id, @RequestBody Product product) {
+	public Product updateProduct(@PathVariable("id") String id, @RequestBody Product product) {
 		log.info("request recieved: update product");
 		Product response = service.updateProduct(id, product);
 		log.info("response sent: update product");
@@ -62,7 +62,7 @@ public class ProductResource {
 	}
 
 	@DeleteMapping("{id}")
-	public Response deleteProduct(@PathVariable String id) {
+	public Response deleteProduct(@PathVariable("id") String id) {
 		log.info("request recieved: remove product");
 		Response response = service.deleteProduct(id);
 		log.info("response sent: remove product");
@@ -72,7 +72,7 @@ public class ProductResource {
 	// CRUD end
 
 	@GetMapping("/search")
-	public Response searchProducts(@RequestParam String name) {
+	public Response searchProducts(@RequestParam("name") String name) {
 	    log.info("Search request received: {}", name);
 	    return service.searchProducts(name);
 	}

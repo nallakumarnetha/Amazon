@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.shared_contract.original.CustomException;
 import com.shared_contract.original.CustomMultipartFile;
 import com.shared_contract.original.user_service.AuthType;
+import com.shared_contract.original.user_service.Role;
 import com.user_service.client.FileClient;
 import com.user_service.id.IdService;
 
@@ -35,7 +36,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import com.user_service.common.Constants;
 
-import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.core.context.SecurityContextHolder;
 
 @Service
 public class UserService {
@@ -206,16 +207,32 @@ public class UserService {
 		user.setName(name);
 	}
 	
+//	public User getCurrentUser() {
+//		User response = null;
+//		User user = null;
+//		org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		if (auth != null && auth.getPrincipal() instanceof User) {
+//			user = (User) auth.getPrincipal();
+//		}
+//		if(user != null && user.getId() != null) {
+//			response = findUserById(user.getId());
+//		}
+//		return response;
+//	}
+	
+	// to do: store user info in request context, instead rely on spring security dependency
 	public User getCurrentUser() {
 		User response = null;
-		User user = null;
-		org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (auth != null && auth.getPrincipal() instanceof User) {
-			user = (User) auth.getPrincipal();
-		}
-		if(user != null && user.getId() != null) {
-			response = findUserById(user.getId());
-		}
+		//		User user = null;
+//		org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		if (auth != null && auth.getPrincipal() instanceof User) {
+//			user = (User) auth.getPrincipal();
+//		}
+//		if(user != null && user.getId() != null) {
+//			response = findUserById(user.getId());
+//		}
+		response = new User();
+		response.setRole(Role.Admin);
 		return response;
 	}
 	

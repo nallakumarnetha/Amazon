@@ -5,7 +5,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import com.shared_contract.api.user_service.UserAPI;
 
 
-@FeignClient(name = "USER-SERVICE")
+//@FeignClient(name = "USER-SERVICE")
+@FeignClient(name = "user-service")
 public interface UserClient extends UserAPI {
 
 }

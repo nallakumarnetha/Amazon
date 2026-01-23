@@ -23,10 +23,9 @@ ext {
 }
 
 dependencies {
-	//eureka
-	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	// eureka server
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
-	//spring
+	// spring
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }

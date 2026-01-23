@@ -23,7 +23,7 @@ public class CartResource {
 	private CartService service;
 	
 	@GetMapping
-	public Response findProductsByUserId(@RequestParam(required = false, name = "status") Status status) {
+	public Response findProductsByUserId(@RequestParam(name = "status", required = false) Status status) {
 		log.info("request recieved: find cart products by user id");
 		Response response = service.findProductsByUserId(status);
 		log.info("response sent: find cart products by user id");
@@ -31,7 +31,7 @@ public class CartResource {
 	}
 	
 	@GetMapping("{productId}")
-	public Cart findCartByProductId(@PathVariable String productId) {
+	public Cart findCartByProductId(@PathVariable("id") String productId) {
 		log.info("request recieved: find cart by product id");
 		Cart response = service.findCartByProductId(productId);
 		log.info("response sent: find cart by product id");
@@ -39,7 +39,7 @@ public class CartResource {
 	}
 
 	@PostMapping("{productId}")
-	public Response addToCart(@PathVariable String productId) {
+	public Response addToCart(@PathVariable("productId") String productId) {
 		log.info("request recieved: add product to cart");
 		Response response = service.addToCart(productId);
 		log.info("response sent: add product to cart");
@@ -47,7 +47,7 @@ public class CartResource {
 	}
 
 	@DeleteMapping("{productId}")
-	public Response deleteFromCart(@PathVariable String productId) {
+	public Response deleteFromCart(@PathVariable("productId") String productId) {
 		log.info("request recieved: delete product from cart");
 		Response response = service.deleteFromCart(productId);
 		log.info("response sent: delete product from cart");
@@ -55,7 +55,7 @@ public class CartResource {
 	}
 
 	@PutMapping("{productId}/increase")
-	public Response increaseCount(@PathVariable String productId) {
+	public Response increaseCount(@PathVariable("productId") String productId) {
 		log.info("request recieved: increase product count in cart");
 		Response response = service.increaseCount(productId);
 		log.info("response sent: increase product count in cart");
@@ -63,7 +63,7 @@ public class CartResource {
 	}
 	
 	@PutMapping("{productId}/decrease")
-	public Response decreaseCount(@PathVariable String productId) {
+	public Response decreaseCount(@PathVariable("productId") String productId) {
 		log.info("request recieved: decrease product count in cart");
 		Response response = service.decreaseCount(productId);
 		log.info("response sent: decrease product count in cart");

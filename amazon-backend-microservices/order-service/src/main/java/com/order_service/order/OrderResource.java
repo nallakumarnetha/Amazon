@@ -23,8 +23,8 @@ public class OrderResource {
 	private OrderService service;
 
 	@GetMapping
-	public Response findAllOrders(@RequestParam(required = false, defaultValue = "0") int page,
-			@RequestParam(required = false, defaultValue = "10") int size) {
+	public Response findAllOrders(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
+			@RequestParam(name = "size", required = false, defaultValue = "10") int size) {
 		log.info("request received: find all orders");
 		Response response = service.findAllOrders(page, size);
 		log.info("response sent: find all orders");
@@ -32,7 +32,7 @@ public class OrderResource {
 	}
 
 	@GetMapping("/{id}")
-	public Order findOrderById(@PathVariable String id) {
+	public Order findOrderById(@PathVariable("id") String id) {
 		log.info("request received: find order by id");
 		Order response = service.findOrder(id);
 		log.info("response sent: find order by id");
@@ -48,7 +48,7 @@ public class OrderResource {
 	}
 
 	@PutMapping("/{id}")
-	public Order updateOrder(@PathVariable String id, @RequestBody Order request) {
+	public Order updateOrder(@PathVariable("id") String id, @RequestBody Order request) {
 		log.info("request received: update order");
 		Order response = service.updateOrder(id, request);
 		log.info("response sent: update order");
@@ -56,7 +56,7 @@ public class OrderResource {
 	}
 
 	@DeleteMapping("/{id}")
-	public Response deleteOrder(@PathVariable String id) {
+	public Response deleteOrder(@PathVariable("id") String id) {
 		log.info("request received: delete order");
 		Response response = service.deleteOrder(id);
 		log.info("response sent: delete order");
@@ -64,7 +64,7 @@ public class OrderResource {
 	}
 	
 	@GetMapping("/search")
-	public Response searchOrders(@RequestParam String name) {
+	public Response searchOrders(@RequestParam("name") String name) {
 	    log.info("Search request received: {}", name);
 	    return service.searchOrders(name);
 	}

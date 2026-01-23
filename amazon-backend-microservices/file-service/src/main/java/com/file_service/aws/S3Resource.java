@@ -17,7 +17,7 @@ public class S3Resource {
     }
 
     @GetMapping("/download/{fileName}")
-    public byte[] download(@PathVariable String fileName) throws Exception {
+    public byte[] download(@PathVariable("fileName") String fileName) throws Exception {
         return s3Service.downloadFile(fileName);
     }
 }

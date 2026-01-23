@@ -35,7 +35,7 @@ public class UserResource {
 	}
 
 	@GetMapping("/{id}")
-	public User findUserById(@PathVariable String id) {
+	public User findUserById(@PathVariable("id") String id) {
 		User response = service.findUserById(id);
 		return response;
 	}
@@ -47,13 +47,13 @@ public class UserResource {
 	}
 
 	@PutMapping("/{id}")
-	public User updateUser(@PathVariable String id, @RequestBody User request, HttpServletResponse response) throws CustomException {
+	public User updateUser(@PathVariable("id") String id, @RequestBody User request, HttpServletResponse response) throws CustomException {
 		User user = service.updateUser(id, request, response);
 		return user;
 	}
 
 	@DeleteMapping("/{id}")
-	public Response removeUser(@PathVariable String id) {
+	public Response removeUser(@PathVariable("id") String id) {
 		Response response = service.removeUser(id);
 		return response;
 	}
@@ -64,27 +64,27 @@ public class UserResource {
 		return response;
 	}
 	
-	@PostMapping("login")
+	@PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody User user, HttpServletResponse response) {
 		ResponseEntity<User> responseUser = service.login(user, response);
 		return responseUser;
 	}
 	
-	@PostMapping("logout")
+	@PostMapping("/logout")
 	public ResponseEntity<?> logout(HttpServletResponse response) {
 		ResponseEntity<User> responseUser = service.logout(response);
 		return responseUser;
 	}
 	
-	@PostMapping("register")
+	@PostMapping("/register")
 	public User registerUser(@RequestBody User request, HttpServletResponse response) {
 		request.setAuthType(AuthType.BASIC_TOKEN);
 		User userResponse = service.addUser(request, response);
 		return userResponse;
 	}
 	
-	@GetMapping("oauth2/callback")
-	public void googleCallback(@RequestParam String code, HttpServletResponse response) throws IOException {
+	@GetMapping("/oauth2/callback")
+	public void googleCallback(@RequestParam("code") String code, HttpServletResponse response) throws IOException {
 		service.googleCallback(code, response);
 		response.sendRedirect("http://localhost:4200/home");
 	}

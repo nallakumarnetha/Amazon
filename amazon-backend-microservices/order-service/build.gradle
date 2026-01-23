@@ -27,8 +27,8 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	implementation 'commons-fileupload:commons-fileupload:1.5'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	//jwt
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
+	// jwt
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
@@ -45,9 +45,15 @@ dependencies {
 	// OpenFeign
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 	
-	//eureka
+	// eureka client
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+	
+	// zipkin
+	implementation 'io.micrometer:micrometer-tracing-bridge-brave'
+	implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
+    
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+		
 	// ----------------microservices end----------------
 }
 
