@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import static com.shared_contract.original.Logger.log;
 
 @RestController
-@RequestMapping("preferences")
+@RequestMapping("common/preferences")
 public class PreferencesResource {
 
     @Autowired

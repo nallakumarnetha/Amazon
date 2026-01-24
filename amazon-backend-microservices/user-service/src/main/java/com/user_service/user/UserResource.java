@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.websocket.server.PathParam;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("user/users")
 public class UserResource {
 
 	@Autowired

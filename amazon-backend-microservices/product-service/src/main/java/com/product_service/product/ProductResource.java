@@ -20,7 +20,7 @@ import static com.shared_contract.original.Logger.log;
 import java.awt.print.Pageable;
 
 @RestController
-@RequestMapping("products")
+@RequestMapping("product/products")
 public class ProductResource {
 
 	@Autowired

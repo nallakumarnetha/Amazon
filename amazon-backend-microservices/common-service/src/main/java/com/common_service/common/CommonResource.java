@@ -12,7 +12,7 @@ import static com.shared_contract.original.Logger.log;
 
 
 @RestController
-@RequestMapping("common")
+@RequestMapping("common/common")
 public class CommonResource {
 
 	@Autowired

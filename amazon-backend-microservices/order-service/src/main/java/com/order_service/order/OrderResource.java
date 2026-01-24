@@ -16,7 +16,7 @@ import com.shared_contract.original.FilterRequest;
 import static com.shared_contract.original.Logger.log;
 
 @RestController
-@RequestMapping("orders")
+@RequestMapping("order/orders")
 public class OrderResource {
 
 	@Autowired
