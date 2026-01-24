@@ -10,9 +10,9 @@ import com.shared_contract.dto.product_service.ProductDTO;
 
 public interface ProductAPI {
 
-	@PostMapping("products")
+	@PostMapping("product/products")
 	ProductDTO addProduct(@RequestBody ProductDTO request);
 	
-	@GetMapping("products/{id}")
+	@GetMapping("product/products/{id}")
 	ProductDTO findProductById(@PathVariable("id") String id);
 }

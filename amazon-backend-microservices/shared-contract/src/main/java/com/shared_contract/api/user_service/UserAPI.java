@@ -8,10 +8,10 @@ import com.shared_contract.dto.user_service.UserDTO;
 
 public interface UserAPI {
 
-	@GetMapping("amazon/users/{id}")
+	@GetMapping("user/users/{id}")
 	UserDTO findUserById(@PathVariable("id") String id);
 
-	@GetMapping("amazon/users/current-user")
+	@GetMapping("user/users/current-user")
 	UserDTO getCurrentUser();
 	
 }

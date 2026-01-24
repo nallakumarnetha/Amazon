@@ -10,9 +10,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface FileAPI {
 	
-	@PostMapping("files")
+	@PostMapping("file/files")
 	List<String> uploadFile(@RequestParam("files") List<MultipartFile> files);
 
-	@PostMapping("files/base64")
+	@PostMapping("file/files/base64")
 	Map<String, String> getBase64Files(@RequestBody List<String> ids);
 }

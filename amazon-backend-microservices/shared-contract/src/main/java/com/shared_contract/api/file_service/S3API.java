@@ -9,9 +9,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface S3API {
 
-    @PostMapping("s3/upload")
+    @PostMapping("file/s3/upload")
     String upload(@RequestParam("file") MultipartFile file);
 
-    @GetMapping("s3/download/{fileName}")
+    @GetMapping("file/s3/download/{fileName}")
     byte[] download(@PathVariable("fileName") String fileName);
 }

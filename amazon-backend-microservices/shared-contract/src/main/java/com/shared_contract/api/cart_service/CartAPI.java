@@ -10,12 +10,12 @@ import com.shared_contract.dto.common_service.ResponseDTO;
 
 public interface CartAPI {
 
-	@GetMapping("cart/{productId}")
+	@GetMapping("cart/cart/{productId}")
 	CartDTO findCartByProductId(@PathVariable("productId") String productId);
 
-	@PostMapping("cart/{productId}")
+	@PostMapping("cart/cart/{productId}")
 	ResponseDTO addToCart(@PathVariable("productId") String productId);
 
-	@DeleteMapping("cart/{productId}")
+	@DeleteMapping("cart/cart/{productId}")
 	ResponseDTO deleteFromCart(@PathVariable("productId") String productId);
 }

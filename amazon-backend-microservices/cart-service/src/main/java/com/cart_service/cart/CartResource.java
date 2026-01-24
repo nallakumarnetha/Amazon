@@ -31,7 +31,7 @@ public class CartResource {
 	}
 	
 	@GetMapping("{productId}")
-	public Cart findCartByProductId(@PathVariable("id") String productId) {
+	public Cart findCartByProductId(@PathVariable("productId") String productId) {
 		log.info("request recieved: find cart by product id");
 		Cart response = service.findCartByProductId(productId);
 		log.info("response sent: find cart by product id");

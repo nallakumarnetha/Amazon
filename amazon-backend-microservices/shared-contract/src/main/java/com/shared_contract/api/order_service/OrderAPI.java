@@ -8,7 +8,7 @@ import com.shared_contract.dto.order_service.OrderDTO;
 
 public interface OrderAPI {
 
-	@PostMapping("orders")
+	@PostMapping("order/orders")
 	OrderDTO addOrder(@RequestBody OrderDTO request);
 
 }

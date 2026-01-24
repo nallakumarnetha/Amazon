@@ -84,6 +84,9 @@ public class ProductService {
 
 	public Product findProduct(String id) {
 		Product response = repository.findById(id).orElse(null);
+		if(response == null) {
+			return null;
+		}
 		// set base64 files
 		List<String> fileIds = response.getFiles();
 		Map<String, String> base64FilesData = fileClient.getBase64Files(fileIds);
