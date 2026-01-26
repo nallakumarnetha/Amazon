@@ -1,4 +1,4 @@
-package com.common_service.configuration;
+package com.common_service.examples;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 import jakarta.annotation.PostConstruct;
 
 @Component
-public class ConfigServerDemo {
+public class ConfigServerEx {
 
-	@Value("${demo.text}")
-	String str;
+	@Value("${demo.text:default_value}")
+	private String str;
 	
 	@PostConstruct
     public void init() {

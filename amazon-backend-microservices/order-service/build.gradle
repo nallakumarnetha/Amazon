@@ -57,6 +57,10 @@ dependencies {
 	// config client
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
     
+    // Resilience4J - for method level
+    implementation 'io.github.resilience4j:resilience4j-spring-boot3'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    
 	// ----------------microservices end----------------
 }
 
