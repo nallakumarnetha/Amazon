@@ -4,9 +4,9 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
-group = 'com.example'
+group = 'com.product_service'
 version = '0.0.1-SNAPSHOT'
-description = 'Demo project for Spring Boot'
+description = 'Product Service Microservice for Amazon Platform'
 
 java {
 	toolchain {
@@ -16,6 +16,14 @@ java {
 
 repositories {
 	mavenCentral()
+	maven {
+       	url "http://localhost:8082/artifactory/jfrog-maven-repo"
+      	allowInsecureProtocol = true	// to allow http
+       	credentials {
+        	username = 'admin'
+        	password = 'Tenant@2'
+    	}
+	}
 }
 
 dependencies {
@@ -39,6 +47,9 @@ dependencies {
 	implementation 'software.amazon.awssdk:s3:2.25.0'
 	
 	// ----------------microservices start----------------
+	// shared-contract - fetch from JFrog
+	implementation 'com.shared_contract:shared-contract:1.0.0'
+	
 	// spring cloud
 	//implementation 'org.springframework.cloud:spring-cloud-dependencies:2025.0.0'
 
@@ -61,6 +72,12 @@ dependencies {
     implementation 'io.github.resilience4j:resilience4j-spring-boot3'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     
+    // RabbitMQ
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    
+    // java model mapper
+	implementation 'org.modelmapper:modelmapper:3.1.1'
+	
 	// ----------------microservices end----------------
 }
 

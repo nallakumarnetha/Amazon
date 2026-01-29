@@ -25,6 +25,7 @@ import com.shared_contract.original.user_service.AuthType;
 import com.shared_contract.original.user_service.Role;
 import com.user_service.client.FileClient;
 import com.user_service.id.IdService;
+import com.user_service.messaging.UserMessageProducer;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -55,6 +56,9 @@ public class UserService {
 
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	@Autowired
+	private UserMessageProducer userMessageProducer;
 
 	public Response findAllUsers() {
 		List<User> users = repository.findAll();
@@ -95,6 +99,13 @@ public class UserService {
 		request.setAccessToken(accessToken);
 		repository.save(entity);	// update
 		addAccessTokenToCookie(accessToken, response);
+		// -------rabbitmq start-----
+		//send to RabbitMQ
+		// direct, Fanout exchange
+		userMessageProducer.sendMessage(user);
+		// Topic exchange
+		userMessageProducer.sendMessageExchange("user.india.create", user);
+		// ------rabbitmq end--------
 		return entity;
 	}
 

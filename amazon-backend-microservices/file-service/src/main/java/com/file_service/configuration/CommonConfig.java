@@ -4,6 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
+import org.modelmapper.ModelMapper;
+
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 
@@ -23,4 +25,9 @@ public class CommonConfig {
 	            .build();
 	}
 
+	@Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
+	
 }

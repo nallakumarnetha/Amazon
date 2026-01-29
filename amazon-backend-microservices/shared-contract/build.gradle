@@ -1,10 +1,13 @@
 plugins {
     id 'java-library'
+    id 'maven-publish'
 }
 
-group = 'com.example.contract'
+group = 'com.shared_contract'
 version = '1.0.0'
+description = 'Shared contract library for Amazon microservices'
 
+// for downloading dependencies
 repositories {
     mavenCentral()
 }
@@ -16,6 +19,33 @@ dependencies {
    api 'org.springframework:spring-web:5.3.39'
    // for Logger
    api 'org.slf4j:slf4j-api:1.7.36'
+}
+
+jar {
+    archiveBaseName.set('shared-contract')
+    archiveVersion.set(version)
+}
+
+// for uploading dependency
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            groupId = 'com.shared_contract'
+            artifactId = 'shared-contract'
+            version = '1.0.0'
+        }
+    }
+    repositories {
+        maven {
+            url "http://localhost:8082/artifactory/jfrog-maven-repo"
+            allowInsecureProtocol = true
+            credentials {
+                username = 'admin'
+                password = 'Tenant@2'
+            }
+        }
+    }
 }
 
 java {
