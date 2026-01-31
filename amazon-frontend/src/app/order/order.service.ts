@@ -9,7 +9,8 @@ import { FilterRequest } from "../common/common.model";
 })
 export class OrderService {
 
-    private baseUrl = 'http://localhost:8080/amazon/orders';
+    // private baseUrl = 'http://localhost:8080/amazon/orders'; // monolithic
+    private baseUrl = 'http://localhost:8088/order/orders'; // microservices
 
     constructor(private http: HttpClient) { }
 

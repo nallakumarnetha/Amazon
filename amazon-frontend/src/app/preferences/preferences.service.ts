@@ -18,7 +18,8 @@ export class PreferencesService {
         this.findPreferences();
     }
 
-    private baseUrl = 'http://localhost:8080/amazon/preferences'
+    // private baseUrl = 'http://localhost:8080/amazon/preferences' // monolithic
+     private baseUrl = 'http://localhost:8088/common/preferences' // microservices
 
     findPreferences(): void {
         this.http.get(`${this.baseUrl}`).subscribe(res => {

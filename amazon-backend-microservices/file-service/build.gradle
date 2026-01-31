@@ -21,7 +21,7 @@ repositories {
       	allowInsecureProtocol = true	// to allow http
        	credentials {
         	username = 'admin'
-        	password = 'Tenant@2'
+        	password = 'password'
     	}
 	}
 }

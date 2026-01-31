@@ -11,7 +11,8 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  private baseUrl = 'http://localhost:8080/amazon/products'
+  // private baseUrl = 'http://localhost:8080/amazon/products' // monolithic
+  private baseUrl = 'http://localhost:8088/product/products' // microservices
 
   //CRUD start
 

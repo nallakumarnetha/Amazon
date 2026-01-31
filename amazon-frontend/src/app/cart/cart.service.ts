@@ -17,7 +17,8 @@ export class CartService {
     cartObservable$ = this.cartSubject.asObservable();
 
     isLoggedIn: boolean = true;
-    private baseUrl = 'http://localhost:8080/amazon/cart'
+    // private baseUrl = 'http://localhost:8080/amazon/cart'; // monolithic
+    private baseUrl = 'http://localhost:8088/cart/cart'; // microservices
     cartProduct?: Product;
 
     constructor(private http: HttpClient, private productService: ProductService, private router: Router) {

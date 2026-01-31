@@ -9,6 +9,7 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,9 +18,20 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfiguration {
 
 	@Bean
-	public Queue userProductQueue(){
-		return new Queue("userProductQueue") ;
+	public Queue cartQueue() {
+	    return new Queue("cartQueue");
 	}
+
+	@Bean
+	public Queue orderQueue() {
+	    return new Queue("orderQueue");
+	}
+
+	@Bean
+	public Queue productQueue() {
+	    return new Queue("productQueue");
+	}
+
 
 	@Bean
 	public MessageConverter jsonMessageConverter() {
@@ -56,17 +68,17 @@ public class RabbitMQConfiguration {
 	}
 	
 	@Bean
-	public Binding bindingA(Queue queue1, FanoutExchange fanoutExchange) {
+	public Binding bindingA(@Qualifier("queue1") Queue queue1, FanoutExchange fanoutExchange) {
 		return BindingBuilder.bind(queue1).to(fanoutExchange);
 	}
 	
 	@Bean
-	public Binding bindingB(Queue queue2, FanoutExchange fanoutExchange) {
+	public Binding bindingB(@Qualifier("queue2") Queue queue2, FanoutExchange fanoutExchange) {
 		return BindingBuilder.bind(queue2).to(fanoutExchange);
 	}
 	
 	@Bean
-	public Binding bindingC(Queue queue3, FanoutExchange fanoutExchange) {
+	public Binding bindingC(@Qualifier("queue3") Queue queue3, FanoutExchange fanoutExchange) {
 		return BindingBuilder.bind(queue3).to(fanoutExchange);
 	}
 
@@ -87,12 +99,12 @@ public class RabbitMQConfiguration {
 	}
 	
 	@Bean
-	public Binding bindingAll(Queue userQueueAll, TopicExchange topicExchange) {
+	public Binding bindingAll(@Qualifier("userQueueAll") Queue userQueueAll, TopicExchange topicExchange) {
 		return BindingBuilder.bind(userQueueAll).to(topicExchange).with("user.*");
 	}
 	
 	@Bean
-	public Binding bindingIndia(Queue userQueueIndia, TopicExchange topicExchange) {
+	public Binding bindingIndia(@Qualifier("userQueueIndia") Queue userQueueIndia, TopicExchange topicExchange) {
 		return BindingBuilder.bind(userQueueIndia).to(topicExchange).with("user.india.#");
 	}
 

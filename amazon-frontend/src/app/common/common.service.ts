@@ -24,12 +24,14 @@ export class CommonService {
     }
 
     dumpData() {
-        let baseUrl = 'http://localhost:8080/amazon/common/dump-data';
+        // let baseUrl = 'http://localhost:8080/amazon/common/dump-data'; // monolithic
+        let baseUrl = 'http://localhost:8088/common/common/dump-data'; // microservices
         this.http.get(baseUrl).subscribe();
     }
 
     clearData() {
-        let baseUrl = 'http://localhost:8080/amazon/common/clear-data';
+        // let baseUrl = 'http://localhost:8080/amazon/common/clear-data'; // monolithic
+        let baseUrl = 'http://localhost:8088/common/common/clear-data'; // microservices
         this.http.delete(baseUrl).subscribe();
     }
 
