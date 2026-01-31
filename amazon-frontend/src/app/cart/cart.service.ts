@@ -18,7 +18,7 @@ export class CartService {
 
     isLoggedIn: boolean = true;
     // private baseUrl = 'http://localhost:8080/amazon/cart'; // monolithic
-    private baseUrl = 'http://localhost:8088/cart/cart'; // microservices
+    private baseUrl = 'http://localhost:8080/cart/cart'; // microservices
     cartProduct?: Product;
 
     constructor(private http: HttpClient, private productService: ProductService, private router: Router) {

@@ -11,7 +11,7 @@ export class Constants {
     public static readonly TOKEN_URI_GOOGLE = 'https://oauth2.googleapis.com/token';
 
     // public static readonly REDIRECT_URI_GOOGLE = 'http://localhost:8080/amazon/users/oauth2/callback'; // monolithic
-    public static readonly REDIRECT_URI_GOOGLE = 'http://localhost:8088/user/users/oauth2/callback'; // microservices
+    public static readonly REDIRECT_URI_GOOGLE = 'http://localhost:8080/user/users/oauth2/callback'; // microservices
 
     public static readonly SCOPE_GOOGLE = 'openid profile email';
 

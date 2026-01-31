@@ -20,7 +20,7 @@ export interface AddressListResponse {
 export class UserService {
 
   // private baseUrl = 'http://localhost:8080/amazon/users'; // monolithic
-  private baseUrl = 'http://localhost:8088/user/users'; // microservices
+  private baseUrl = 'http://localhost:8080/user/users'; // microservices
 
   constructor(private http: HttpClient, private router: Router) { }
 

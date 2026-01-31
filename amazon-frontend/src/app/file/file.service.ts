@@ -10,7 +10,7 @@ export class FileService {
 constructor(private http: HttpClient) { }
 
   // private baseUrl = 'http://localhost:8080/amazon/files' // monolithic
-  private baseUrl = 'http://localhost:8088/file/files' // microservices
+  private baseUrl = 'http://localhost:8080/file/files' // microservices
 
    uploadFiles(files: File[]): Observable<string[]> {
     let formData = new FormData();

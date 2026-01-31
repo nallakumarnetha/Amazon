@@ -1,38 +1,29 @@
-—---------—-----START—---------------------
-version: '3.7'
+version: "3.9"
+
+networks:
+  microservices-net:
+
+volumes:
+  mysql-data:
 
 services:
 
-  # ---------------- MYSQL ----------------
+  # =======================
+  # INFRASTRUCTURE
+  # =======================
+
   mysql:
     image: mysql:8.0
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: amazon
-      MYSQL_USER: amazon
-      MYSQL_PASSWORD: amazon
     ports:
       - "3306:3306"
     volumes:
-      - mysql:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
     networks:
-      - microservice-network
-    restart: unless-stopped
+      - microservices-net
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    environment:
-      PMA_HOST: mysql
-      PMA_PORT: 3306
-    ports:
-      - "8085:80"
-    networks:
-      - microservice-network
-    restart: unless-stopped
-
-  # ---------------- RABBITMQ ----------------
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
@@ -40,126 +31,138 @@ services:
       - "5672:5672"
       - "15672:15672"
     networks:
-      - microservice-network
+      - microservices-net
 
-  # ---------------- ZIPKIN ----------------
   zipkin:
     image: openzipkin/zipkin
     container_name: zipkin
     ports:
       - "9411:9411"
     networks:
-      - microservice-network
+      - microservices-net
 
-  # ---------------- SERVICE REGISTRY ----------------
+  # =======================
+  # SPRING CLOUD CORE
+  # =======================
+
+  config-server:
+    image: config-server:latest
+    container_name: config-server
+    ports:
+      - "8087:8087"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - mysql
+    networks:
+      - microservices-net
+
   service-registry:
-    image: dcode007/service-registry:latest
+    image: service-registry:latest
     container_name: service-registry
     ports:
       - "8761:8761"
-    depends_on:
-      - rabbitmq
-      - zipkin
-      - mysql
-    networks:
-      - microservice-network
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - config-server
+    networks:
+      - microservices-net
 
-  # ---------------- CONFIG SERVER ----------------
-  config-server:
-    image: dcode007/config-server:latest
-    container_name: config-server
+  api-gateway:
+    image: api-gateway:latest
+    container_name: api-gateway
     ports:
       - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     depends_on:
       - service-registry
+      - config-server
     networks:
-      - microservice-network
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker	| application-docker.properties
+      - microservices-net
 
-  # ---------------- USER SERVICE ----------------
+  # =======================
+  # BUSINESS SERVICES
+  # =======================
+
   user-service:
-    image: dcode007/user-service:latest
+    image: user-service:latest
     container_name: user-service
     ports:
-      - "8081:8081"
+      - "8086:8086"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     depends_on:
+      - mysql
+      - rabbitmq
       - service-registry
       - config-server
     networks:
-      - microservice-network
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-registry:8761/eureka
+      - microservices-net
 
-  # ---------------- PRODUCT SERVICE ----------------
   product-service:
-    image: dcode007/product-service:latest
-    container_name: product-service
+    image: product-service:latest
+    container_name: product
     ports:
-      - "8082:8082"
-    depends_on:
-      - service-registry
-      - config-server
-    networks:
-      - microservice-network
+      - "8085:8085"
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-registry:8761/eureka
-
-  # ---------------- PAYMENT SERVICE ----------------
-  payment-service:
-    image: dcode007/payment-service:latest
-    container_name: payment-service
-    ports:
-      - "8083:8083"
+      SPRING_PROFILES_ACTIVE: docker
     depends_on:
+      - mysql
       - service-registry
-      - config-server
     networks:
-      - microservice-network
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-registry:8761/eureka
+      - microservices-net
 
-  # ---------------- ORDER SERVICE ----------------
   order-service:
-    image: dcode007/order-service:latest
-    container_name: order-service
+    image: order-service:latest
+    container_name: order
     ports:
       - "8084:8084"
-    depends_on:
-      - service-registry
-      - config-server
-    networks:
-      - microservice-network
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-registry:8761/eureka
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - mysql
+      - rabbitmq
+      - service-registry
+    networks:
+      - microservices-net
 
-  # ---------------- API GATEWAY ----------------
-  gateway-service:
-    image: dcode007/gateway-service:latest
-    container_name: gateway-service
+  file-service:
+    image: file-service:latest
+    container_name: file
     ports:
-      - "8086:8084"
+      - "8083:8083"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - mysql
+    networks:
+      - microservices-net
+
+  common-service:
+    image: common-service:latest
+    container_name: common
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     depends_on:
       - service-registry
     networks:
-      - microservice-network
+      - microservices-net
+
+  cart-service:
+    image: cart-service:latest
+    container_name: cart
+    ports:
+      - "8081:8081"
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-registry:8761/eureka
-
-# ---------------- NETWORKS ----------------
-networks:
-  microservice-network:
-    driver: bridge
-
-# ---------------- VOLUMES ----------------
-volumes:
-  mysql:
-—---------—-----END—---------------------
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - mysql
+      - rabbitmq
+      - service-registry
+    networks:
+      - microservices-net
 
