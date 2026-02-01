@@ -46,7 +46,7 @@ services:
   # =======================
 
   config-server:
-    image: config-server:latest
+    image: kumarnalla/config-server:latest
     container_name: config-server
     ports:
       - "8087:8087"
@@ -58,7 +58,7 @@ services:
       - microservices-net
 
   service-registry:
-    image: service-registry:latest
+    image: kumarnalla/service-registry:latest
     container_name: service-registry
     ports:
       - "8761:8761"
@@ -70,7 +70,7 @@ services:
       - microservices-net
 
   api-gateway:
-    image: api-gateway:latest
+    image: kumarnalla/api-gateway:latest
     container_name: api-gateway
     ports:
       - "8080:8080"
@@ -87,10 +87,10 @@ services:
   # =======================
 
   cart-service:
-    image: cart-service:latest
+    image: kumarnalla/cart-service:latest
     container_name: cart-service
     ports:
-      - "8081:8081"
+      - "8081:8080"
     environment:
       SPRING_PROFILES_ACTIVE: docker
     depends_on:
@@ -101,10 +101,10 @@ services:
       - microservices-net
 
   common-service:
-    image: common-service:latest
+    image: kumarnalla/common-service:latest
     container_name: common-service
     ports:
-      - "8082:8082"
+      - "8082:8080"
     environment:
       SPRING_PROFILES_ACTIVE: docker
     depends_on:
@@ -113,10 +113,10 @@ services:
       - microservices-net
 
   file-service:
-    image: file-service:latest
+    image: kumarnalla/file-service:latest
     container_name: file-service
     ports:
-      - "8083:8083"
+      - "8083:8080"
     environment:
       SPRING_PROFILES_ACTIVE: docker
     depends_on:
@@ -125,10 +125,10 @@ services:
       - microservices-net
 
   order-service:
-    image: order-service:latest
+    image: kumarnalla/order-service:latest
     container_name: order-service
     ports:
-      - "8084:8084"
+      - "8084:8080"
     environment:
       SPRING_PROFILES_ACTIVE: docker
     depends_on:
@@ -139,10 +139,10 @@ services:
       - microservices-net
     
   product-service:
-    image: product-service:latest
+    image: kumarnalla/product-service:latest
     container_name: product-service
     ports:
-      - "8085:8085"
+      - "8085:8080"
     environment:
       SPRING_PROFILES_ACTIVE: docker
     depends_on:
@@ -152,10 +152,10 @@ services:
       - microservices-net        
 
   user-service:
-    image: user-service:latest
+    image: kumarnalla/user-service:latest
     container_name: user-service
     ports:
-      - "8086:8086"
+      - "8086:8080"
     environment:
       SPRING_PROFILES_ACTIVE: docker
     depends_on:
@@ -166,4 +166,11 @@ services:
     networks:
       - microservices-net
 
+  frontend:
+    image: kumarnalla/amazon-frontend-microservices:latest
+    container_name: frontend
+    ports:
+      - "4200:4200"
+    networks:
+      - microservices-net
 
