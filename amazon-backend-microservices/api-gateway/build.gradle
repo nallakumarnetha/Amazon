@@ -26,9 +26,9 @@ repositories {
 	}
 }
 
-ext {
-	set('springCloudVersion', "2025.0.1")
-}
+//ext {
+//	set('springCloudVersion', "2025.0.1")
+//}
 
 dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -52,10 +52,12 @@ dependencies {
 	
 	// Resilience4j - for microservice level
     implementation 'io.github.resilience4j:resilience4j-spring-boot3'
+    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j'
+
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     
     // spring security
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
 	
 	// ----------------microservices end-----------------
 }
