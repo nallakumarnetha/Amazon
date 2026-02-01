@@ -86,6 +86,71 @@ services:
   # BUSINESS SERVICES
   # =======================
 
+  cart-service:
+    image: cart-service:latest
+    container_name: cart-service
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - mysql
+      - rabbitmq
+      - service-registry
+    networks:
+      - microservices-net
+
+  common-service:
+    image: common-service:latest
+    container_name: common-service
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - service-registry
+    networks:
+      - microservices-net
+
+  file-service:
+    image: file-service:latest
+    container_name: file-service
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - mysql
+    networks:
+      - microservices-net
+
+  order-service:
+    image: order-service:latest
+    container_name: order-service
+    ports:
+      - "8084:8084"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - mysql
+      - rabbitmq
+      - service-registry
+    networks:
+      - microservices-net
+    
+  product-service:
+    image: product-service:latest
+    container_name: product-service
+    ports:
+      - "8085:8085"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - mysql
+      - service-registry
+    networks:
+      - microservices-net        
+
   user-service:
     image: user-service:latest
     container_name: user-service
@@ -101,68 +166,4 @@ services:
     networks:
       - microservices-net
 
-  product-service:
-    image: product-service:latest
-    container_name: product
-    ports:
-      - "8085:8085"
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
-    depends_on:
-      - mysql
-      - service-registry
-    networks:
-      - microservices-net
-
-  order-service:
-    image: order-service:latest
-    container_name: order
-    ports:
-      - "8084:8084"
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
-    depends_on:
-      - mysql
-      - rabbitmq
-      - service-registry
-    networks:
-      - microservices-net
-
-  file-service:
-    image: file-service:latest
-    container_name: file
-    ports:
-      - "8083:8083"
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
-    depends_on:
-      - mysql
-    networks:
-      - microservices-net
-
-  common-service:
-    image: common-service:latest
-    container_name: common
-    ports:
-      - "8082:8082"
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
-    depends_on:
-      - service-registry
-    networks:
-      - microservices-net
-
-  cart-service:
-    image: cart-service:latest
-    container_name: cart
-    ports:
-      - "8081:8081"
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
-    depends_on:
-      - mysql
-      - rabbitmq
-      - service-registry
-    networks:
-      - microservices-net
 
