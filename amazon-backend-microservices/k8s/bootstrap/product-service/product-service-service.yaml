@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-service
+  labels:
+    app: product-service
+spec:
+  selector:
+    app: product-service
+  ports:
+    - port: 80         # exposed inside the cluster
+      targetPort: 8085 # containerPort in deployment
+  type: ClusterIP

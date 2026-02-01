@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+data:
+  MYSQL_DATABASE: amazon
+  MYSQL_USER: amazon
+  MYSQL_PASSWORD: amazon123
+  MYSQL_ROOT_PASSWORD: root123

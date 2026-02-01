@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cart-service
+  labels:
+    app: cart-service
+spec:
+  selector:
+    app: cart-service
+  ports:
+    - port: 80         # exposed inside the cluster
+      targetPort: 8081 # containerPort in deployment
+  type: ClusterIP
